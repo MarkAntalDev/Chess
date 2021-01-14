@@ -4,7 +4,7 @@
 class ChessBoard{
 public:
     ChessBoard();
-
+    //boardToOriginal(); //// visszaállítja a board ot az eredeti állapotába
 private:
     /***********************************************************************************************
     ; egy 120 elemes 1 dimenziós tömb a gyorsabb elérés és könnyebb lépésgenerálás érdekében
@@ -42,6 +42,8 @@ private:
       7,  7,  7,  7,  7,  7,  7,  7,  7,  7,
       7,  7,  7,  7,  7,  7,  7,  7,  7,  7
     };
+
+    char 
 }
 
 #endif // _BOARD_H_
