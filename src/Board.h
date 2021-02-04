@@ -1,10 +1,21 @@
 #ifndef _BOARD_H_
 #define _BOARD_H_
 
+#include <iostream>
+#include <vector>
+#include<tuple>
+
+struct legalMove{
+  unsigned char from;
+  unsigned char to;
+  char value;
+};
+
 class ChessBoard{
 public:
     ChessBoard();
-    //boardToOriginal(); //// visszaállítja a board ot az eredeti állapotába
+    //void boardToOriginal(); //// visszaállítja a board ot az eredeti állapotába
+    void drawIntBoard();//drawing the table to the console with numbers
 private:
     /***********************************************************************************************
     ; egy 120 elemes 1 dimenziós tömb a gyorsabb elérés és könnyebb lépésgenerálás érdekében
@@ -43,7 +54,34 @@ private:
       7,  7,  7,  7,  7,  7,  7,  7,  7,  7
     };
 
-    char 
-}
+    //current positions(indices) of the pieces
+    char whiteLeftKnight = 22;
+    char whiteRightKnight = 27;
+
+    //vector for current possible moves
+
+
+    /*************************************************************************************************
+    ; 
+    ; moving constants 
+    ; 
+    **************************************************************************************************/
+
+    const char knightMoveConstants[8] = {-21, -19, -12, -8,  8,  12,  19,  21};
+
+    /*************************************************************************************************
+    ; 
+    ; WHITE move generation functions for each piece
+    ; 
+    **************************************************************************************************/
+
+    void whiteKnightMoveGeneration();
+
+    /*************************************************************************************************
+    ; 
+    ; BLACK move generation functions for each piece
+    ; 
+    **************************************************************************************************/
+};
 
 #endif // _BOARD_H_

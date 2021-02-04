@@ -1,4 +1,5 @@
 #include <iostream>
+#include "Board.h"
 
 int main(){
     char board[120] = {
@@ -17,6 +18,9 @@ int main(){
     };
 
 
-    std::cout << int(board[21]) << std::endl; 
+    //std::cout << int(board[21]) << std::endl;
+
+    ChessBoard* chessboard = new ChessBoard();
+    chessboard->drawIntBoard();
     return 0;
 }
