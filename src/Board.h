@@ -55,31 +55,42 @@ private:
     };
 
     //current positions(indices) of the pieces
+    char whiteLeftRook = 21;
     char whiteLeftKnight = 22;
+    char whiteLeftBishop = 23;
+    char whiteRightBishop = 26;
     char whiteRightKnight = 27;
+    char whiteRightRook = 28;
+    
 
     //vector for current possible moves
-
+    std::vector<legalMove> legalMoves;
 
     /*************************************************************************************************
     ; 
-    ; moving constants 
+    ; Moving constants (Offsets)
     ; 
     **************************************************************************************************/
 
-    const char knightMoveConstants[8] = {-21, -19, -12, -8,  8,  12,  19,  21};
+    const char knightOffsets[8] = {-21, -19, -12, -8,  8,  12,  19,  21};
+    const char rookOffsets[4] = {-1, 1, -10, 10};
+    const char bishopOffsets[4] = {9, 11, -9, -11};
 
     /*************************************************************************************************
     ; 
     ; WHITE move generation functions for each piece
+    ; !! Pseudo-legal moves are generated !!
     ; 
     **************************************************************************************************/
 
-    void whiteKnightMoveGeneration();
+    void whiteKnightMoveGeneration(); // white knight move generation function
+    void whiteRookMoveGeneration();   // white rook move generation function
+    void whiteBishopMoveGeneration(); // white bishop move generation function
 
     /*************************************************************************************************
     ; 
     ; BLACK move generation functions for each piece
+    ; !! Pseudo-legal moves are generated !!
     ; 
     **************************************************************************************************/
 };

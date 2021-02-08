@@ -25,8 +25,55 @@ void ChessBoard::drawIntBoard(){
 
 void ChessBoard::whiteKnightMoveGeneration(){
     for(int i=0 ; i<8 ; ++i){
-        if(board[whiteLeftKnight] + knightMoveConstants[i] < 1){
-            /// the move is legal 
+        if(board[whiteLeftKnight + knightOffsets[i]] < 1){ // left knight
+            /// the move is pseudo-legal
+            /// may be capture as well
         }
+        if(board[whiteRightKnight + knightOffsets[i]] < 1){ // right knight
+            /// the move is pseudo-legal
+            /// may be capture as well
+        }
+    }
+}
+
+void ChessBoard::whiteRookMoveGeneration(){
+    int j;
+    for(int i=0 ; i<4 ; ++i){
+        j = 1;
+        while(board[whiteLeftRook + j * rookOffsets[i]] == 0){ // left rook
+            /// the move is pseudo-legal
+            ++j;
+        }
+        if(board[whiteLeftRook + j * rookOffsets[i]] < 0)
+            /// the last move is a capture || else doesn't matter, either white piece or off the table
+        
+        j = 1;
+        while(board[whiteRightRook + j * rookOffsets[i]] == 0){ // right rooks
+            /// the move is pseudo-legal
+            j++;
+        }
+        if(board[whiteRightRook + j * rookOffsets[i]] < 0)
+            /// the last move is a capture || else doesn't matter, either white piece or off the table
+    }
+}
+
+void ChessBoard::whiteBishopMoveGeneration(){ // same as rook moves with different offsets
+    int j;
+    for(int i=0 ; i<4 ; ++i){
+        j = 1;
+        while(board[whiteLeftBishop + j * bishopOffsets[i]] == 0){ // left bishop
+            /// the move is pseudo-legal
+            ++j;
+        }
+        if(board[whiteLeftBishop + j * bishopOffsets[i]] < 0)
+            /// the last move is a capture || else doesn't matter, either white piece or off the table
+        
+        j = 1;
+        while(board[whiteRightBishop + j * bishopOffsets[i]] == 0){ // right bishop
+            /// the move is pseudo-legal
+            j++;
+        }
+        if(board[whiteRightBishop + j * bishopOffsets[i]] < 0)
+            /// the last move is a capture || else doesn't matter, either white piece or off the table
     }
 }
