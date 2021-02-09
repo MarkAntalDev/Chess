@@ -16,6 +16,7 @@ public:
     ChessBoard();
     //void boardToOriginal(); //// visszaállítja a board ot az eredeti állapotába
     void drawIntBoard();//drawing the table to the console with numbers
+    void generatePseudoLegalMoves();
 private:
     /***********************************************************************************************
     ; egy 120 elemes 1 dimenziós tömb a gyorsabb elérés és könnyebb lépésgenerálás érdekében
@@ -42,14 +43,14 @@ private:
     char board[120] = {
       7,  7,  7,  7,  7,  7,  7,  7,  7,  7,
       7,  7,  7,  7,  7,  7,  7,  7,  7,  7,
-      7,  4,  2,  3,  6,  5,  3,  2,  4,  7,
+      7,  4,  2,  3,  5,  6,  3,  2,  4,  7,
       7,  1,  1,  1,  1,  1,  1,  1,  1,  7,
       7,  0,  0,  0,  0,  0,  0,  0,  0,  7,
       7,  0,  0,  0,  0,  0,  0,  0,  0,  7,
       7,  0,  0,  0,  0,  0,  0,  0,  0,  7,
       7,  0,  0,  0,  0,  0,  0,  0,  0,  7,
       7, -1, -1, -1, -1, -1, -1, -1, -1,  7,
-      7, -4, -2, -3, -6, -5, -3, -2, -4,  7,
+      7, -4, -2, -3, -5, -6, -3, -2, -4,  7,
       7,  7,  7,  7,  7,  7,  7,  7,  7,  7,
       7,  7,  7,  7,  7,  7,  7,  7,  7,  7
     };
@@ -58,6 +59,8 @@ private:
     char whiteLeftRook = 21;
     char whiteLeftKnight = 22;
     char whiteLeftBishop = 23;
+    char whiteQueen = 24;
+    //char whiteKing = 25; 
     char whiteRightBishop = 26;
     char whiteRightKnight = 27;
     char whiteRightRook = 28;
@@ -86,6 +89,7 @@ private:
     void whiteKnightMoveGeneration(); // white knight move generation function
     void whiteRookMoveGeneration();   // white rook move generation function
     void whiteBishopMoveGeneration(); // white bishop move generation function
+    void whiteQueenMoveGeneration(); // white queen move generation function (rook + bishop move geenration)
 
     /*************************************************************************************************
     ; 

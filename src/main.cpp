@@ -2,25 +2,8 @@
 #include "Board.h"
 
 int main(){
-    char board[120] = {
-      7,  7,  7,  7,  7,  7,  7,  7,  7,  7,
-      7,  7,  7,  7,  7,  7,  7,  7,  7,  7,
-      7,  4,  2,  3,  6,  5,  3,  2,  4,  7,
-      7,  1,  1,  1,  1,  1,  1,  1,  1,  7,
-      7,  0,  0,  0,  0,  0,  0,  0,  0,  7,
-      7,  0,  0,  0,  0,  0,  0,  0,  0,  7,
-      7,  0,  0,  0,  0,  0,  0,  0,  0,  7,
-      7,  0,  0,  0,  0,  0,  0,  0,  0,  7,
-      7, -1, -1, -1, -1, -1, -1, -1, -1,  7,
-      7, -4, -2, -3, -6, -5, -3, -2, -4,  7,
-      7,  7,  7,  7,  7,  7,  7,  7,  7,  7,
-      7,  7,  7,  7,  7,  7,  7,  7,  7,  7
-    };
-
-
-    //std::cout << int(board[21]) << std::endl;
-
     ChessBoard* chessboard = new ChessBoard();
     chessboard->drawIntBoard();
+    chessboard->generatePseudoLegalMoves();
     return 0;
 }
