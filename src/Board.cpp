@@ -26,10 +26,12 @@ void ChessBoard::drawIntBoard(){
 void ChessBoard::whiteKnightMoveGeneration(){
     for (int i=0 ; i<8 ; ++i){
         if (board[whiteLeftKnight + knightOffsets[i]] < 1){ // left knight
+            std::cout << "Knight to" << whiteLeftKnight + knightOffsets[i] << std::endl;
             /// the move is pseudo-legal
             /// may be capture as well
         }
         if (board[whiteRightKnight + knightOffsets[i]] < 1){ // right knight
+            std::cout << "Knight to" << whiteRightKnight + knightOffsets[i] << std::endl;
             /// the move is pseudo-legal
             /// may be capture as well
         }
@@ -42,19 +44,21 @@ void ChessBoard::whiteRookMoveGeneration(){
         j = 1;
         while (board[whiteLeftRook + j * rookOffsets[i]] == 0){ // left rook
             /// the move is pseudo-legal
+            std::cout << "Rook to" << whiteLeftRook + j * rookOffsets[i] << std::endl;
             ++j;
         }
         if (board[whiteLeftRook + j * rookOffsets[i]] < 0)
-            std::cout << std::endl;
+            std::cout << "Rook captures on" << whiteLeftRook + j * rookOffsets[i] << std::endl;
             /// the last move is a capture || else doesn't matter, either white piece or off the table
 
         j = 1;
         while (board[whiteRightRook + j * rookOffsets[i]] == 0){ // right rooks
             /// the move is pseudo-legal
+            std::cout << "Rook to" << whiteRightRook + j * rookOffsets[i] << std::endl;
             j++;
         }
         if (board[whiteRightRook + j * rookOffsets[i]] < 0)
-            std::cout << std::endl;
+            std::cout << "Rook captures on" << whiteRightRook + j * rookOffsets[i] << std::endl;
             /// the last move is a capture || else doesn't matter, either white piece or off the table
     }
 }
@@ -110,11 +114,19 @@ void ChessBoard::whiteQueenMoveGeneration(){
 void ChessBoard::whiteKingMoveGeneration(){
     for (int i=0 ; i<4 ; ++i){
         if (board[whiteKing + bishopOffsets[i]] < 1)
-            std::cout << "King moves to" << whiteQueen + bishopOffsets[i] << std::endl;
+            std::cout << " King moves to" << whiteQueen + bishopOffsets[i] << std::endl;
+            /// the last move is a capture || else doesn't matter, either white piece or off the table
+        if (board[whiteKing + rookOffsets[i]] < 1)
+            std::cout << "King moves to" << whiteKing + rookOffsets[i] << std::endl;
             /// the last move is a capture || else doesn't matter, either white piece or off the table
     }
+
+    /// Castling
+    ///  
 }
 
 void ChessBoard::generatePseudoLegalMoves(){
     whiteQueenMoveGeneration();
+    whiteKingMoveGeneration();
+    whiteKnightMoveGeneration();
 }
