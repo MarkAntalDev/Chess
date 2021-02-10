@@ -3,7 +3,9 @@
 
 #include <iostream>
 #include <vector>
-#include<tuple>
+#include <tuple>
+#include <map>
+#include <string>
 
 struct legalMove{
   unsigned char from;
@@ -55,12 +57,20 @@ private:
       7,  7,  7,  7,  7,  7,  7,  7,  7,  7
     };
 
+    //change index to position map
+    std::map<int, std::string> indexPosMap = {
+      { 21, "a1" },
+      { 22, "a2" },
+      { 23, "a3" },
+      { 24, "a4" }
+    };
+
     //current positions(indices) of the pieces
     char whiteLeftRook = 21;
     char whiteLeftKnight = 22;
     char whiteLeftBishop = 23;
     char whiteQueen = 24;
-    //char whiteKing = 25; 
+    char whiteKing = 25; 
     char whiteRightBishop = 26;
     char whiteRightKnight = 27;
     char whiteRightRook = 28;
@@ -90,6 +100,7 @@ private:
     void whiteRookMoveGeneration();   // white rook move generation function
     void whiteBishopMoveGeneration(); // white bishop move generation function
     void whiteQueenMoveGeneration(); // white queen move generation function (rook + bishop move geenration)
+    void whiteKingMoveGeneration(); // white king move generation function (queen without while loop)
 
     /*************************************************************************************************
     ; 
