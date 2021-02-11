@@ -1,7 +1,7 @@
 #include "Board.h"
 
 ChessBoard::ChessBoard(){
-
+    enPassant = false;
 }
 
 //drawing the chessboard with ints
@@ -143,11 +143,24 @@ void ChessBoard::whitePawnsCapture(){
 
 void ChessBoard::whitePawnMoveGeneration(){
     for (int i=0 ; i<8 ; ++i){
-        if (whitePawns[i] != -1){
-            if(whitePawns[i] == 31 + i){ /// if the current pawn is on the starting position
-                ///single push
-                std::cout << "Pawn on " << indexPosMap[whitePawns[i]] << " to " << indexPosMap[whitePawns[i] + 10] <<std::endl;
+        char currentPawn = whitePawns[i];
+        if (currentPawn != -1){
+            if (currentPawn == 31 + i){ /// if the current pawn is on the starting position
+                if (board[currentPawn + 10] == 0){ ///single push
+                    std::cout << "Pawn on " << indexPosMap[whitePawns[i]] << " to " << indexPosMap[whitePawns[i] + 10] <<std::endl;
+                    if(board[currentPawn + 20] == 0){ /// double push
+                        std::cout << "Pawn on " << indexPosMap[whitePawns[i]] << " to " << indexPosMap[whitePawns[i] + 20] <<std::endl;
+                        enPassant = true;
+                    }
+                } 
             }
+            else{
+                if (board[currentPawn + 10] == 0){
+                    std::cout << "Pawn on " << indexPosMap[whitePawns[i]] << " to " << indexPosMap[whitePawns[i] + 10] <<std::endl;
+                }
+            }
+            
+            //// en passant
         }
     }
 }

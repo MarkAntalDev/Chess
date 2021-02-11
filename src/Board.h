@@ -20,6 +20,12 @@ public:
     void drawIntBoard();//drawing the table to the console with numbers
     void generatePseudoLegalMoves();
 private:
+    //vector for current possible moves
+    std::vector<legalMove> legalMoves;
+
+    //is en passant an option
+    bool enPassant;
+
     /***********************************************************************************************
     ; egy 120 elemes 1 dimenziós tömb a gyorsabb elérés és könnyebb lépésgenerálás érdekében
     ; 10*12 es táblát reprezentál amivel a pályáról való kilépés alacsony költséggel ellenőrizhető
@@ -150,8 +156,6 @@ private:
 
 
 
-    //vector for current possible moves
-    std::vector<legalMove> legalMoves;
 
     /*************************************************************************************************
     ; 
