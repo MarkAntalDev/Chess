@@ -26,12 +26,12 @@ void ChessBoard::drawIntBoard(){
 void ChessBoard::whiteKnightMoveGeneration(){
     for (int i=0 ; i<8 ; ++i){
         if (board[whiteLeftKnight + knightOffsets[i]] < 1){ // left knight
-            std::cout << "Knight to" << whiteLeftKnight + knightOffsets[i] << std::endl;
+            std::cout << "Knight to " << whiteLeftKnight + knightOffsets[i] << std::endl;
             /// the move is pseudo-legal
             /// may be capture as well
         }
         if (board[whiteRightKnight + knightOffsets[i]] < 1){ // right knight
-            std::cout << "Knight to" << whiteRightKnight + knightOffsets[i] << std::endl;
+            std::cout << "Knight to " << whiteRightKnight + knightOffsets[i] << std::endl;
             /// the move is pseudo-legal
             /// may be capture as well
         }
@@ -44,21 +44,21 @@ void ChessBoard::whiteRookMoveGeneration(){
         j = 1;
         while (board[whiteLeftRook + j * rookOffsets[i]] == 0){ // left rook
             /// the move is pseudo-legal
-            std::cout << "Rook to" << whiteLeftRook + j * rookOffsets[i] << std::endl;
+            std::cout << "Rook to " << whiteLeftRook + j * rookOffsets[i] << std::endl;
             ++j;
         }
         if (board[whiteLeftRook + j * rookOffsets[i]] < 0)
-            std::cout << "Rook captures on" << whiteLeftRook + j * rookOffsets[i] << std::endl;
+            std::cout << "Rook captures on " << whiteLeftRook + j * rookOffsets[i] << std::endl;
             /// the last move is a capture || else doesn't matter, either white piece or off the table
 
         j = 1;
         while (board[whiteRightRook + j * rookOffsets[i]] == 0){ // right rooks
             /// the move is pseudo-legal
-            std::cout << "Rook to" << whiteRightRook + j * rookOffsets[i] << std::endl;
+            std::cout << "Rook to " << whiteRightRook + j * rookOffsets[i] << std::endl;
             j++;
         }
         if (board[whiteRightRook + j * rookOffsets[i]] < 0)
-            std::cout << "Rook captures on" << whiteRightRook + j * rookOffsets[i] << std::endl;
+            std::cout << "Rook captures on " << whiteRightRook + j * rookOffsets[i] << std::endl;
             /// the last move is a capture || else doesn't matter, either white piece or off the table
     }
 }
@@ -92,16 +92,16 @@ void ChessBoard::whiteQueenMoveGeneration(){
         j = 1;
         while (board[whiteQueen + j * bishopOffsets[i]] == 0){ 
             /// the move is pseudo-legal
-            std::cout << "Queen to (bishop)" << whiteQueen + j * bishopOffsets[i] << std::endl;
+            std::cout << "Queen to " << whiteQueen + j * bishopOffsets[i] << std::endl;
             ++j;
         }
         if (board[whiteQueen + j * bishopOffsets[i]] < 0)
-            std::cout << "Queen captures (bishop) " << whiteQueen + j * bishopOffsets[i] << std::endl;
+            std::cout << "Queen captures " << whiteQueen + j * bishopOffsets[i] << std::endl;
             /// the last move is a capture || else doesn't matter, either white piece or off the table
         
         j = 1;
         while (board[whiteQueen + j * rookOffsets[i]] == 0){ 
-            std::cout << "Queen to (rook)" << whiteQueen + j * rookOffsets[i] << std::endl;
+            std::cout << "Queen to " << whiteQueen + j * rookOffsets[i] << std::endl;
             /// the move is pseudo-legal
             j++;
         }
@@ -114,10 +114,10 @@ void ChessBoard::whiteQueenMoveGeneration(){
 void ChessBoard::whiteKingMoveGeneration(){
     for (int i=0 ; i<4 ; ++i){
         if (board[whiteKing + bishopOffsets[i]] < 1)
-            std::cout << " King moves to" << whiteQueen + bishopOffsets[i] << std::endl;
+            std::cout << "King moves to " << whiteQueen + bishopOffsets[i] << std::endl;
             /// the last move is a capture || else doesn't matter, either white piece or off the table
         if (board[whiteKing + rookOffsets[i]] < 1)
-            std::cout << "King moves to" << whiteKing + rookOffsets[i] << std::endl;
+            std::cout << "King moves to " << whiteKing + rookOffsets[i] << std::endl;
             /// the last move is a capture || else doesn't matter, either white piece or off the table
     }
 
@@ -125,8 +125,36 @@ void ChessBoard::whiteKingMoveGeneration(){
     ///  
 }
 
+void ChessBoard::whitePawnsSinglePush(){
+
+}
+
+void ChessBoard::whitePawnsDoublePush(){
+
+}
+
+void ChessBoard::whitePawnsEnPassant(){
+
+}
+
+void ChessBoard::whitePawnsCapture(){
+
+}
+
+void ChessBoard::whitePawnMoveGeneration(){
+    for (int i=0 ; i<8 ; ++i){
+        if (whitePawns[i] != -1){
+            if(whitePawns[i] == 31 + i){ /// if the current pawn is on the starting position
+                ///single push
+                std::cout << "Pawn on " << indexPosMap[whitePawns[i]] << " to " << indexPosMap[whitePawns[i] + 10] <<std::endl;
+            }
+        }
+    }
+}
+
 void ChessBoard::generatePseudoLegalMoves(){
     whiteQueenMoveGeneration();
     whiteKingMoveGeneration();
     whiteKnightMoveGeneration();
+    whitePawnMoveGeneration();
 }

@@ -103,9 +103,38 @@ private:
       { 66, "f5" },
       { 67, "g5" },
       { 68, "h5" },
+
+      { 71, "a6" },
+      { 72, "b6" },
+      { 73, "c6" },
+      { 74, "d6" },
+      { 75, "e6" },
+      { 76, "f6" },
+      { 77, "g6" },
+      { 78, "h6" },
+
+      { 81, "a7" },
+      { 82, "b7" },
+      { 83, "c7" },
+      { 84, "d7" },
+      { 85, "e7" },
+      { 86, "f7" },
+      { 87, "g7" },
+      { 88, "h7" },
+
+      { 91, "a8" },
+      { 92, "b8" },
+      { 93, "c8" },
+      { 94, "d8" },
+      { 95, "e8" },
+      { 96, "f8" },
+      { 97, "g8" },
+      { 98, "h8" }
     };
 
     //current positions(indices) of the pieces
+
+    //**************white pieces**************************
     char whiteLeftRook = 21;
     char whiteLeftKnight = 22;
     char whiteLeftBishop = 23;
@@ -114,7 +143,12 @@ private:
     char whiteRightBishop = 26;
     char whiteRightKnight = 27;
     char whiteRightRook = 28;
+
+    char whitePawns[8] = {31, 32, 33, 34, 35, 36, 37, 38};
     
+    //**************black pieces**************************
+
+
 
     //vector for current possible moves
     std::vector<legalMove> legalMoves;
@@ -129,13 +163,6 @@ private:
     const char rookOffsets[4] = {-1, 1, -10, 10};
     const char bishopOffsets[4] = {9, 11, -9, -11};
 
-    /*************************************************************************************************
-    ; 
-    ; White King in check
-    ; 
-    **************************************************************************************************/
-
-    bool whiteKingInCheck(); /// checking if the white king is in check
 
     /*************************************************************************************************
     ; 
@@ -147,8 +174,16 @@ private:
     void whiteKnightMoveGeneration(); // white knight move generation function
     void whiteRookMoveGeneration();   // white rook move generation function
     void whiteBishopMoveGeneration(); // white bishop move generation function
-    void whiteQueenMoveGeneration(); // white queen move generation function (rook + bishop move geenration)
-    void whiteKingMoveGeneration(); // white king move generation function (queen without while loop)
+    void whiteQueenMoveGeneration();  // white queen move generation function (rook + bishop move geenration)
+    void whiteKingMoveGeneration();   // white king move generation function (queen without while loop)
+    
+    //pawn moves: separate functions because of the complications (double push, en passant,different capture)
+    void whitePawnsSinglePush();
+    void whitePawnsDoublePush();
+    void whitePawnsCapture();
+    void whitePawnsEnPassant();
+
+    void whitePawnMoveGeneration();  // all the white pawn functions above together
 
     /*************************************************************************************************
     ; 
@@ -156,6 +191,15 @@ private:
     ; !! Pseudo-legal moves are generated !!
     ; 
     **************************************************************************************************/
+
+
+   /*************************************************************************************************
+    ; 
+    ; Futher functions
+    ; 
+    **************************************************************************************************/
+
+    bool whiteKingInCheck(); /// checking if the white king is in check
 };
 
 #endif // _BOARD_H_
