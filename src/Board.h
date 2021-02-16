@@ -10,9 +10,25 @@
 struct legalMove{
   unsigned char from;
   unsigned char to;
+  unsigned char takenPiece; /// if there was any
   char value;
 };
 
+/* side note for takenPiece 
+; 0 if nothing
+; 1 - 8 white pawns ( -1 equals the index in the array)
+; 9 white left rook
+; 10 white right rook
+; 11 white left knight
+; 12 white right knight
+; 13 white left bishop
+; 14 white right bishop
+; 15 white queen
+; 16 white king
+; 
+; [17 - 32] same with black 
+;
+*/
 class ChessBoard{
 public:
     ChessBoard();
@@ -52,12 +68,12 @@ private:
       7,  7,  7,  7,  7,  7,  7,  7,  7,  7,
       7,  7,  7,  7,  7,  7,  7,  7,  7,  7,
       7,  4,  2,  3,  5,  6,  3,  2,  4,  7,
-      7,  1,  1,  1,  1,  1,  1,  1,  1,  7,
+      7,  1,  1,  1,  1,  1,  0,  1,  1,  7,
       7,  0,  0,  0,  0,  0,  0,  0,  0,  7,
       7,  0,  0,  0,  0,  0,  0,  0,  0,  7,
+      7,  0,  0,  0,  0,  0,  1, -1,  0,  7,
       7,  0,  0,  0,  0,  0,  0,  0,  0,  7,
-      7,  0,  0,  0,  0,  0,  0,  0,  0,  7,
-      7, -1, -1, -1, -1, -1, -1, -1, -1,  7,
+      7, -1, -1, -1, -1, -1, -1,  0, -1,  7,
       7, -4, -2, -3, -5, -6, -3, -2, -4,  7,
       7,  7,  7,  7,  7,  7,  7,  7,  7,  7,
       7,  7,  7,  7,  7,  7,  7,  7,  7,  7
@@ -150,7 +166,7 @@ private:
     char whiteRightKnight = 27;
     char whiteRightRook = 28;
 
-    char whitePawns[8] = {31, 32, 33, 34, 35, 36, 37, 38};
+    char whitePawns[8] = {31, 32, 33, 34, 35, 66, 37, 38};
     
     //**************black pieces**************************
 
@@ -184,8 +200,8 @@ private:
     //pawn moves: separate functions because of the complications (double push, en passant,different capture)
     void whitePawnsSinglePush();
     void whitePawnsDoublePush();
-    void whitePawnsCapture();
-    void whitePawnsEnPassant();
+    void whitePawnsCapture(int index);
+    void whitePawnsEnPassant(int index);
 
     void whitePawnMoveGeneration();  // all the white pawn functions above together
 
@@ -197,13 +213,15 @@ private:
     **************************************************************************************************/
 
 
+
    /*************************************************************************************************
     ; 
-    ; Futher functions
+    ; Additional functions
     ; 
     **************************************************************************************************/
 
     bool whiteKingInCheck(); /// checking if the white king is in check
+    void putInLegalMoves(unsigned char _from, unsigned  char _to, unsigned char _takenPiece); /// puches back the vector with a new legalMove item 
 };
 
 #endif // _BOARD_H_

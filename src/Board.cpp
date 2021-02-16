@@ -1,7 +1,7 @@
 #include "Board.h"
 
 ChessBoard::ChessBoard(){
-    enPassant = false;
+    enPassant = true;
 }
 
 //drawing the chessboard with ints
@@ -133,34 +133,48 @@ void ChessBoard::whitePawnsDoublePush(){
 
 }
 
-void ChessBoard::whitePawnsEnPassant(){
-
+void ChessBoard::whitePawnsEnPassant(int index){
+    if (index/10 == 6){
+        if(board[index-1] == -1) /// en passant left to the current pawn
+            std::cout << "Pawn on " << indexPosMap[index] << " captures on " << indexPosMap[index + 9] << " en passant" << std::endl;
+        if(board[index+1] == -1) /// en passant left to the current pawn
+            std::cout << "Pawn on " << indexPosMap[index] << " captures on " << indexPosMap[index + 11] << " en passant" << std::endl;    
+    }
 }
 
-void ChessBoard::whitePawnsCapture(){
-
+void ChessBoard::whitePawnsCapture(int index){
+    if (board[index + 9] < 0){
+        std::cout << "Pawn on " << indexPosMap[index] << " captures on " << indexPosMap[index + 9] << std::endl;
+    }
+    if (board[index + 11] < 0){
+        std::cout << "Pawn on " << indexPosMap[index] << " captures on " << indexPosMap[index + 11] << std::endl;
+    }
 }
 
 void ChessBoard::whitePawnMoveGeneration(){
     for (int i=0 ; i<8 ; ++i){
         char currentPawn = whitePawns[i];
         if (currentPawn != -1){
-            if (currentPawn == 31 + i){ /// if the current pawn is on the starting position
+            if (currentPawn == 31 + i){ /// if the current pawn is on the starting position (checkable with the current index)
+                whitePawnsCapture(currentPawn); /// calling the single capture function
                 if (board[currentPawn + 10] == 0){ ///single push
                     std::cout << "Pawn on " << indexPosMap[whitePawns[i]] << " to " << indexPosMap[whitePawns[i] + 10] <<std::endl;
                     if(board[currentPawn + 20] == 0){ /// double push
                         std::cout << "Pawn on " << indexPosMap[whitePawns[i]] << " to " << indexPosMap[whitePawns[i] + 20] <<std::endl;
-                        enPassant = true;
+                        ///After this en passant is possible
                     }
-                } 
+                }
             }
-            else{
+            else{ /// when the current pawn is not on the starting position
                 if (board[currentPawn + 10] == 0){
                     std::cout << "Pawn on " << indexPosMap[whitePawns[i]] << " to " << indexPosMap[whitePawns[i] + 10] <<std::endl;
                 }
+                ///here we have to check en passant, because the current pawn is not on the starting position
+                if (enPassant) /// first check if en passant is possible
+                    whitePawnsEnPassant(currentPawn); /// so we call en passant function with the current index
+
+                whitePawnsCapture(currentPawn); /// we also call the basic capture function, because we can still capture normally
             }
-            
-            //// en passant
         }
     }
 }
@@ -170,4 +184,12 @@ void ChessBoard::generatePseudoLegalMoves(){
     whiteKingMoveGeneration();
     whiteKnightMoveGeneration();
     whitePawnMoveGeneration();
+}
+
+void ChessBoard::putInLegalMoves(unsigned char _from, unsigned  char _to, unsigned char _takenPiece){
+    legalMove clm;
+    clm.from = _from;
+    clm.to = _to;
+    clm.takenPiece = _takenPiece; 
+    legalMoves.push_back()
 }
