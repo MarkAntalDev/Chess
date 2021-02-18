@@ -68,12 +68,12 @@ private:
       7,  7,  7,  7,  7,  7,  7,  7,  7,  7,
       7,  7,  7,  7,  7,  7,  7,  7,  7,  7,
       7,  4,  2,  3,  5,  6,  3,  2,  4,  7,
-      7,  1,  1,  1,  1,  1,  0,  1,  1,  7,
+      7,  1,  1,  1,  1,  1,  1,  1,  1,  7,
       7,  0,  0,  0,  0,  0,  0,  0,  0,  7,
       7,  0,  0,  0,  0,  0,  0,  0,  0,  7,
-      7,  0,  0,  0,  0,  0,  1, -1,  0,  7,
       7,  0,  0,  0,  0,  0,  0,  0,  0,  7,
-      7, -1, -1, -1, -1, -1, -1,  0, -1,  7,
+      7,  0,  0,  0,  0,  0,  0,  0,  0,  7,
+      7, -1, -1, -1, -1, -1, -1, -1, -1,  7,
       7, -4, -2, -3, -5, -6, -3, -2, -4,  7,
       7,  7,  7,  7,  7,  7,  7,  7,  7,  7,
       7,  7,  7,  7,  7,  7,  7,  7,  7,  7
@@ -157,19 +157,30 @@ private:
     //current positions(indices) of the pieces
 
     //**************white pieces**************************
-    char whiteLeftRook = 21;
-    char whiteLeftKnight = 22;
-    char whiteLeftBishop = 23;
-    char whiteQueen = 24;
-    char whiteKing = 25; 
+
+    char whiteLeftRook =    21;
+    char whiteLeftKnight =  22;
+    char whiteLeftBishop =  23;
+    char whiteQueen =       24;
+    char whiteKing =        25; 
     char whiteRightBishop = 26;
     char whiteRightKnight = 27;
-    char whiteRightRook = 28;
+    char whiteRightRook =   28;
 
     char whitePawns[8] = {31, 32, 33, 34, 35, 66, 37, 38};
     
     //**************black pieces**************************
 
+    char blackLeftRook =    91;
+    char blackLeftKnight =  92;
+    char blackLeftBishop =  93;
+    char blackQueen =       94;
+    char blackKing =        95; 
+    char blackRightBishop = 96;
+    char blackRightKnight = 97;
+    char blackRightRook =   98;
+
+    char blackPawns[8] = {81, 82, 83, 84, 85, 86, 87, 88};
 
 
 
@@ -198,12 +209,9 @@ private:
     void whiteKingMoveGeneration();   // white king move generation function (queen without while loop)
     
     //pawn moves: separate functions because of the complications (double push, en passant,different capture)
-    void whitePawnsSinglePush();
-    void whitePawnsDoublePush();
     void whitePawnsCapture(int index);
     void whitePawnsEnPassant(int index);
-
-    void whitePawnMoveGeneration();  // all the white pawn functions above together
+    void whitePawnMoveGeneration();  // all the white pawn functions together
 
     /*************************************************************************************************
     ; 
