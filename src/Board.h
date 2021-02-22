@@ -6,6 +6,10 @@
 #include <tuple>
 #include <map>
 #include <string>
+#include <ctime>
+#include <ratio>
+#include <chrono>
+
 
 struct legalMove{
   unsigned char from;
@@ -35,12 +39,14 @@ public:
     //void boardToOriginal(); //// visszaállítja a board ot az eredeti állapotába
     void drawIntBoard();//drawing the table to the console with numbers
     void generatePseudoLegalMoves();
+    void testingFunction();
 private:
     //vector for current possible moves
     std::vector<legalMove> legalMoves;
+    
+    bool enPassant; //is en passant an option
 
-    //is en passant an option
-    bool enPassant;
+    bool currentPlayer; // true-white || false-black
 
     /***********************************************************************************************
     ; egy 120 elemes 1 dimenziós tömb a gyorsabb elérés és könnyebb lépésgenerálás érdekében
@@ -79,7 +85,7 @@ private:
       7,  7,  7,  7,  7,  7,  7,  7,  7,  7
     };
 
-    //change index to position map
+    //exchange index to position on Board
     std::map<int, std::string> indexPosMap = {
       { 21, "a1" },
       { 22, "b1" },
@@ -202,12 +208,13 @@ private:
     ; 
     **************************************************************************************************/
 
-    void whiteKnightMoveGeneration(); // white knight move generation function
+    
     void whiteRookMoveGeneration();   // white rook move generation function
     void whiteBishopMoveGeneration(); // white bishop move generation function
     void whiteQueenMoveGeneration();  // white queen move generation function (rook + bishop move geenration)
     void whiteKingMoveGeneration();   // white king move generation function (queen without while loop)
-    
+    void whiteKnightMoveGeneration(); // white knight move generation function
+
     //pawn moves: separate functions because of the complications (double push, en passant,different capture)
     void whitePawnsCapture(int index);
     void whitePawnsEnPassant(int index);
@@ -217,10 +224,13 @@ private:
     ; 
     ; BLACK move generation functions for each piece
     ; !! Pseudo-legal moves are generated !!
+    ; Same naming as whites
     ; 
     **************************************************************************************************/
 
-
+    void blackKnightMoveGeneration(); 
+    void blackKingMoveGeneration();
+    void blackRookMoveGeneration();
 
    /*************************************************************************************************
     ; 
@@ -229,7 +239,7 @@ private:
     **************************************************************************************************/
 
     bool whiteKingInCheck(); /// checking if the white king is in check
-    void putInLegalMoves(unsigned char _from, unsigned  char _to, unsigned char _takenPiece); /// puches back the vector with a new legalMove item 
+    void putInLegalMoves(unsigned char _from, unsigned  char _to, unsigned char _takenPiece, char _value); /// puches back the vector with a new legalMove item 
 };
 
 #endif // _BOARD_H_
