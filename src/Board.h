@@ -85,7 +85,100 @@ private:
       7,  7,  7,  7,  7,  7,  7,  7,  7,  7
     };
 
-    //exchange index to position on Board
+
+    //current positions(indices) of the pieces
+
+    //**************white pieces**************************
+
+    char whiteLeftRook =    21;
+    char whiteLeftKnight =  22;
+    char whiteLeftBishop =  23;
+    char whiteQueen =       24;
+    char whiteKing =        25; 
+    char whiteRightBishop = 26;
+    char whiteRightKnight = 27;
+    char whiteRightRook =   28;
+
+    char whitePawns[8] = {31, 32, 33, 34, 35, 66, 37, 38};
+    
+    //**************black pieces**************************
+
+    char blackLeftRook =    91;
+    char blackLeftKnight =  92;
+    char blackLeftBishop =  93;
+    char blackQueen =       94;
+    char blackKing =        95; 
+    char blackRightBishop = 96;
+    char blackRightKnight = 97;
+    char blackRightRook =   98;
+
+    char blackPawns[8] = {81, 82, 83, 84, 85, 86, 87, 88};
+
+
+
+    /*************************************************************************************************
+    ; 
+    ; Moving constants (Offsets)
+    ; 
+    **************************************************************************************************/
+
+    const char knightOffsets[8] = {-21, -19, -12, -8,  8,  12,  19,  21};
+    const char rookOffsets[4] = {-1, 1, -10, 10};
+    const char bishopOffsets[4] = {9, 11, -9, -11};
+
+
+    /*************************************************************************************************
+    ; 
+    ; WHITE move generation functions for each piece
+    ; !! Pseudo-legal moves are generated !!
+    ; 
+    **************************************************************************************************/
+
+    
+    void whiteRookMoveGeneration();   // white rook move generation function
+    void whiteBishopMoveGeneration(); // white bishop move generation function
+    void whiteQueenMoveGeneration();  // white queen move generation function (rook + bishop move geenration)
+    void whiteKingMoveGeneration();   // white king move generation function (queen without while loop)
+    void whiteKnightMoveGeneration(); // white knight move generation function
+
+    //pawn moves: separate functions because of the complications (double push, en passant,different capture)
+    void whitePawnsCapture(int index);
+    void whitePawnsEnPassant(int index);
+    void whitePawnMoveGeneration();  // all the white pawn functions together
+
+    /*************************************************************************************************
+    ; 
+    ; BLACK move generation functions for each piece
+    ; !! Pseudo-legal moves are generated !!
+    ; Same naming as whites
+    ; 
+    **************************************************************************************************/
+
+    void blackRookMoveGeneration();
+    void blackBishopMoveGeneration();
+    void blackKnightMoveGeneration(); 
+    void blackKingMoveGeneration();
+    void blackQueenMoveGeneration();
+
+    void blackPawnsCapture(int index);
+    void blackPawnsEnPassant(int index);
+    void blackPawnMoveGeneration();
+
+   /*************************************************************************************************
+    ; 
+    ; Additional functions
+    ; 
+    **************************************************************************************************/
+
+    bool whiteKingInCheck(); /// checking if the white king is in check
+    void putInLegalMoves(unsigned char _from, unsigned  char _to, unsigned char _takenPiece, char _value); /// puches back the vector with a new legalMove item 
+
+
+    /*************************************************************************************************
+    ; 
+    ; Maps to exchange the indexes with positions
+    ; 
+    **************************************************************************************************/
     std::map<int, std::string> indexPosMap = {
       { 21, "a1" },
       { 22, "b1" },
@@ -160,86 +253,6 @@ private:
       { 98, "h8" }
     };
 
-    //current positions(indices) of the pieces
-
-    //**************white pieces**************************
-
-    char whiteLeftRook =    21;
-    char whiteLeftKnight =  22;
-    char whiteLeftBishop =  23;
-    char whiteQueen =       24;
-    char whiteKing =        25; 
-    char whiteRightBishop = 26;
-    char whiteRightKnight = 27;
-    char whiteRightRook =   28;
-
-    char whitePawns[8] = {31, 32, 33, 34, 35, 66, 37, 38};
-    
-    //**************black pieces**************************
-
-    char blackLeftRook =    91;
-    char blackLeftKnight =  92;
-    char blackLeftBishop =  93;
-    char blackQueen =       94;
-    char blackKing =        95; 
-    char blackRightBishop = 96;
-    char blackRightKnight = 97;
-    char blackRightRook =   98;
-
-    char blackPawns[8] = {81, 82, 83, 84, 85, 86, 87, 88};
-
-
-
-    /*************************************************************************************************
-    ; 
-    ; Moving constants (Offsets)
-    ; 
-    **************************************************************************************************/
-
-    const char knightOffsets[8] = {-21, -19, -12, -8,  8,  12,  19,  21};
-    const char rookOffsets[4] = {-1, 1, -10, 10};
-    const char bishopOffsets[4] = {9, 11, -9, -11};
-
-
-    /*************************************************************************************************
-    ; 
-    ; WHITE move generation functions for each piece
-    ; !! Pseudo-legal moves are generated !!
-    ; 
-    **************************************************************************************************/
-
-    
-    void whiteRookMoveGeneration();   // white rook move generation function
-    void whiteBishopMoveGeneration(); // white bishop move generation function
-    void whiteQueenMoveGeneration();  // white queen move generation function (rook + bishop move geenration)
-    void whiteKingMoveGeneration();   // white king move generation function (queen without while loop)
-    void whiteKnightMoveGeneration(); // white knight move generation function
-
-    //pawn moves: separate functions because of the complications (double push, en passant,different capture)
-    void whitePawnsCapture(int index);
-    void whitePawnsEnPassant(int index);
-    void whitePawnMoveGeneration();  // all the white pawn functions together
-
-    /*************************************************************************************************
-    ; 
-    ; BLACK move generation functions for each piece
-    ; !! Pseudo-legal moves are generated !!
-    ; Same naming as whites
-    ; 
-    **************************************************************************************************/
-
-    void blackKnightMoveGeneration(); 
-    void blackKingMoveGeneration();
-    void blackRookMoveGeneration();
-
-   /*************************************************************************************************
-    ; 
-    ; Additional functions
-    ; 
-    **************************************************************************************************/
-
-    bool whiteKingInCheck(); /// checking if the white king is in check
-    void putInLegalMoves(unsigned char _from, unsigned  char _to, unsigned char _takenPiece, char _value); /// puches back the vector with a new legalMove item 
 };
 
 #endif // _BOARD_H_
