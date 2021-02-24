@@ -104,14 +104,14 @@ private:
     
     //**************black pieces**************************
 
-    char blackLeftRook =    91;
+    //char blackLeftRook =    91;
     //char blackLeftKnight =  92;
     char blackLeftBishop =  93;
     char blackQueen =       94;
     //char blackKing =        95; 
     char blackRightBishop = 96;
     //char blackRightKnight = 97;
-    char blackRightRook =   98;
+    //char blackRightRook =   98;
 
     char blackPawns[8] = {81, 82, 83, 84, 85, 86, 87, 88};
 
