@@ -12,34 +12,35 @@
 
 
 struct legalMove{
-  unsigned char from;
-  unsigned char to;
-  unsigned char takenPiece; /// if there was any
+  char from;
+  char to;
+  char takenPiece;
   char value;
 };
 
 /* side note for takenPiece 
-; 0 if nothing
-; 1 - 8 white pawns ( -1 equals the index in the array)
-; 9 white left rook
-; 10 white right rook
-; 11 white left knight
-; 12 white right knight
-; 13 white left bishop
-; 14 white right bishop
-; 15 white queen
-; 16 white king
+; 0 - 7 white pawns ( -1 equals the index in the array)
+; 8  white left rook
+; 9  white right rook
+; 10 white left knight
+; 11 white right knight
+; 12 white left bishop
+; 13 white right bishop
+; 14 white queen
+; 15 white king
 ; 
-; [17 - 32] same with black 
+; [16 - 31] same with black 
 ;
 */
+
 class ChessBoard{
 public:
     ChessBoard();
-    //void boardToOriginal(); //// visszaállítja a board ot az eredeti állapotába
+
     void drawIntBoard();//drawing the table to the console with numbers
     void generatePseudoLegalMoves();
     void testingFunction();
+    void writeVector();
 private:
     //vector for current possible moves
     std::vector<legalMove> legalMoves;
@@ -90,31 +91,61 @@ private:
 
     //**************white pieces**************************
 
-    char whiteLeftRook =    21;
-    char whiteLeftKnight =  22;
-    char whiteLeftBishop =  23;
-    char whiteQueen =       24;
-    char whiteKing =        25; 
-    char whiteRightBishop = 26;
-    char whiteRightKnight = 27;
-    char whiteRightRook =   28;
+    //char whiteLeftRook =    21;
+    //char whiteLeftKnight =  22;
+    //char whiteLeftBishop =  23;
+    //char whiteQueen =       24;
+    //char whiteKing =        25; 
+    //char whiteRightBishop = 26;
+    //char whiteRightKnight = 27;
+    //char whiteRightRook =   28;
 
-    char whitePawns[8] = {31, 32, 33, 34, 35, 66, 37, 38};
+    //char whitePawns[8] = {31, 32, 33, 34, 35, 36, 37, 38};
     
     //**************black pieces**************************
 
     char blackLeftRook =    91;
-    char blackLeftKnight =  92;
+    //char blackLeftKnight =  92;
     char blackLeftBishop =  93;
     char blackQueen =       94;
-    char blackKing =        95; 
+    //char blackKing =        95; 
     char blackRightBishop = 96;
-    char blackRightKnight = 97;
+    //char blackRightKnight = 97;
     char blackRightRook =   98;
 
     char blackPawns[8] = {81, 82, 83, 84, 85, 86, 87, 88};
 
+    /*************************************************************************************************
+    ; 
+    ; All the pieces in one array. It is easier to implement capture like this
+    ; Just the right index is needed in case of capturing
+    ; 
+    **************************************************************************************************/
 
+    /* side note for the pieces (indices in allPieces array)
+    ; 0 - 7 white pawns
+    ; 8  white left rook
+    ; 9  white right rook
+    ; 10 white left knight
+    ; 11 white right knight
+    ; 12 white left bishop
+    ; 13 white right bishop
+    ; 14 white queen
+    ; 15 white king
+    ; 
+    ; 16 - 23 black pawns
+    ; 24 black left rook
+    ; 25 black right rook
+    ; 26 black left knight
+    ; 27 black right knight
+    ; 28 black left bishop
+    ; 29 black right bishop
+    ; 30 black queen
+    ; 31 black king
+    ;
+    */
+    char allPieces[32] = { 31, 32, 33, 34, 35, 36, 37, 38, 21, 28, 22, 27, 23, 26, 24, 25, 
+                           81, 82, 83, 84, 85, 86, 87, 88, 91, 98, 92, 97, 93, 96, 94, 95 };
 
     /*************************************************************************************************
     ; 
@@ -142,8 +173,8 @@ private:
     void whiteKnightMoveGeneration(); // white knight move generation function
 
     //pawn moves: separate functions because of the complications (double push, en passant,different capture)
-    void whitePawnsCapture(int index);
-    void whitePawnsEnPassant(int index);
+    void whitePawnsCapture(int index, char piece);
+    void whitePawnsEnPassant(int index, char piece);
     void whitePawnMoveGeneration();  // all the white pawn functions together
 
     /*************************************************************************************************
@@ -171,8 +202,8 @@ private:
     **************************************************************************************************/
 
     bool whiteKingInCheck(); /// checking if the white king is in check
-    void putInLegalMoves(unsigned char _from, unsigned  char _to, unsigned char _takenPiece, char _value); /// puches back the vector with a new legalMove item 
-
+    void putInLegalMoves(char _from, char _to, char _takenPiece, char _value); /// puches back the vector with a new legalMove item 
+    char findPiece(char index); /// finds which piece is on the board with the given index
 
     /*************************************************************************************************
     ; 
