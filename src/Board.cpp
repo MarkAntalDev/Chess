@@ -1,8 +1,9 @@
 #include "Board.h"
 
 ChessBoard::ChessBoard(){
-    enPassant = true;
-    currentPlayer = false;
+    enPassant = false;
+    currentPlayer = true;
+    std::srand(std::time(nullptr));
 }
 
 //drawing the chessboard with ints
@@ -527,46 +528,55 @@ void ChessBoard::blackQueenMoveGeneration(){
     } 
 }
 //////////////////////////////////////////////////////////////// CONTINUE HERE ////////////////////////////////////////////////////////
-void ChessBoard::blackPawnsEnPassant(int index){
+void ChessBoard::blackPawnsEnPassant(int index, char piece){
     if (index/10 == 5){
-        if (board[index-1] == 1) /// en passant left to the current pawn
-            std::cout << "Pawn on " << indexPosMap[index] << " captures on " << indexPosMap[index - 9] << " en passant" << std::endl;
-        if (board[index+1] == 1) /// en passant left to the current pawn
-            std::cout << "Pawn on " << indexPosMap[index] << " captures on " << indexPosMap[index - 11] << " en passant" << std::endl;    
+        if (board[index-1] == 1){/// en passant left to the current pawn
+            putInLegalMoves(piece, index - 11, findPiece(index-1), 0);
+            //std::cout << "Pawn on " << indexPosMap[index] << " captures on " << indexPosMap[index - 9] << " en passant" << std::endl;
+        } 
+        if (board[index+1] == 1){/// en passant left to the current pawn
+            putInLegalMoves(piece, index - 9, findPiece(index+1), 0);
+            //std::cout << "Pawn on " << indexPosMap[index] << " captures on " << indexPosMap[index - 11] << " en passant" << std::endl; 
+        }     
     }
 }
 
-void ChessBoard::blackPawnsCapture(int index){
+void ChessBoard::blackPawnsCapture(int index, char piece){
     if (board[index - 9] > 0 && board[index - 9] < 7){
-        std::cout << "Pawn on " << indexPosMap[index] << " captures on " << indexPosMap[index - 9] << std::endl;
+        putInLegalMoves(piece, index - 9, findPiece(index-9), 0);
+        //std::cout << "Pawn on " << indexPosMap[index] << " captures on " << indexPosMap[index - 9] << std::endl;
     }
     if (board[index - 11] > 0 && board[index - 11] < 7){
-        std::cout << "Pawn on " << indexPosMap[index] << " captures on " << indexPosMap[index - 11] << std::endl;
+        putInLegalMoves(piece, index - 11, findPiece(index-11), 0);
+        //std::cout << "Pawn on " << indexPosMap[index] << " captures on " << indexPosMap[index - 11] << std::endl;
     }
 }
 
 void ChessBoard::blackPawnMoveGeneration(){
     for (int i=0 ; i<8 ; ++i){
-        char currentPawn = blackPawns[i];
+        char currentPawn = allPieces[16+i];
         if (currentPawn != -1){
-            blackPawnsCapture(currentPawn); /// we call the capture function (because its possible anywhere)
             if (currentPawn == 81 + i){ /// if the current pawn is on the starting position (checkable with the current index)
+                blackPawnsCapture(currentPawn, char(16+i));
                 if (board[currentPawn - 10] == 0){ ///single push
-                    std::cout << "Pawn on " << indexPosMap[blackPawns[i]] << " to " << indexPosMap[blackPawns[i] - 10] <<std::endl;
+                    //std::cout << "Pawn on " << indexPosMap[blackPawns[i]] << " to " << indexPosMap[blackPawns[i] - 10] <<std::endl;
+                    putInLegalMoves(char(16+i), currentPawn - 10, -1, 0);
                     if (board[currentPawn - 20] == 0){ /// double push !!! it's only possible if single push is possible
-                        std::cout << "Pawn on " << indexPosMap[blackPawns[i]] << " to " << indexPosMap[blackPawns[i] - 20] <<std::endl;
+                        putInLegalMoves(char(16+i), currentPawn - 20, -1, 0);
+                        //std::cout << "Pawn on " << indexPosMap[blackPawns[i]] << " to " << indexPosMap[blackPawns[i] - 20] <<std::endl;
                         ///After this en passant is possible
                     }
                 }
             }
             else{ /// when the current pawn is not on the starting position
                 if (board[currentPawn - 10] == 0){
-                    std::cout << "Pawn on " << indexPosMap[blackPawns[i]] << " to " << indexPosMap[blackPawns[i] - 10] <<std::endl;
+                    putInLegalMoves(char(i), currentPawn - 10, -1, 0);
+                    //std::cout << "Pawn on " << indexPosMap[blackPawns[i]] << " to " << indexPosMap[blackPawns[i] - 10] <<std::endl;
                     ////// PROMOTION IF POSSIBLE
                 }
                 ///here we have to check en passant, because the current pawn is not on the starting position
                 if (enPassant) /// first check if en passant is possible
-                    blackPawnsEnPassant(currentPawn); /// so we call en passant function with the current index
+                    blackPawnsEnPassant(currentPawn, char(16+i)); /// so we call en passant function with the current index
             }
         }
     }
@@ -597,6 +607,26 @@ void ChessBoard::generatePseudoLegalMoves(){
     }
 }
 
+void ChessBoard::makeMove(char indexOfMove){
+    if(legalMoves.size() < indexOfMove+1){
+        std::cout << "out of range";
+    }
+    else{
+        board[allPieces[legalMoves[indexOfMove].from]] = 0;
+        allPieces[legalMoves[indexOfMove].from] = legalMoves[indexOfMove].to;
+        board[legalMoves[indexOfMove].takenPiece] = 0;
+        board[legalMoves[indexOfMove].to] = getPieceNumber(legalMoves[indexOfMove].from);
+    }
+
+}
+
+#pragma region putInLegalMoves(char, char, char, char)
+/// <summary> A vecktorunkhoz push-ol egy legalMove struktúrát a paraméterekben megadott értékekkel</summary>
+/// <param name="_from"> A lépő bábu indexe az allPieces[] tömbben </param>
+/// <param name="_to"> A mező indexe ahova a bábu lépni fog a board[] tömbben </param>
+/// <param name="_takenPiece"> A leütött bábu indexe az allPieces[] tömbben: ha van akkor FindPiece függvény használata szükséges | ha nincs akkor -1 </param>
+/// <param name="_value"> a lépés értéke </param>
+/// <returns> void </returns>
 void ChessBoard::putInLegalMoves(char _from, char _to, char _takenPiece, char _value){
     legalMove clm;
     clm.from = _from;
@@ -605,6 +635,7 @@ void ChessBoard::putInLegalMoves(char _from, char _to, char _takenPiece, char _v
     clm.value = _value;
     legalMoves.push_back(clm);
 }
+#pragma endregion
 
 void ChessBoard::testingFunction(){
     for (int i = 0; i < 30; ++i)
@@ -629,6 +660,7 @@ void ChessBoard::writeVector(){
     }
 }
 
+/// finds the index of the piece in allPieces[] based on the given index in board[]
 char ChessBoard::findPiece(char index){
     for (char i=0 ; i<32 ; ++i){
         if (allPieces[i] == index){
@@ -636,4 +668,71 @@ char ChessBoard::findPiece(char index){
         }
     }
     return char(-1);
+}
+
+char ChessBoard::getPieceNumber(char index){
+    if(index > -1 && index < 8)
+        return 1;
+    if(index > 15 && index < 24)
+        return -1;
+    switch(index){
+////// Fehér bábuk
+        case 8:
+            return 4;
+            break;
+        case 9:
+            return 4;
+            break;
+        case 10:
+            return 2;
+            break;
+        case 11:
+            return 2;
+            break;
+        case 12:
+            return 3;
+            break;
+        case 13:
+            return 3;
+            break;
+        case 14:
+            return 5;
+            break;
+        case 15:
+            return 6;
+            break;
+
+/////// Fekete bábuk            
+        case 24:
+            return -4;
+            break;
+        case 25:
+            return -4;
+            break;
+        case 26:
+            return -2;
+            break;
+        case 27:
+            return -2;
+            break;
+        case 28:
+            return -3;
+            break;
+        case 29:
+            return -3;
+            break;
+        case 30:
+            return -5;
+            break;
+        case 31:
+            return -6;
+            break;
+    }
+}
+
+void ChessBoard::generateRandomMove(){
+    legalMoves.clear();
+    generatePseudoLegalMoves();
+    char random_index = std::rand()%legalMoves.size();
+    std::cout << int(legalMoves[random_index].from) << " " << int(legalMoves[random_index].to) << " " << int(legalMoves[random_index].takenPiece) << std::endl;
 }

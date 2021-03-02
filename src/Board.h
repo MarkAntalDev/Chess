@@ -9,6 +9,7 @@
 #include <ctime>
 #include <ratio>
 #include <chrono>
+#include <cstdlib>
 
 
 struct legalMove{
@@ -41,6 +42,8 @@ public:
     void generatePseudoLegalMoves();
     void testingFunction();
     void writeVector();
+    void makeMove(char indexOfMove);
+    void generateRandomMove();
 private:
     //vector for current possible moves
     std::vector<legalMove> legalMoves;
@@ -106,14 +109,14 @@ private:
 
     //char blackLeftRook =    91;
     //char blackLeftKnight =  92;
-    char blackLeftBishop =  93;
-    char blackQueen =       94;
+    //char blackLeftBishop =  93;
+    //char blackQueen =       94;
     //char blackKing =        95; 
-    char blackRightBishop = 96;
+    //char blackRightBishop = 96;
     //char blackRightKnight = 97;
     //char blackRightRook =   98;
 
-    char blackPawns[8] = {81, 82, 83, 84, 85, 86, 87, 88};
+    //char blackPawns[8] = {81, 82, 83, 84, 85, 86, 87, 88};
 
     /*************************************************************************************************
     ; 
@@ -191,8 +194,8 @@ private:
     void blackKingMoveGeneration();
     void blackQueenMoveGeneration();
 
-    void blackPawnsCapture(int index);
-    void blackPawnsEnPassant(int index);
+    void blackPawnsCapture(int index, char piece);
+    void blackPawnsEnPassant(int index, char piece);
     void blackPawnMoveGeneration();
 
    /*************************************************************************************************
@@ -204,6 +207,8 @@ private:
     bool whiteKingInCheck(); /// checking if the white king is in check
     void putInLegalMoves(char _from, char _to, char _takenPiece, char _value); /// puches back the vector with a new legalMove item 
     char findPiece(char index); /// finds which piece is on the board with the given index
+    char getPieceNumber(char index);
+    
 
     /*************************************************************************************************
     ; 
