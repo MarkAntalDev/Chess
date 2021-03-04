@@ -252,23 +252,23 @@ void ChessBoard::whiteKingMoveGeneration(){
 void ChessBoard::whitePawnsEnPassant(int index, char piece){
     if (index/10 == 6){ // checking if the pawn is on the good square
         if(board[index-1] == -1){ /// en passant left to the current pawn
-            //std::cout << "Pawn on " << indexPosMap[index] << " captures on " << indexPosMap[index + 9] << " en passant" << std::endl;
+            //std::cout << "Pawn on " << indexToPos[index] << " captures on " << indexToPos[index + 9] << " en passant" << std::endl;
             putInLegalMoves(piece, index + 9, findPiece(index-1), 0);
         } 
             
         if(board[index+1] == -1) /// en passant left to the current pawn
-            //std::cout << "Pawn on " << indexPosMap[index] << " captures on " << indexPosMap[index + 11] << " en passant" << std::endl;
+            //std::cout << "Pawn on " << indexToPos[index] << " captures on " << indexToPos[index + 11] << " en passant" << std::endl;
             putInLegalMoves(piece, index + 11, findPiece(index+1), 0);
     }
 }
 
 void ChessBoard::whitePawnsCapture(int index, char piece){
     if (board[index + 9] < 0){
-        //std::cout << "Pawn on " << indexPosMap[index] << " captures on " << indexPosMap[index + 9] << std::endl;
+        //std::cout << "Pawn on " << indexToPos[index] << " captures on " << indexToPos[index + 9] << std::endl;
         putInLegalMoves(piece, index + 9, findPiece(index+9), 0);
     }
     if (board[index + 11] < 0){
-        //std::cout << "Pawn on " << indexPosMap[index] << " captures on " << indexPosMap[index + 11] << std::endl;
+        //std::cout << "Pawn on " << indexToPos[index] << " captures on " << indexToPos[index + 11] << std::endl;
         putInLegalMoves(piece, index + 11, findPiece(index+11), 0);
     }
 }
@@ -281,10 +281,10 @@ void ChessBoard::whitePawnMoveGeneration(){
                 whitePawnsCapture(currentPawn, char(i)); /// calling the single capture function
                 if (board[currentPawn + 10] == 0){ ///single push
                     putInLegalMoves(char(i), currentPawn + 10, -1, 0);
-                    //std::cout << "Pawn on " << indexPosMap[whitePawns[i]] << " to " << indexPosMap[whitePawns[i] + 10] <<std::endl;
+                    //std::cout << "Pawn on " << indexToPos[whitePawns[i]] << " to " << indexToPos[whitePawns[i] + 10] <<std::endl;
                     if(board[currentPawn + 20] == 0){ /// double push
                         putInLegalMoves(char(i), currentPawn + 20, -1, 0);
-                        //std::cout << "Pawn on " << indexPosMap[whitePawns[i]] << " to " << indexPosMap[whitePawns[i] + 20] <<std::endl;
+                        //std::cout << "Pawn on " << indexToPos[whitePawns[i]] << " to " << indexToPos[whitePawns[i] + 20] <<std::endl;
                         ///After this en passant is possible
                     }
                 }
@@ -292,7 +292,7 @@ void ChessBoard::whitePawnMoveGeneration(){
             else{ /// when the current pawn is not on the starting position
                 if (board[currentPawn + 10] == 0){
                     putInLegalMoves(char(i), currentPawn + 10, -1, 0);
-                    //std::cout << "Pawn on " << indexPosMap[whitePawns[i]] << " to " << indexPosMap[whitePawns[i] + 10] <<std::endl;
+                    //std::cout << "Pawn on " << indexToPos[whitePawns[i]] << " to " << indexToPos[whitePawns[i] + 10] <<std::endl;
                 }
                 ///here we have to check en passant, because the current pawn is not on the starting position
                 if (enPassant) /// first check if en passant is possible
@@ -532,11 +532,11 @@ void ChessBoard::blackPawnsEnPassant(int index, char piece){
     if (index/10 == 5){
         if (board[index-1] == 1){/// en passant left to the current pawn
             putInLegalMoves(piece, index - 11, findPiece(index-1), 0);
-            //std::cout << "Pawn on " << indexPosMap[index] << " captures on " << indexPosMap[index - 9] << " en passant" << std::endl;
+            //std::cout << "Pawn on " << indexToPos[index] << " captures on " << indexToPos[index - 9] << " en passant" << std::endl;
         } 
         if (board[index+1] == 1){/// en passant left to the current pawn
             putInLegalMoves(piece, index - 9, findPiece(index+1), 0);
-            //std::cout << "Pawn on " << indexPosMap[index] << " captures on " << indexPosMap[index - 11] << " en passant" << std::endl; 
+            //std::cout << "Pawn on " << indexToPos[index] << " captures on " << indexToPos[index - 11] << " en passant" << std::endl; 
         }     
     }
 }
@@ -544,11 +544,11 @@ void ChessBoard::blackPawnsEnPassant(int index, char piece){
 void ChessBoard::blackPawnsCapture(int index, char piece){
     if (board[index - 9] > 0 && board[index - 9] < 7){
         putInLegalMoves(piece, index - 9, findPiece(index-9), 0);
-        //std::cout << "Pawn on " << indexPosMap[index] << " captures on " << indexPosMap[index - 9] << std::endl;
+        //std::cout << "Pawn on " << indexToPos[index] << " captures on " << indexToPos[index - 9] << std::endl;
     }
     if (board[index - 11] > 0 && board[index - 11] < 7){
         putInLegalMoves(piece, index - 11, findPiece(index-11), 0);
-        //std::cout << "Pawn on " << indexPosMap[index] << " captures on " << indexPosMap[index - 11] << std::endl;
+        //std::cout << "Pawn on " << indexToPos[index] << " captures on " << indexToPos[index - 11] << std::endl;
     }
 }
 
@@ -559,11 +559,11 @@ void ChessBoard::blackPawnMoveGeneration(){
             if (currentPawn == 81 + i){ /// if the current pawn is on the starting position (checkable with the current index)
                 blackPawnsCapture(currentPawn, char(16+i));
                 if (board[currentPawn - 10] == 0){ ///single push
-                    //std::cout << "Pawn on " << indexPosMap[blackPawns[i]] << " to " << indexPosMap[blackPawns[i] - 10] <<std::endl;
+                    //std::cout << "Pawn on " << indexToPos[blackPawns[i]] << " to " << indexToPos[blackPawns[i] - 10] <<std::endl;
                     putInLegalMoves(char(16+i), currentPawn - 10, -1, 0);
                     if (board[currentPawn - 20] == 0){ /// double push !!! it's only possible if single push is possible
                         putInLegalMoves(char(16+i), currentPawn - 20, -1, 0);
-                        //std::cout << "Pawn on " << indexPosMap[blackPawns[i]] << " to " << indexPosMap[blackPawns[i] - 20] <<std::endl;
+                        //std::cout << "Pawn on " << indexToPos[blackPawns[i]] << " to " << indexToPos[blackPawns[i] - 20] <<std::endl;
                         ///After this en passant is possible
                     }
                 }
@@ -571,7 +571,7 @@ void ChessBoard::blackPawnMoveGeneration(){
             else{ /// when the current pawn is not on the starting position
                 if (board[currentPawn - 10] == 0){
                     putInLegalMoves(char(i), currentPawn - 10, -1, 0);
-                    //std::cout << "Pawn on " << indexPosMap[blackPawns[i]] << " to " << indexPosMap[blackPawns[i] - 10] <<std::endl;
+                    //std::cout << "Pawn on " << indexToPos[blackPawns[i]] << " to " << indexToPos[blackPawns[i] - 10] <<std::endl;
                     ////// PROMOTION IF POSSIBLE
                 }
                 ///here we have to check en passant, because the current pawn is not on the starting position
@@ -591,6 +591,7 @@ void ChessBoard::blackPawnMoveGeneration(){
 
 void ChessBoard::generatePseudoLegalMoves(){
     if(currentPlayer){ /// current player is true when it's white's turn
+        std::cout << "white's turn" << std::endl;
         whiteQueenMoveGeneration();
         whiteKingMoveGeneration();
         whiteRookMoveGeneration();
@@ -598,6 +599,7 @@ void ChessBoard::generatePseudoLegalMoves(){
         whiteBishopMoveGeneration();
         whitePawnMoveGeneration();
     }else{ /// current player is false when it's black's turn
+        std::cout << "black's turn" << std::endl;
         blackQueenMoveGeneration();
         blackKingMoveGeneration();
         blackRookMoveGeneration();
@@ -620,7 +622,7 @@ void ChessBoard::makeMove(char indexOfMove){
 
 }
 
-#pragma region putInLegalMoves(char, char, char, char)
+
 /// <summary> A vecktorunkhoz push-ol egy legalMove struktúrát a paraméterekben megadott értékekkel</summary>
 /// <param name="_from"> A lépő bábu indexe az allPieces[] tömbben </param>
 /// <param name="_to"> A mező indexe ahova a bábu lépni fog a board[] tömbben </param>
@@ -635,7 +637,6 @@ void ChessBoard::putInLegalMoves(char _from, char _to, char _takenPiece, char _v
     clm.value = _value;
     legalMoves.push_back(clm);
 }
-#pragma endregion
 
 void ChessBoard::testingFunction(){
     for (int i = 0; i < 30; ++i)
@@ -733,6 +734,8 @@ char ChessBoard::getPieceNumber(char index){
 void ChessBoard::generateRandomMove(){
     legalMoves.clear();
     generatePseudoLegalMoves();
-    char random_index = std::rand()%legalMoves.size();
-    std::cout << int(legalMoves[random_index].from) << " " << int(legalMoves[random_index].to) << " " << int(legalMoves[random_index].takenPiece) << std::endl;
+    char randomIndex = std::rand()%legalMoves.size();
+    std::cout << int(legalMoves[randomIndex].from) << " " << int(legalMoves[randomIndex].to) << " " << int(legalMoves[randomIndex].takenPiece) << std::endl;
+    makeMove(randomIndex);
+    this->currentPlayer = !this->currentPlayer;
 }
