@@ -3,12 +3,12 @@
 
 int main(){
     ChessBoard* chessboard = new ChessBoard();
-    chessboard->drawIntBoard();
+    //chessboard->drawIntBoard();
     //chessboard->generatePseudoLegalMoves();
     //chessboard->writeVector();
-    //chessboard->testingFunction();
+    chessboard->testingFunction();
     //chessboard->generateRandomMove();
-    char c;
+    /*char c;
     do{
         std::cout << "input:";
         std::cin >> c;
@@ -17,6 +17,6 @@ int main(){
             chessboard->generateRandomMove();
             chessboard->drawIntBoard();
         }
-    }while(c != 'x');
+    }while(c != 'x');*/
     return 0;
 }

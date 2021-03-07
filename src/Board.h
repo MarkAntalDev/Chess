@@ -167,16 +167,27 @@ private:
     **************************************************************************************************/
 
     
-    void whiteRookMoveGeneration();   // white rook move generation function
-    void whiteBishopMoveGeneration(); // white bishop move generation function
-    void whiteQueenMoveGeneration();  // white queen move generation function (rook + bishop move geenration)
+    void whiteRookMoveGeneration(char pieceIndex);   // white rook move generation function
+    void whiteBishopMoveGeneration(char pieceIndex); // white bishop move generation function
+    void whiteQueenMoveGeneration(char pieceIndex);  // white queen move generation function (rook + bishop move geenration)
     void whiteKingMoveGeneration();   // white king move generation function (queen without while loop)
-    void whiteKnightMoveGeneration(); // white knight move generation function
+    void whiteKnightMoveGeneration(char pieceIndex); // white knight move generation function
 
     //pawn moves: separate functions because of the complications (double push, en passant,different capture)
-    void whitePawnsCapture(int index, char piece);
-    void whitePawnsEnPassant(int index, char piece);
-    void whitePawnMoveGeneration();  // all the white pawn functions together
+    void whitePawnsCapture(char index, char piece);
+    void whitePawnsEnPassant(char index, char piece);
+    void whitePawnMoveGeneration(char pieceIndex);  // all the white pawn functions together
+
+
+    //A függvényeket megfelelő számokkal meghívó függvénye
+    void whiteRookMoveCall();
+    void whiteBishopMoveCall();
+    void whiteQueenMoveCall();
+    void whiteKingMoveCall();
+    void whiteKnightMoveCall();
+    void whitePawnMoveCall();
+
+    void callAllWhiteMoveGeneration();
 
     /*************************************************************************************************
     ; 
@@ -186,15 +197,25 @@ private:
     ; 
     **************************************************************************************************/
 
-    void blackRookMoveGeneration();
-    void blackBishopMoveGeneration();
-    void blackKnightMoveGeneration(); 
+    void blackRookMoveGeneration(char pieceIndex);
+    void blackBishopMoveGeneration(char pieceIndex);
+    void blackKnightMoveGeneration(char pieceIndex); 
     void blackKingMoveGeneration();
-    void blackQueenMoveGeneration();
+    void blackQueenMoveGeneration(char pieceIndex);
 
-    void blackPawnsCapture(int index, char piece);
-    void blackPawnsEnPassant(int index, char piece);
-    void blackPawnMoveGeneration();
+    void blackPawnsCapture(char index, char piece);
+    void blackPawnsEnPassant(char index, char piece);
+    void blackPawnMoveGeneration(char pieceIndex);
+
+    // a függvényeet megfelelő számokkal meghívó függvénye
+    void blackRookMoveCall();
+    void blackBishopMoveCall();
+    void blackQueenMoveCall();
+    void blackKingMoveCall();
+    void blackKnightMoveCall();
+    void blackPawnMoveCall();
+
+    void callAllBlackMoveGeneration();
 
    /*************************************************************************************************
     ; 
@@ -202,7 +223,7 @@ private:
     ; 
     **************************************************************************************************/
 
-    bool whiteKingInCheck(); /// checking if the white king is in check
+    //bool whiteKingInCheck(); /// checking if the white king is in check
     void putInLegalMoves(char _from, char _to, char _takenPiece, char _value); /// puches back the vector with a new legalMove item 
     char findPiece(char index); /// finds which piece is on the board with the given index
     char getPieceNumber(char index);
@@ -213,7 +234,7 @@ private:
     ; Maps to exchange the indexes with positions
     ; 
     **************************************************************************************************/
-    std::map<int, std::string> indexToPos = {
+    std::map<char, std::string> indexToPos = {
       { 21, "a1" },
       { 22, "b1" },
       { 23, "c1" },
@@ -293,7 +314,7 @@ private:
     ; Map a táblapozíciók indexre való átváltására
     ; 
     **************************************************************************************************/
-    std::map<std::string, int> posToIndex = {
+    std::map<std::string, char> posToIndex = {
       { "a1", 21 },
       { "b1", 22 },
       { "c1", 23 },

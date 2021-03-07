@@ -2,7 +2,7 @@
 
 ChessBoard::ChessBoard(){
     enPassant = false;
-    currentPlayer = true;
+    currentPlayer = false;
     std::srand(std::time(nullptr));
 }
 
@@ -25,202 +25,85 @@ void ChessBoard::drawIntBoard(){
 ; 
 **************************************************************************************************/
 
-void ChessBoard::whiteKnightMoveGeneration(){
-    /// allPieces[10] == white left knight
-    /// allPieces[11] == white right knight
-    char whiteLeftKnight = allPieces[10];
-    char whiteRightKnight = allPieces[11];
-    if (whiteLeftKnight != -1 && whiteRightKnight != -1){  /// both white knights are in the game
-        for (int i=0 ; i<8 ; ++i){
-            if (board[whiteLeftKnight + knightOffsets[i]] < 1){ // left knight
-                //std::cout << "Knight to " << whiteLeftKnight + knightOffsets[i] << std::endl;
-                if (board[whiteLeftKnight + knightOffsets[i]] < 0){
-                    putInLegalMoves(10, whiteLeftKnight + knightOffsets[i], findPiece(whiteLeftKnight + knightOffsets[i]), 0);
+void ChessBoard::whiteKnightMoveGeneration(char pieceIndex){
+    char currentWhiteKnight = allPieces[pieceIndex];
+    if (currentWhiteKnight != -1){  /// both white knights are in the game
+        for (char i=0 ; i<8 ; ++i){
+            if (board[currentWhiteKnight + knightOffsets[i]] < 1){ // left knight
+                if (board[currentWhiteKnight + knightOffsets[i]] < 0){
+                    putInLegalMoves(pieceIndex, currentWhiteKnight + knightOffsets[i], findPiece(currentWhiteKnight + knightOffsets[i]), 0);
                 }else{
-                    putInLegalMoves(10, whiteLeftKnight + knightOffsets[i], -1, 0);
+                    putInLegalMoves(pieceIndex, currentWhiteKnight + knightOffsets[i], -1, 0);
                 }
-            }
-            if (board[whiteRightKnight + knightOffsets[i]] < 1){ // right knight
-                //std::cout << "Knight to " << whiteRightKnight + knightOffsets[i] << std::endl;
-                if (board[whiteRightKnight + knightOffsets[i]] < 0){
-                    putInLegalMoves(11, whiteRightKnight + knightOffsets[i], findPiece(whiteRightKnight + knightOffsets[i]), 0);
-                }else{
-                    putInLegalMoves(11, whiteRightKnight + knightOffsets[i], -1, 0);
-                }
-            }
-        }
-    }else if (whiteLeftKnight == -1){ /// the white right knight is in the game
-        for (int i=0 ; i<8 ; ++i){
-            if (board[whiteRightKnight + knightOffsets[i]] < 1){ // right knight
-                //std::cout << "Knight to " << whiteRightKnight + knightOffsets[i] << std::endl;
-                if (board[whiteRightKnight + knightOffsets[i]] < 0){
-                    putInLegalMoves(11, whiteRightKnight + knightOffsets[i], findPiece(whiteRightKnight + knightOffsets[i]), 0);
-                }else{
-                    putInLegalMoves(11, whiteRightKnight + knightOffsets[i], -1, 0);
-                }
-                /// may be capture as well
-            }
-        }
-    }else if (whiteRightKnight == -1){ /// the white left knight is in the game
-        for (int i=0 ; i<8 ; ++i){
-            if (board[whiteLeftKnight + knightOffsets[i]] < 1){ // left knight
-                //std::cout << "Knight to " << whiteLeftKnight + knightOffsets[i] << std::endl;
-                if (board[whiteLeftKnight + knightOffsets[i]] < 0){
-                    putInLegalMoves(10, whiteLeftKnight + knightOffsets[i], findPiece(whiteLeftKnight + knightOffsets[i]), 0);
-                }else{
-                    putInLegalMoves(10, whiteLeftKnight + knightOffsets[i], -1, 0);
-                }
-                /// may be capture as well
             }
         }
     }
 }
 
-void ChessBoard::whiteRookMoveGeneration(){
-    /// allPieces[8] == white left rook
-    /// allPieces[9] == white right rook
-    char whiteLeftRook = allPieces[8];
-    char whiteRightRook = allPieces[9];
-    int j;
-    if (whiteLeftRook != -1 && whiteRightRook != -1){
-        for (int i=0 ; i<4 ; ++i){
+void ChessBoard::whiteRookMoveGeneration(char pieceIndex){
+    char currentWhiteRook = allPieces[pieceIndex];
+    char j;
+    if (currentWhiteRook != -1){
+        for (char i=0 ; i<4 ; ++i){
             j = 1;
-            while (board[whiteLeftRook + j * rookOffsets[i]] == 0){ // left rook
-                putInLegalMoves(8, whiteLeftRook + j * rookOffsets[i], -1, 0);
+            while (board[currentWhiteRook + j * rookOffsets[i]] == 0){ // left rook
+                putInLegalMoves(pieceIndex, currentWhiteRook + j * rookOffsets[i], -1, 0);
                 ++j;
                 //std::cout << "Rook to " << whiteLeftRook + j * rookOffsets[i] << std::endl;
                 
             }
-            if (board[whiteLeftRook + j * rookOffsets[i]] < 0)
-                putInLegalMoves(8, whiteLeftRook + j * rookOffsets[i], findPiece(whiteLeftRook + j * rookOffsets[i]), 0);
-                //std::cout << "Rook captures on " << whiteLeftRook + j * rookOffsets[i] << std::endl;
-                /// the last move is a capture || else doesn't matter, either white piece or off the table
-
-            j = 1;
-            while (board[whiteRightRook + j * rookOffsets[i]] == 0){ // right rooks
-                putInLegalMoves(9, whiteRightRook + j * rookOffsets[i], -1, 0);
-                //std::cout << "Rook to " << whiteRightRook + j * rookOffsets[i] << std::endl;
-                j++;
-            }
-            if (board[whiteRightRook + j * rookOffsets[i]] < 0)
-                putInLegalMoves(9, whiteRightRook + j * rookOffsets[i], findPiece(whiteRightRook + j * rookOffsets[i]), 0);
-                //std::cout << "Rook captures on " << whiteRightRook + j * rookOffsets[i] << std::endl;
-                /// the last move is a capture || else doesn't matter, either white piece or off the table
-        }
-    }else if(whiteLeftRook == -1){
-        for (int i=0 ; i<4 ; ++i){
-            j = 1;
-            while (board[whiteRightRook + j * rookOffsets[i]] == 0){ // right rooks
-                putInLegalMoves(9, whiteRightRook + j * rookOffsets[i], -1, 0);
-                //std::cout << "Rook to " << whiteRightRook + j * rookOffsets[i] << std::endl;
-                j++;
-            }
-            if (board[whiteRightRook + j * rookOffsets[i]] < 0)
-                putInLegalMoves(9, whiteRightRook + j * rookOffsets[i], findPiece(whiteRightRook + j * rookOffsets[i]), 0);
-                //std::cout << "Rook captures on " << whiteRightRook + j * rookOffsets[i] << std::endl;
-                /// the last move is a capture || else doesn't matter, either white piece or off the table
-        }
-    }else if(whiteRightRook == -1){
-        for (int i=0 ; i<4 ; ++i){
-            j = 1;
-            while (board[whiteLeftRook + j * rookOffsets[i]] == 0){ // left rook
-                putInLegalMoves(8, whiteLeftRook + j * rookOffsets[i], -1, 0);
-                ++j;
-                //std::cout << "Rook to " << whiteLeftRook + j * rookOffsets[i] << std::endl;
-                
-            }
-            if (board[whiteLeftRook + j * rookOffsets[i]] < 0)
-                putInLegalMoves(8, whiteLeftRook + j * rookOffsets[i], findPiece(whiteLeftRook + j * rookOffsets[i]), 0);
+            if (board[currentWhiteRook + j * rookOffsets[i]] < 0)
+                putInLegalMoves(pieceIndex, currentWhiteRook + j * rookOffsets[i], findPiece(currentWhiteRook + j * rookOffsets[i]), 0);
                 //std::cout << "Rook captures on " << whiteLeftRook + j * rookOffsets[i] << std::endl;
                 /// the last move is a capture || else doesn't matter, either white piece or off the table
         }
     }
 }
 
-void ChessBoard::whiteBishopMoveGeneration(){
-    /// allPieces[12] == white left bishop
-    /// allPieces[13] == white right bishop
-    char whiteLeftBishop = allPieces[12];
-    char whiteRightBishop = allPieces[13];
-    int j;
-    if(whiteLeftBishop != -1 && whiteRightBishop != -1){
-        for (int i=0 ; i<4 ; ++i){
+void ChessBoard::whiteBishopMoveGeneration(char pieceIndex){
+    char currentWhiteBishop = allPieces[pieceIndex];
+    char j;
+    if(currentWhiteBishop != -1){
+        for (char i=0 ; i<4 ; ++i){
             j = 1;
-            while (board[whiteLeftBishop + j * bishopOffsets[i]] == 0){ // left bishop
-                putInLegalMoves(12, whiteLeftBishop + j * bishopOffsets[i], -1, 0);
+            while (board[currentWhiteBishop + j * bishopOffsets[i]] == 0){ // left bishop
+                putInLegalMoves(pieceIndex, currentWhiteBishop + j * bishopOffsets[i], -1, 0);
                 ++j;
                 //std::cout << "Bishop to " << whiteLeftBishop + j * bishopOffsets[i] << std::endl;
             }
-            if (board[whiteLeftBishop + j * bishopOffsets[i]] < 0)
-                putInLegalMoves(12, whiteLeftBishop + j * bishopOffsets[i], findPiece(whiteLeftBishop + j * bishopOffsets[i]), 0);
-                //std::cout << "Bishop captures on " << whiteLeftBishop + j * bishopOffsets[i] << std::endl;
-                /// the last move is a capture || else doesn't matter, either white piece or off the table
-            
-            j = 1;
-            while (board[whiteRightBishop + j * bishopOffsets[i]] == 0){ // right bishop
-                putInLegalMoves(13, whiteRightBishop + j * bishopOffsets[i], -1, 0);
-                //std::cout << "Bishop to " << whiteRightBishop + j * bishopOffsets[i] << std::endl;
-                j++;
-            }
-            if (board[whiteRightBishop + j * bishopOffsets[i]] < 0)
-                putInLegalMoves(12, whiteRightBishop + j * bishopOffsets[i], findPiece(whiteRightBishop + j * bishopOffsets[i]), 0);
-                //std::cout << "Bishop captures on " << whiteRightBishop + j * bishopOffsets[i] << std::endl;
-                /// the last move is a capture || else doesn't matter, either white piece or off the table
-        }
-    }else if(whiteLeftBishop == -1){
-        for (int i=0 ; i<4 ; ++i){
-            j = 1;
-            while (board[whiteRightBishop + j * bishopOffsets[i]] == 0){ // right bishop
-                putInLegalMoves(13, whiteRightBishop + j * bishopOffsets[i], -1, 0);
-                //std::cout << "Bishop to " << whiteRightBishop + j * bishopOffsets[i] << std::endl;
-                j++;
-            }
-            if (board[whiteRightBishop + j * bishopOffsets[i]] < 0)
-                putInLegalMoves(12, whiteRightBishop + j * bishopOffsets[i], findPiece(whiteRightBishop + j * bishopOffsets[i]), 0);
-                //std::cout << "Bishop captures on " << whiteRightBishop + j * bishopOffsets[i] << std::endl;
-                /// the last move is a capture || else doesn't matter, either white piece or off the table
-        }
-    }else if(whiteRightBishop == -1){
-        for (int i=0 ; i<4 ; ++i){
-            j = 1;
-            while (board[whiteLeftBishop + j * bishopOffsets[i]] == 0){ // left bishop
-                putInLegalMoves(12, whiteLeftBishop + j * bishopOffsets[i], -1, 0);
-                ++j;
-                //std::cout << "Bishop to " << whiteLeftBishop + j * bishopOffsets[i] << std::endl;
-            }
-            if (board[whiteLeftBishop + j * bishopOffsets[i]] < 0)
-                putInLegalMoves(12, whiteLeftBishop + j * bishopOffsets[i], findPiece(whiteLeftBishop + j * bishopOffsets[i]), 0);
+            if (board[currentWhiteBishop + j * bishopOffsets[i]] < 0)
+                putInLegalMoves(pieceIndex, currentWhiteBishop + j * bishopOffsets[i], findPiece(currentWhiteBishop + j * bishopOffsets[i]), 0);
                 //std::cout << "Bishop captures on " << whiteLeftBishop + j * bishopOffsets[i] << std::endl;
                 /// the last move is a capture || else doesn't matter, either white piece or off the table
         }
     }
 }
 
-void ChessBoard::whiteQueenMoveGeneration(){
+void ChessBoard::whiteQueenMoveGeneration(char pieceIndex){
     /// allPieces[14] == white queen
-    char whiteQueen = allPieces[14];
-    int j;
+    char whiteQueen = allPieces[pieceIndex];
+    char j;
     if(whiteQueen != -1){
-        for (int i=0 ; i<4 ; ++i){
+        for (char i=0 ; i<4 ; ++i){
             j = 1;
             while (board[whiteQueen + j * bishopOffsets[i]] == 0){
-                putInLegalMoves(14, whiteQueen + j * bishopOffsets[i], -1, 0);
+                putInLegalMoves(pieceIndex, whiteQueen + j * bishopOffsets[i], -1, 0);
                 //std::cout << "Queen to " << whiteQueen + j * bishopOffsets[i] << std::endl;
                 ++j;
             }
             if (board[whiteQueen + j * bishopOffsets[i]] < 0)
-                putInLegalMoves(14, whiteQueen + j * bishopOffsets[i], findPiece(whiteQueen + j * bishopOffsets[i]), 0);
+                putInLegalMoves(pieceIndex, whiteQueen + j * bishopOffsets[i], findPiece(whiteQueen + j * bishopOffsets[i]), 0);
                 //std::cout << "Queen captures " << whiteQueen + j * bishopOffsets[i] << std::endl;
                 /// the last move is a capture || else doesn't matter, either white piece or off the table
             
             j = 1;
             while (board[whiteQueen + j * rookOffsets[i]] == 0){
-                putInLegalMoves(14, whiteQueen + j * rookOffsets[i], -1, 0);
+                putInLegalMoves(pieceIndex, whiteQueen + j * rookOffsets[i], -1, 0);
                 //std::cout << "Queen to " << whiteQueen + j * rookOffsets[i] << std::endl;
                 j++;
             }
             if (board[whiteQueen + j * rookOffsets[i]] < 0)
-                putInLegalMoves(14, whiteQueen + j * rookOffsets[i], findPiece(whiteQueen + j * rookOffsets[i]), 0);
+                putInLegalMoves(pieceIndex, whiteQueen + j * rookOffsets[i], findPiece(whiteQueen + j * rookOffsets[i]), 0);
                 //std::cout << "Queen captures on " << whiteQueen + j * rookOffsets[i] << std::endl;
                 // the last move is a capture || else doesn't matter, either white piece or off the table
         }
@@ -228,9 +111,9 @@ void ChessBoard::whiteQueenMoveGeneration(){
 }
 
 void ChessBoard::whiteKingMoveGeneration(){
-    /// allPieces[15] == white queen
+    /// allPieces[15] == white king
     char whiteKing = allPieces[15];
-    for (int i=0 ; i<4 ; ++i){
+    for (char i=0 ; i<4 ; ++i){
         if (board[whiteKing + bishopOffsets[i]] < 1){
             if(board[whiteKing + bishopOffsets[i]] < 0)
                 putInLegalMoves(15, whiteKing + bishopOffsets[i], findPiece(whiteKing + bishopOffsets[i]), 0);
@@ -249,7 +132,7 @@ void ChessBoard::whiteKingMoveGeneration(){
     ///  
 }
 
-void ChessBoard::whitePawnsEnPassant(int index, char piece){
+void ChessBoard::whitePawnsEnPassant(char index, char piece){
     if (index/10 == 6){ // checking if the pawn is on the good square
         if(board[index-1] == -1){ /// en passant left to the current pawn
             //std::cout << "Pawn on " << indexToPos[index] << " captures on " << indexToPos[index + 9] << " en passant" << std::endl;
@@ -262,7 +145,7 @@ void ChessBoard::whitePawnsEnPassant(int index, char piece){
     }
 }
 
-void ChessBoard::whitePawnsCapture(int index, char piece){
+void ChessBoard::whitePawnsCapture(char index, char piece){
     if (board[index + 9] < 0){
         //std::cout << "Pawn on " << indexToPos[index] << " captures on " << indexToPos[index + 9] << std::endl;
         putInLegalMoves(piece, index + 9, findPiece(index+9), 0);
@@ -273,35 +156,78 @@ void ChessBoard::whitePawnsCapture(int index, char piece){
     }
 }
 
-void ChessBoard::whitePawnMoveGeneration(){
-    for (int i=0 ; i<8 ; ++i){
-        char currentPawn = allPieces[i];
-        if (currentPawn != -1){
-            if (currentPawn == 31 + i){ /// if the current pawn is on the starting position (checkable with the current index)
-                whitePawnsCapture(currentPawn, char(i)); /// calling the single capture function
-                if (board[currentPawn + 10] == 0){ ///single push
-                    putInLegalMoves(char(i), currentPawn + 10, -1, 0);
-                    //std::cout << "Pawn on " << indexToPos[whitePawns[i]] << " to " << indexToPos[whitePawns[i] + 10] <<std::endl;
-                    if(board[currentPawn + 20] == 0){ /// double push
-                        putInLegalMoves(char(i), currentPawn + 20, -1, 0);
-                        //std::cout << "Pawn on " << indexToPos[whitePawns[i]] << " to " << indexToPos[whitePawns[i] + 20] <<std::endl;
-                        ///After this en passant is possible
-                    }
+void ChessBoard::whitePawnMoveGeneration(char pieceIndex){
+    char currentPawn = allPieces[pieceIndex]; /// 0-7
+    if (currentPawn != -1){
+        if (currentPawn == 31 + pieceIndex){ /// if the current pawn is on the starting position (checkable with the current index)
+            whitePawnsCapture(currentPawn, pieceIndex); /// calling the single capture function
+            if (board[currentPawn + 10] == 0){ ///single push
+                putInLegalMoves(pieceIndex, currentPawn + 10, -1, 0);
+                //std::cout << "Pawn on " << indexToPos[whitePawns[i]] << " to " << indexToPos[whitePawns[i] + 10] <<std::endl;
+                if(board[currentPawn + 20] == 0){ /// double push
+                    putInLegalMoves(pieceIndex, currentPawn + 20, -1, 0);
+                    //std::cout << "Pawn on " << indexToPos[whitePawns[i]] << " to " << indexToPos[whitePawns[i] + 20] <<std::endl;
+                    ///After this en passant is possible
                 }
-            }
-            else{ /// when the current pawn is not on the starting position
-                if (board[currentPawn + 10] == 0){
-                    putInLegalMoves(char(i), currentPawn + 10, -1, 0);
-                    //std::cout << "Pawn on " << indexToPos[whitePawns[i]] << " to " << indexToPos[whitePawns[i] + 10] <<std::endl;
-                }
-                ///here we have to check en passant, because the current pawn is not on the starting position
-                if (enPassant) /// first check if en passant is possible
-                    whitePawnsEnPassant(currentPawn, char(i)); /// so we call en passant function with the current index
-
-                whitePawnsCapture(currentPawn, char(i)); /// we also call the basic capture function, because we can still capture normally
             }
         }
+        else{ /// when the current pawn is not on the starting position
+            if (board[currentPawn + 10] == 0){
+                putInLegalMoves(pieceIndex, currentPawn + 10, -1, 0);
+                    //std::cout << "Pawn on " << indexToPos[whitePawns[i]] << " to " << indexToPos[whitePawns[i] + 10] <<std::endl;
+            }
+            ///here we have to check en passant, because the current pawn is not on the starting position
+            if (enPassant) /// first check if en passant is possible
+                whitePawnsEnPassant(currentPawn, pieceIndex); /// so we call en passant function with the current index
+
+            whitePawnsCapture(currentPawn, pieceIndex); /// we also call the basic capture function, because we can still capture normally
+        }
     }
+}
+
+/*************************************************************************************************
+; 
+; A meghívó függvények
+; 
+**************************************************************************************************/
+
+void ChessBoard::whiteRookMoveCall(){
+    whiteRookMoveGeneration(8);
+    whiteRookMoveGeneration(9);
+}
+
+void ChessBoard::whiteBishopMoveCall(){
+    whiteBishopMoveGeneration(12);
+    whiteBishopMoveGeneration(13);
+}
+
+void ChessBoard::whiteQueenMoveCall(){
+    whiteQueenMoveGeneration(14);
+}
+
+void ChessBoard::whiteKingMoveCall(){
+    whiteKingMoveGeneration();
+}
+
+void ChessBoard::whiteKnightMoveCall(){
+    whiteKnightMoveGeneration(10);
+    whiteKnightMoveGeneration(11);
+}
+
+void ChessBoard::whitePawnMoveCall(){
+    for(char i=0 ; i<8 ; ++i){
+        whitePawnMoveGeneration(i);
+    }
+}
+
+///összes meghívása
+void ChessBoard::callAllWhiteMoveGeneration(){
+    whiteRookMoveCall();
+    whiteBishopMoveCall();
+    whiteQueenMoveCall();
+    whiteKingMoveCall();
+    whiteKnightMoveCall();
+    whitePawnMoveCall();
 }
 
 /*************************************************************************************************
@@ -310,45 +236,15 @@ void ChessBoard::whitePawnMoveGeneration(){
 ; 
 **************************************************************************************************/
 
-void ChessBoard::blackKnightMoveGeneration(){
-    /// allPieces[26] == black left knight
-    /// allPieces[27] == black right knight
-    char blackLeftKnight = allPieces[26];
-    char blackRightKnight = allPieces[27];
-    if (blackLeftKnight != -1 && blackRightKnight != -1){  /// both white knights are in the game
-        for (int i=0 ; i<8 ; ++i){
-            if (board[blackLeftKnight + knightOffsets[i]] > -1 && board[blackLeftKnight + knightOffsets[i]] < 7){ // left knight
-                if (board[blackLeftKnight + knightOffsets[i]] > 0){
-                    putInLegalMoves(26, blackLeftKnight + knightOffsets[i], findPiece(blackLeftKnight + knightOffsets[i]), 0);
+void ChessBoard::blackKnightMoveGeneration(char pieceIndex){
+    char currentBlackKnight = allPieces[pieceIndex];
+    if (currentBlackKnight != -1){  /// both white knights are in the game
+        for (char i=0 ; i<8 ; ++i){
+            if (board[currentBlackKnight + knightOffsets[i]] > -1 && board[currentBlackKnight + knightOffsets[i]] < 7){ // left knight
+                if (board[currentBlackKnight + knightOffsets[i]] > 0){
+                    putInLegalMoves(pieceIndex, currentBlackKnight + knightOffsets[i], findPiece(currentBlackKnight + knightOffsets[i]), 0);
                 }else{
-                    putInLegalMoves(26, blackLeftKnight + knightOffsets[i], -1, 0);
-                }
-            }
-            if (board[blackRightKnight + knightOffsets[i]] > -1 && board[blackRightKnight + knightOffsets[i]] < 7){ // right knight
-                if (board[blackRightKnight + knightOffsets[i]] > 0){
-                    putInLegalMoves(27, blackRightKnight + knightOffsets[i], findPiece(blackRightKnight + knightOffsets[i]), 0);
-                }else{
-                    putInLegalMoves(27, blackRightKnight + knightOffsets[i], -1, 0);
-                }
-            }
-        }
-    }else if (blackLeftKnight == -1){ /// the white right knight is in the game
-        for (int i=0 ; i<8 ; ++i){
-            if (board[blackRightKnight + knightOffsets[i]] > -1 && board[blackRightKnight + knightOffsets[i]] < 7){ // right knight
-                if (board[blackRightKnight + knightOffsets[i]] > 0){
-                    putInLegalMoves(27, blackRightKnight + knightOffsets[i], findPiece(blackRightKnight + knightOffsets[i]), 0);
-                }else{
-                    putInLegalMoves(27, blackRightKnight + knightOffsets[i], -1, 0);
-                }
-            }
-        }
-    }else if (blackRightKnight == -1){ /// the white left knight is in the game
-        for (int i=0 ; i<8 ; ++i){
-            if (board[blackLeftKnight + knightOffsets[i]] > -1 && board[blackLeftKnight + knightOffsets[i]] < 7){ // left knight
-                if (board[blackLeftKnight + knightOffsets[i]] > 0){
-                    putInLegalMoves(26, blackLeftKnight + knightOffsets[i], findPiece(blackLeftKnight + knightOffsets[i]), 0);
-                }else{
-                    putInLegalMoves(26, blackLeftKnight + knightOffsets[i], -1, 0);
+                    putInLegalMoves(pieceIndex, currentBlackKnight + knightOffsets[i], -1, 0);
                 }
             }
         }
@@ -358,7 +254,7 @@ void ChessBoard::blackKnightMoveGeneration(){
 void ChessBoard::blackKingMoveGeneration(){
     /// allPieces[31] == black king
     char blackKing = allPieces[31];
-    for (int i=0 ; i<4 ; ++i){
+    for (char i=0 ; i<4 ; ++i){
         if (board[blackKing + bishopOffsets[i]] > -1 && board[blackKing + bishopOffsets[i]] < 7){
              if(board[blackKing + bishopOffsets[i]] > 0)
                 putInLegalMoves(31, blackKing + bishopOffsets[i], findPiece(blackKing + bishopOffsets[i]), 0);
@@ -377,158 +273,77 @@ void ChessBoard::blackKingMoveGeneration(){
     ///  
 }
 
-void ChessBoard::blackRookMoveGeneration(){
-    /// allPieces[24] == black left rook
-    /// allPieces[25] == black right rook
-    char blackLeftRook = allPieces[24];
-    char blackRightRook = allPieces[25];
-    int j;
-    if (blackLeftRook != -1 && blackRightRook != -1){
+void ChessBoard::blackRookMoveGeneration(char pieceIndex){
+    char currentBlackRook = allPieces[pieceIndex];
+    char j;
+    if (currentBlackRook != -1){
         for (int i=0 ; i<4 ; ++i){
             j = 1;
-            while (board[blackLeftRook + j * rookOffsets[i]] == 0){ // left rook
-                putInLegalMoves(24, blackLeftRook + j * rookOffsets[i], -1, 0);
+            while (board[currentBlackRook + j * rookOffsets[i]] == 0){ // left rook
+                putInLegalMoves(pieceIndex, currentBlackRook + j * rookOffsets[i], -1, 0);
                 //std::cout << "Rook to " << blackLeftRook + j * rookOffsets[i] << std::endl;
                 ++j;
             }
-            if (board[blackLeftRook + j * rookOffsets[i]] > 0 && board[blackLeftRook + j * rookOffsets[i]] < 7)
+            if (board[currentBlackRook + j * rookOffsets[i]] > 0 && board[currentBlackRook + j * rookOffsets[i]] < 7)
                 //std::cout << "Rook captures on " << blackLeftRook + j * rookOffsets[i] << std::endl;
-                putInLegalMoves(24, blackLeftRook + j * rookOffsets[i], findPiece(blackLeftRook + j * rookOffsets[i]), 0);
-                /// the last move is a capture || else doesn't matter, either black piece or off the table
-
-            j = 1;
-            while (board[blackRightRook + j * rookOffsets[i]] == 0){ // right rooks
-                putInLegalMoves(25, blackRightRook + j * rookOffsets[i], -1, 0);
-                //std::cout << "Rook to " << blackRightRook + j * rookOffsets[i] << std::endl;
-                j++;
-            }
-            if (board[blackRightRook + j * rookOffsets[i]] > 0 && board[blackRightRook + j * rookOffsets[i]] < 7)
-                //std::cout << "Rook captures on " << blackRightRook + j * rookOffsets[i] << std::endl;
-                putInLegalMoves(25, blackRightRook + j * rookOffsets[i], findPiece(blackRightRook + j * rookOffsets[i]), 0);
-                /// the last move is a capture || else doesn't matter, either black piece or off the table
-        }
-    }else if(blackLeftRook == -1){
-        for (int i=0 ; i<4 ; ++i){
-            j = 1;
-            while (board[blackRightRook + j * rookOffsets[i]] == 0){ // right rooks
-                putInLegalMoves(25, blackRightRook + j * rookOffsets[i], -1, 0);
-                //std::cout << "Rook to " << blackRightRook + j * rookOffsets[i] << std::endl;
-                j++;
-            }
-            if (board[blackRightRook + j * rookOffsets[i]] > 0 && board[blackRightRook + j * rookOffsets[i]] < 7)
-                //std::cout << "Rook captures on " << blackRightRook + j * rookOffsets[i] << std::endl;
-                putInLegalMoves(25, blackRightRook + j * rookOffsets[i], findPiece(blackRightRook + j * rookOffsets[i]), 0);
-                /// the last move is a capture || else doesn't matter, either black piece or off the table
-        }
-    }else if(blackRightRook == -1){
-        for (int i=0 ; i<4 ; ++i){
-            j = 1;
-            while (board[blackLeftRook + j * rookOffsets[i]] == 0){ // left rook
-                putInLegalMoves(24, blackLeftRook + j * rookOffsets[i], -1, 0);
-                //std::cout << "Rook to " << blackLeftRook + j * rookOffsets[i] << std::endl;
-                ++j;
-            }
-            if (board[blackLeftRook + j * rookOffsets[i]] > 0 && board[blackLeftRook + j * rookOffsets[i]] < 7)
-                //std::cout << "Rook captures on " << blackLeftRook + j * rookOffsets[i] << std::endl;
-                putInLegalMoves(24, blackLeftRook + j * rookOffsets[i], findPiece(blackLeftRook + j * rookOffsets[i]), 0);
+                putInLegalMoves(pieceIndex, currentBlackRook + j * rookOffsets[i], findPiece(currentBlackRook + j * rookOffsets[i]), 0);
                 /// the last move is a capture || else doesn't matter, either black piece or off the table
         }
     }
 }
 
-void ChessBoard::blackBishopMoveGeneration(){
-    /// allPieces[28] == black left bishop
-    /// allPieces[29] == black right bishop
-    char blackLeftBishop = allPieces[28];
-    char blackRightBishop = allPieces[29];
-    int j;
-    if(blackLeftBishop != -1 && blackRightBishop != -1){
+void ChessBoard::blackBishopMoveGeneration(char pieceIndex){
+    char currentBlackBishop = allPieces[pieceIndex];
+    char j;
+    if(currentBlackBishop != -1){
         for (int i=0 ; i<4 ; ++i){
             j = 1;
-            while (board[blackLeftBishop + j * bishopOffsets[i]] == 0){ // left bishop
-                putInLegalMoves(28, blackLeftBishop + j * bishopOffsets[i], -1, 0);
+            while (board[currentBlackBishop + j * bishopOffsets[i]] == 0){ // left bishop
+                putInLegalMoves(pieceIndex, currentBlackBishop + j * bishopOffsets[i], -1, 0);
                 //std::cout << "Bishop to " << blackLeftBishop + j * bishopOffsets[i] << std::endl;
                 ++j;
             }
-            if (board[blackLeftBishop + j * bishopOffsets[i]] > 0 && board[blackLeftBishop + j * bishopOffsets[i]] < 7)
-                putInLegalMoves(28, blackLeftBishop + j * bishopOffsets[i], findPiece(blackLeftBishop + j * bishopOffsets[i]), 0);
-                //std::cout << "Bishop captures on " << blackLeftBishop + j * bishopOffsets[i] << std::endl;
-                /// the last move is a capture || else doesn't matter, either black piece or off the table
-            
-            j = 1;
-            while (board[blackRightBishop + j * bishopOffsets[i]] == 0){ // right bishop
-                putInLegalMoves(29, blackRightBishop + j * bishopOffsets[i], -1, 0);
-                //std::cout << "Bishop to " << blackRightBishop + j * bishopOffsets[i] << std::endl;
-                j++;
-            }
-            if (board[blackRightBishop + j * bishopOffsets[i]] > 0 && board[blackRightBishop + j * bishopOffsets[i]] < 7)
-                putInLegalMoves(29, blackRightBishop + j * bishopOffsets[i], findPiece(blackRightBishop + j * bishopOffsets[i]), 0);
-                //std::cout << "Bishop captures on " << blackRightBishop + j * bishopOffsets[i] << std::endl;
-                /// the last move is a capture || else doesn't matter, either black piece or off the table
-        }
-    }else if(blackLeftBishop == -1){
-        for (int i=0 ; i<4 ; ++i){
-            j = 1;
-            while (board[blackRightBishop + j * bishopOffsets[i]] == 0){ // right bishop
-                putInLegalMoves(29, blackRightBishop + j * bishopOffsets[i], -1, 0);
-                //std::cout << "Bishop to " << blackRightBishop + j * bishopOffsets[i] << std::endl;
-                j++;
-            }
-            if (board[blackRightBishop + j * bishopOffsets[i]] > 0 && board[blackRightBishop + j * bishopOffsets[i]] < 7)
-                putInLegalMoves(29, blackRightBishop + j * bishopOffsets[i], findPiece(blackRightBishop + j * bishopOffsets[i]), 0);
-                //std::cout << "Bishop captures on " << blackRightBishop + j * bishopOffsets[i] << std::endl;
-                /// the last move is a capture || else doesn't matter, either black piece or off the table
-        }
-    }else if(blackRightBishop == -1){
-        for (int i=0 ; i<4 ; ++i){
-            j = 1;
-            while (board[blackLeftBishop + j * bishopOffsets[i]] == 0){ // left bishop
-                putInLegalMoves(28, blackLeftBishop + j * bishopOffsets[i], -1, 0);
-                //std::cout << "Bishop to " << blackLeftBishop + j * bishopOffsets[i] << std::endl;
-                ++j;
-            }
-            if (board[blackLeftBishop + j * bishopOffsets[i]] > 0 && board[blackLeftBishop + j * bishopOffsets[i]] < 7)
-                putInLegalMoves(28, blackLeftBishop + j * bishopOffsets[i], findPiece(blackLeftBishop + j * bishopOffsets[i]), 0);
+            if (board[currentBlackBishop + j * bishopOffsets[i]] > 0 && board[currentBlackBishop + j * bishopOffsets[i]] < 7)
+                putInLegalMoves(pieceIndex, currentBlackBishop + j * bishopOffsets[i], findPiece(currentBlackBishop + j * bishopOffsets[i]), 0);
                 //std::cout << "Bishop captures on " << blackLeftBishop + j * bishopOffsets[i] << std::endl;
                 /// the last move is a capture || else doesn't matter, either black piece or off the table
         }
-    }
-    
+    }   
 }
 
-void ChessBoard::blackQueenMoveGeneration(){
+void ChessBoard::blackQueenMoveGeneration(char pieceIndex){
     /// allPieces[30] == black queen
-    char blackQueen = allPieces[30];
-    int j;
+    char blackQueen = allPieces[pieceIndex];
+    char j;
     if(blackQueen != -1){
         for (int i=0 ; i<4 ; ++i){
             j = 1;
             while (board[blackQueen + j * bishopOffsets[i]] == 0){
-                putInLegalMoves(30, blackQueen + j * bishopOffsets[i], -1, 0);
+                putInLegalMoves(pieceIndex, blackQueen + j * bishopOffsets[i], -1, 0);
                 //std::cout << "Queen to " << blackQueen + j * bishopOffsets[i] << std::endl;
                 ++j;
             }
             if (board[blackQueen + j * bishopOffsets[i]] > 0 && board[blackQueen + j * bishopOffsets[i]] < 7 )
-                putInLegalMoves(30, blackQueen + j * bishopOffsets[i], findPiece(blackQueen + j * bishopOffsets[i]), 0);
+                putInLegalMoves(pieceIndex, blackQueen + j * bishopOffsets[i], findPiece(blackQueen + j * bishopOffsets[i]), 0);
                 //std::cout << "Queen captures " << blackQueen + j * bishopOffsets[i] << std::endl;
                 /// the last move is a capture || else doesn't matter, either white piece or off the table
             
             j = 1;
             while (board[blackQueen + j * rookOffsets[i]] == 0){
-                putInLegalMoves(30, blackQueen + j * rookOffsets[i], -1, 0);
+                putInLegalMoves(pieceIndex, blackQueen + j * rookOffsets[i], -1, 0);
                 //std::cout << "Queen to " << blackQueen + j * rookOffsets[i] << std::endl;
                 /// the move is pseudo-legal
                 j++;
             }
             if (board[blackQueen + j * rookOffsets[i]] > 0 && board[blackQueen + j * rookOffsets[i]] < 7)
-                putInLegalMoves(30, blackQueen + j * rookOffsets[i], findPiece(blackQueen + j * rookOffsets[i]), 0);
+                putInLegalMoves(pieceIndex, blackQueen + j * rookOffsets[i], findPiece(blackQueen + j * rookOffsets[i]), 0);
                 //std::cout << "Queen captures on " << blackQueen + j * rookOffsets[i] << std::endl;
                 /// the last move is a capture || else doesn't matter, either white piece or off the table
         }
     } 
 }
-//////////////////////////////////////////////////////////////// CONTINUE HERE ////////////////////////////////////////////////////////
-void ChessBoard::blackPawnsEnPassant(int index, char piece){
+
+void ChessBoard::blackPawnsEnPassant(char index, char piece){
     if (index/10 == 5){
         if (board[index-1] == 1){/// en passant left to the current pawn
             putInLegalMoves(piece, index - 11, findPiece(index-1), 0);
@@ -541,7 +356,7 @@ void ChessBoard::blackPawnsEnPassant(int index, char piece){
     }
 }
 
-void ChessBoard::blackPawnsCapture(int index, char piece){
+void ChessBoard::blackPawnsCapture(char index, char piece){
     if (board[index - 9] > 0 && board[index - 9] < 7){
         putInLegalMoves(piece, index - 9, findPiece(index-9), 0);
         //std::cout << "Pawn on " << indexToPos[index] << " captures on " << indexToPos[index - 9] << std::endl;
@@ -552,34 +367,76 @@ void ChessBoard::blackPawnsCapture(int index, char piece){
     }
 }
 
-void ChessBoard::blackPawnMoveGeneration(){
-    for (int i=0 ; i<8 ; ++i){
-        char currentPawn = allPieces[16+i];
-        if (currentPawn != -1){
-            if (currentPawn == 81 + i){ /// if the current pawn is on the starting position (checkable with the current index)
-                blackPawnsCapture(currentPawn, char(16+i));
-                if (board[currentPawn - 10] == 0){ ///single push
-                    //std::cout << "Pawn on " << indexToPos[blackPawns[i]] << " to " << indexToPos[blackPawns[i] - 10] <<std::endl;
-                    putInLegalMoves(char(16+i), currentPawn - 10, -1, 0);
-                    if (board[currentPawn - 20] == 0){ /// double push !!! it's only possible if single push is possible
-                        putInLegalMoves(char(16+i), currentPawn - 20, -1, 0);
-                        //std::cout << "Pawn on " << indexToPos[blackPawns[i]] << " to " << indexToPos[blackPawns[i] - 20] <<std::endl;
-                        ///After this en passant is possible
-                    }
+void ChessBoard::blackPawnMoveGeneration(char pieceIndex){
+    char currentPawn = allPieces[pieceIndex];
+    if (currentPawn != -1){
+        if (currentPawn == 81 + pieceIndex - 16){ /// if the current pawn is on the starting position (checkable with the current index)
+            blackPawnsCapture(currentPawn, pieceIndex);
+            if (board[currentPawn - 10] == 0){ ///single push
+                //std::cout << "Pawn on " << indexToPos[blackPawns[i]] << " to " << indexToPos[blackPawns[i] - 10] <<std::endl;
+                putInLegalMoves(pieceIndex, currentPawn - 10, -1, 0);
+                if (board[currentPawn - 20] == 0){ /// double push !!! it's only possible if single push is possible
+                    putInLegalMoves(pieceIndex, currentPawn - 20, -1, 0);
+                    //std::cout << "Pawn on " << indexToPos[blackPawns[i]] << " to " << indexToPos[blackPawns[i] - 20] <<std::endl;
+                    ///After this en passant is possible
                 }
             }
-            else{ /// when the current pawn is not on the starting position
-                if (board[currentPawn - 10] == 0){
-                    putInLegalMoves(char(i), currentPawn - 10, -1, 0);
-                    //std::cout << "Pawn on " << indexToPos[blackPawns[i]] << " to " << indexToPos[blackPawns[i] - 10] <<std::endl;
-                    ////// PROMOTION IF POSSIBLE
-                }
-                ///here we have to check en passant, because the current pawn is not on the starting position
-                if (enPassant) /// first check if en passant is possible
-                    blackPawnsEnPassant(currentPawn, char(16+i)); /// so we call en passant function with the current index
+        }else{ /// when the current pawn is not on the starting position
+            if (board[currentPawn - 10] == 0){
+                putInLegalMoves(pieceIndex, currentPawn - 10, -1, 0);
+                //std::cout << "Pawn on " << indexToPos[blackPawns[i]] << " to " << indexToPos[blackPawns[i] - 10] <<std::endl;
+                ////// PROMOTION IF POSSIBLE
             }
+            ///here we have to check en passant, because the current pawn is not on the starting position
+            if (enPassant) /// first check if en passant is possible
+                blackPawnsEnPassant(currentPawn, pieceIndex); /// so we call en passant function with the current index
         }
     }
+}
+
+/*************************************************************************************************
+; 
+; A meghívó függvények a fekete bábuknak
+; 
+**************************************************************************************************/
+
+void ChessBoard::blackRookMoveCall(){
+    blackRookMoveGeneration(24);
+    blackRookMoveGeneration(25);
+}
+
+void ChessBoard::blackBishopMoveCall(){
+    blackBishopMoveGeneration(28);
+    blackBishopMoveGeneration(29);
+}
+
+void ChessBoard::blackQueenMoveCall(){
+    blackQueenMoveGeneration(30);
+}
+
+void ChessBoard::blackKingMoveCall(){
+    blackKingMoveGeneration();
+}
+
+void ChessBoard::blackKnightMoveCall(){
+    blackKnightMoveGeneration(26);
+    blackKnightMoveGeneration(27);
+}
+
+void ChessBoard::blackPawnMoveCall(){
+    for(char i=0 ; i<8 ; ++i){
+        blackPawnMoveGeneration(i+16);
+    }
+}
+
+///összes meghívása
+void ChessBoard::callAllBlackMoveGeneration(){
+    blackRookMoveCall();
+    blackBishopMoveCall();
+    blackQueenMoveCall();
+    blackKingMoveCall();
+    blackKnightMoveCall();
+    blackPawnMoveCall();
 }
 
 
@@ -591,21 +448,11 @@ void ChessBoard::blackPawnMoveGeneration(){
 
 void ChessBoard::generatePseudoLegalMoves(){
     if(currentPlayer){ /// current player is true when it's white's turn
-        std::cout << "white's turn" << std::endl;
-        whiteQueenMoveGeneration();
-        whiteKingMoveGeneration();
-        whiteRookMoveGeneration();
-        whiteKnightMoveGeneration();
-        whiteBishopMoveGeneration();
-        whitePawnMoveGeneration();
+        //std::cout << "white's turn" << std::endl;
+        callAllWhiteMoveGeneration();
     }else{ /// current player is false when it's black's turn
-        std::cout << "black's turn" << std::endl;
-        blackQueenMoveGeneration();
-        blackKingMoveGeneration();
-        blackRookMoveGeneration();
-        blackKnightMoveGeneration();
-        blackBishopMoveGeneration();
-        blackPawnMoveGeneration();
+        //std::cout << "black's turn" << std::endl;
+        callAllBlackMoveGeneration();
     }
 }
 
@@ -614,21 +461,24 @@ void ChessBoard::makeMove(char indexOfMove){
         std::cout << "out of range";
     }
     else{
-        board[allPieces[legalMoves[indexOfMove].from]] = 0;
-        allPieces[legalMoves[indexOfMove].from] = legalMoves[indexOfMove].to;
-        board[legalMoves[indexOfMove].takenPiece] = 0;
-        board[legalMoves[indexOfMove].to] = getPieceNumber(legalMoves[indexOfMove].from);
+        if (legalMoves[indexOfMove].takenPiece == -1){
+            std::cout << "Piece: " << int(getPieceNumber(legalMoves[indexOfMove].from)) << " index: " << int(allPieces[legalMoves[indexOfMove].from]) << " on: "<< indexToPos[allPieces[legalMoves[indexOfMove].from]] << " moves to " << indexToPos[legalMoves[indexOfMove].to] << std::endl;
+            board[allPieces[legalMoves[indexOfMove].from]] = 0;
+            board[legalMoves[indexOfMove].to] = getPieceNumber(legalMoves[indexOfMove].from);
+            allPieces[legalMoves[indexOfMove].from] = legalMoves[indexOfMove].to;
+        }else{
+            std::cout << "Piece: " << int(getPieceNumber(legalMoves[indexOfMove].from)) << " on: "<< indexToPos[allPieces[legalMoves[indexOfMove].from]] << " captures: " << int(getPieceNumber(legalMoves[indexOfMove].takenPiece)) << indexToPos[legalMoves[indexOfMove].to] << std::endl;
+            board[allPieces[legalMoves[indexOfMove].from]] = 0;
+            board[legalMoves[indexOfMove].takenPiece] = 0;
+            board[legalMoves[indexOfMove].to] = getPieceNumber(legalMoves[indexOfMove].from);
+            allPieces[legalMoves[indexOfMove].from] = legalMoves[indexOfMove].to;
+            allPieces[legalMoves[indexOfMove].takenPiece] = -1; 
+        }
     }
-
 }
 
 
-/// <summary> A vecktorunkhoz push-ol egy legalMove struktúrát a paraméterekben megadott értékekkel</summary>
-/// <param name="_from"> A lépő bábu indexe az allPieces[] tömbben </param>
-/// <param name="_to"> A mező indexe ahova a bábu lépni fog a board[] tömbben </param>
-/// <param name="_takenPiece"> A leütött bábu indexe az allPieces[] tömbben: ha van akkor FindPiece függvény használata szükséges | ha nincs akkor -1 </param>
-/// <param name="_value"> a lépés értéke </param>
-/// <returns> void </returns>
+/// A vecktorunkhoz push-ol egy legalMove struktúrát a paraméterekben megadott értékekkel
 void ChessBoard::putInLegalMoves(char _from, char _to, char _takenPiece, char _value){
     legalMove clm;
     clm.from = _from;
@@ -642,7 +492,7 @@ void ChessBoard::testingFunction(){
     for (int i = 0; i < 30; ++i)
     {
         auto t1 = std::chrono::high_resolution_clock::now();
-        for(int j=0; j<1 ; ++j)
+        for(int j=0; j<1000000 ; ++j)
             generatePseudoLegalMoves();
         auto t2 = std::chrono::high_resolution_clock::now();
 
