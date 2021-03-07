@@ -2,7 +2,7 @@
 
 ChessBoard::ChessBoard(){
     enPassant = false;
-    currentPlayer = false;
+    currentPlayer = true;
     std::srand(std::time(nullptr));
 }
 
@@ -147,14 +147,79 @@ void ChessBoard::whitePawnsEnPassant(char index, char piece){
 
 void ChessBoard::whitePawnsCapture(char index, char piece){
     if (board[index + 9] < 0){
-        //std::cout << "Pawn on " << indexToPos[index] << " captures on " << indexToPos[index + 9] << std::endl;
-        putInLegalMoves(piece, index + 9, findPiece(index+9), 0);
+        if(board[index + 20] == 7){
+            putInLegalMoves(piece, index + 9, -2, 0);
+            putInLegalMoves(piece, index + 9, -3, 0);
+            putInLegalMoves(piece, index + 9, -4, 0);
+            putInLegalMoves(piece, index + 9, -5, 0);
+        }else{
+            putInLegalMoves(piece, index + 9, findPiece(index+9), 0);
+        }
     }
     if (board[index + 11] < 0){
-        //std::cout << "Pawn on " << indexToPos[index] << " captures on " << indexToPos[index + 11] << std::endl;
-        putInLegalMoves(piece, index + 11, findPiece(index+11), 0);
+        if(board[index + 20] == 7){
+            putInLegalMoves(piece, index + 11, -2, 0);
+            putInLegalMoves(piece, index + 11, -3, 0);
+            putInLegalMoves(piece, index + 11, -4, 0);
+            putInLegalMoves(piece, index + 11, -5, 0);
+        }else{
+            putInLegalMoves(piece, index + 11, findPiece(index+11), 0);
+        }
     }
 }
+
+void ChessBoard::whitePawnPromotion(legalMove promotionMove){
+    if(allPieces[promotionMove.from] + 10 != promotionMove.to){
+        /// gyalog promóció ütéssel együtt
+        board[allPieces[promotionMove.from]] = 0;
+        allPieces[promotionMove.from] = -1;
+        allPieces[findPiece(promotionMove.to)] = -1;
+        char i = 47;
+        while(allPieces[i-1] < 0)
+            --i;
+        allPieces[i] = promotionMove.to;
+        switch (promotionMove.takenPiece){
+        case -2:
+            board[promotionMove.to] = 2;
+            break;
+        case -3:
+            board[promotionMove.to] = 3;
+            break;
+        case -4:
+            board[promotionMove.to] = 4;
+            break;
+        case -5:
+            board[promotionMove.to] = 5;
+            break;
+        default:
+            break;
+        }
+    }else{
+        /// gyalog promóció egyszerű előrelépéssel
+        board[allPieces[promotionMove.from]] = 0;
+        allPieces[promotionMove.from] = -1;
+        char i = 47;
+        while(allPieces[i-1] < 0)
+            --i;
+        allPieces[i] = promotionMove.to;
+        switch (promotionMove.takenPiece){
+        case -2:
+            board[promotionMove.to] = 2;
+            break;
+        case -3:
+            board[promotionMove.to] = 3;
+            break;
+        case -4:
+            board[promotionMove.to] = 4;
+            break;
+        case -5:
+            board[promotionMove.to] = 5;
+            break;
+        default:
+            break;
+        }
+    }
+}   
 
 void ChessBoard::whitePawnMoveGeneration(char pieceIndex){
     char currentPawn = allPieces[pieceIndex]; /// 0-7
@@ -172,9 +237,15 @@ void ChessBoard::whitePawnMoveGeneration(char pieceIndex){
             }
         }
         else{ /// when the current pawn is not on the starting position
-            if (board[currentPawn + 10] == 0){
+            if (board[currentPawn + 20] == 7 && board[currentPawn + 10] == 0){
+                /// gyalog promóció történik a lépés után
+                /// mind a 4 lehetséges bábura való promóciót hozzá kell tenni a lehetséges lépésekhez
+                putInLegalMoves(pieceIndex, currentPawn + 10, -2, 0);
+                putInLegalMoves(pieceIndex, currentPawn + 10, -3, 0);
+                putInLegalMoves(pieceIndex, currentPawn + 10, -4, 0);
+                putInLegalMoves(pieceIndex, currentPawn + 10, -5, 0);
+            }else if (board[currentPawn + 10] == 0){
                 putInLegalMoves(pieceIndex, currentPawn + 10, -1, 0);
-                    //std::cout << "Pawn on " << indexToPos[whitePawns[i]] << " to " << indexToPos[whitePawns[i] + 10] <<std::endl;
             }
             ///here we have to check en passant, because the current pawn is not on the starting position
             if (enPassant) /// first check if en passant is possible
@@ -358,12 +429,79 @@ void ChessBoard::blackPawnsEnPassant(char index, char piece){
 
 void ChessBoard::blackPawnsCapture(char index, char piece){
     if (board[index - 9] > 0 && board[index - 9] < 7){
-        putInLegalMoves(piece, index - 9, findPiece(index-9), 0);
-        //std::cout << "Pawn on " << indexToPos[index] << " captures on " << indexToPos[index - 9] << std::endl;
+        if(board[index - 20] == 7){
+            putInLegalMoves(piece, index - 9, -2, 0);
+            putInLegalMoves(piece, index - 9, -3, 0);
+            putInLegalMoves(piece, index - 9, -4, 0);
+            putInLegalMoves(piece, index - 9, -5, 0);
+        }else{
+            putInLegalMoves(piece, index - 9, findPiece(index-9), 0);
+        }
     }
     if (board[index - 11] > 0 && board[index - 11] < 7){
-        putInLegalMoves(piece, index - 11, findPiece(index-11), 0);
+        if(board[index - 20] == 7){
+            putInLegalMoves(piece, index - 11, -2, 0);
+            putInLegalMoves(piece, index - 11, -3, 0);
+            putInLegalMoves(piece, index - 11, -4, 0);
+            putInLegalMoves(piece, index - 11, -5, 0);
+        }else{
+            putInLegalMoves(piece, index - 11, findPiece(index-11), 0);
+        }
+        
         //std::cout << "Pawn on " << indexToPos[index] << " captures on " << indexToPos[index - 11] << std::endl;
+    }
+}
+
+void ChessBoard::blackPawnPromotion(){
+    if(allPieces[promotionMove.from] - 10 != promotionMove.to){
+        /// gyalog promóció ütéssel együtt
+        board[allPieces[promotionMove.from]] = 0;
+        allPieces[promotionMove.from] = -1;
+        allPieces[findPiece(promotionMove.to)] = -1
+        char i = 47;
+        while(allPieces[i-1] < 0)
+            --i;
+        allPieces[i] = promotionMove.to;
+        switch (promotionMove.takenPiece){
+        case -2:
+            board[promotionMove.to] = -2;
+            break;
+        case -3:
+            board[promotionMove.to] = -3;
+            break;
+        case -4:
+            board[promotionMove.to] = -4;
+            break;
+        case -5:
+            board[promotionMove.to] = -5;
+            break;
+        default:
+            break;
+        }
+    }else{
+        /// gyalog promóció egyszerű előrelépéssel
+        board[allPieces[promotionMove.from]] = 0;
+        allPieces[promotionMove.from] = -1;
+        char i = 47;
+        while(allPieces[i-1] < 0)
+            --i;
+        allPieces[i] = promotionMove.to;
+        switch (promotionMove.takenPiece){
+        case -2:
+            board[promotionMove.to] = -2;
+            break;
+        case -3:
+            board[promotionMove.to] = -3;
+            break;
+        case -4:
+            board[promotionMove.to] = -4;
+            break;
+        case -5:
+            board[promotionMove.to] = -5;
+            break;
+        default:
+            break;
+        }
     }
 }
 
@@ -382,7 +520,15 @@ void ChessBoard::blackPawnMoveGeneration(char pieceIndex){
                 }
             }
         }else{ /// when the current pawn is not on the starting position
-            if (board[currentPawn - 10] == 0){
+            if (board[currentPawn - 20] == 7 && board[currentPawn - 10] == 0){
+                /// gyalog promóció történik a lépés után
+                /// mind a 4 lehetséges bábura való promóciót hozzá kell tenni a lehetséges lépésekhez
+                putInLegalMoves(pieceIndex, currentPawn - 10, -2, 0);
+                putInLegalMoves(pieceIndex, currentPawn - 10, -3, 0);
+                putInLegalMoves(pieceIndex, currentPawn - 10, -4, 0);
+                putInLegalMoves(pieceIndex, currentPawn - 10, -5, 0);
+            }
+            else if (board[currentPawn - 10] == 0){
                 putInLegalMoves(pieceIndex, currentPawn - 10, -1, 0);
                 //std::cout << "Pawn on " << indexToPos[blackPawns[i]] << " to " << indexToPos[blackPawns[i] - 10] <<std::endl;
                 ////// PROMOTION IF POSSIBLE
@@ -461,12 +607,14 @@ void ChessBoard::makeMove(char indexOfMove){
         std::cout << "out of range";
     }
     else{
-        if (legalMoves[indexOfMove].takenPiece == -1){
+        if (legalMoves[indexOfMove].takenPiece == -1){ /// lépés, de nem ütés
             std::cout << "Piece: " << int(getPieceNumber(legalMoves[indexOfMove].from)) << " index: " << int(allPieces[legalMoves[indexOfMove].from]) << " on: "<< indexToPos[allPieces[legalMoves[indexOfMove].from]] << " moves to " << indexToPos[legalMoves[indexOfMove].to] << std::endl;
             board[allPieces[legalMoves[indexOfMove].from]] = 0;
             board[legalMoves[indexOfMove].to] = getPieceNumber(legalMoves[indexOfMove].from);
             allPieces[legalMoves[indexOfMove].from] = legalMoves[indexOfMove].to;
-        }else{
+        }else if(legalMoves[indexOfMove].takenPiece < -1){ /// bábu promóció
+            whitePawnPromotion(legalMoves[indexOfMove]);
+        }else{ /// ütések
             std::cout << "Piece: " << int(getPieceNumber(legalMoves[indexOfMove].from)) << " on: "<< indexToPos[allPieces[legalMoves[indexOfMove].from]] << " captures: " << int(getPieceNumber(legalMoves[indexOfMove].takenPiece)) << indexToPos[legalMoves[indexOfMove].to] << std::endl;
             board[allPieces[legalMoves[indexOfMove].from]] = 0;
             board[legalMoves[indexOfMove].takenPiece] = 0;
@@ -513,7 +661,7 @@ void ChessBoard::writeVector(){
 
 /// finds the index of the piece in allPieces[] based on the given index in board[]
 char ChessBoard::findPiece(char index){
-    for (char i=0 ; i<32 ; ++i){
+    for (char i=0 ; i<48 ; ++i){
         if (allPieces[i] == index){
             return i;
         }

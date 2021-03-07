@@ -144,9 +144,12 @@ private:
     ; 30 black queen
     ; 31 black king
     ;
+    ;
+    ; 32 - 47 promoted pieces
     */
-    char allPieces[32] = { 31, 32, 33, 34, 35, 36, 37, 38, 21, 28, 22, 27, 23, 26, 24, 25, 
-                           81, 82, 83, 84, 85, 86, 87, 88, 91, 98, 92, 97, 93, 96, 94, 95 };
+    char allPieces[48] = { 31, 32, 33, 34, 35, 36, 37, 38, 21, 28, 22, 27, 23, 26, 24, 25, 
+                           81, 82, 83, 84, 85, 86, 87, 88, 91, 98, 92, 97, 93, 96, 94, 95,
+                           -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1};
 
     /*************************************************************************************************
     ; 
@@ -178,6 +181,7 @@ private:
     void whitePawnsEnPassant(char index, char piece);
     void whitePawnMoveGeneration(char pieceIndex);  // all the white pawn functions together
 
+    void whitePawnPromotion(legalMove promotionMove); /// promotedTo: q-queen , k-knight, b-bishop, r-rook 
 
     //A függvényeket megfelelő számokkal meghívó függvénye
     void whiteRookMoveCall();
@@ -206,6 +210,9 @@ private:
     void blackPawnsCapture(char index, char piece);
     void blackPawnsEnPassant(char index, char piece);
     void blackPawnMoveGeneration(char pieceIndex);
+
+    void blackPawnPromotion(legalMove promotionMove); /// promotedTo: q-queen , k-knight, b-bishop, r-rook 
+
 
     // a függvényeet megfelelő számokkal meghívó függvénye
     void blackRookMoveCall();
