@@ -224,7 +224,12 @@ private:
 
     void callAllBlackMoveGeneration();
 
-   /*************************************************************************************************
+
+    ///Promótált bábuk mozgatása.
+    ///Nincs szükség külön függvényre a két félnek
+    /// Paraméterként adjuk át hogy ki van soron
+    void promotedPiecesMoveGeneration(bool player);
+    /*************************************************************************************************
     ; 
     ; Additional functions
     ; 

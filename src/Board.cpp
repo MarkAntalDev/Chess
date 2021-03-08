@@ -299,6 +299,7 @@ void ChessBoard::callAllWhiteMoveGeneration(){
     whiteKingMoveCall();
     whiteKnightMoveCall();
     whitePawnMoveCall();
+    promotedPiecesMoveGeneration(true);
 }
 
 /*************************************************************************************************
@@ -583,6 +584,52 @@ void ChessBoard::callAllBlackMoveGeneration(){
     blackKingMoveCall();
     blackKnightMoveCall();
     blackPawnMoveCall();
+    promotedPiecesMoveGeneration(false);
+}
+
+
+////Promótált bábuk függvénye
+void ChessBoard::promotedPiecesMoveGeneration(bool player){
+    char i = 32;
+    if(player){
+        while(i < 38 && allPieces[i] > 0){
+            switch (board[allPieces[i]])
+            {
+            case 5:
+                whiteQueenMoveGeneration(i);
+                break;
+            case 2:
+                whiteKnightMoveGeneration(i);
+                break;
+            case 3:
+                whiteBishopMoveGeneration(i);
+                break;
+            case 4:
+                whiteRookMoveGeneration(i);
+            default:
+                break;
+            }
+        }
+    }else{
+        while(i < 38 && allPieces[i] > 0){
+            switch (board[allPieces[i]])
+            {
+            case -5:
+                blackQueenMoveGeneration(i);
+                break;
+            case -2:
+                blackKnightMoveGeneration(i);
+                break;
+            case -3:
+                blackBishopMoveGeneration(i);
+                break;
+            case -4:
+                blackRookMoveGeneration(i);
+            default:
+                break;
+            }
+        }
+    }
 }
 
 
