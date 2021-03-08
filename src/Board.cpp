@@ -168,59 +168,6 @@ void ChessBoard::whitePawnsCapture(char index, char piece){
     }
 }
 
-void ChessBoard::whitePawnPromotion(legalMove promotionMove){
-    if(allPieces[promotionMove.from] + 10 != promotionMove.to){
-        /// gyalog promóció ütéssel együtt
-        board[allPieces[promotionMove.from]] = 0;
-        allPieces[promotionMove.from] = -1;
-        allPieces[findPiece(promotionMove.to)] = -1;
-        char i = 47;
-        while(allPieces[i-1] < 0)
-            --i;
-        allPieces[i] = promotionMove.to;
-        switch (promotionMove.takenPiece){
-        case -2:
-            board[promotionMove.to] = 2;
-            break;
-        case -3:
-            board[promotionMove.to] = 3;
-            break;
-        case -4:
-            board[promotionMove.to] = 4;
-            break;
-        case -5:
-            board[promotionMove.to] = 5;
-            break;
-        default:
-            break;
-        }
-    }else{
-        /// gyalog promóció egyszerű előrelépéssel
-        board[allPieces[promotionMove.from]] = 0;
-        allPieces[promotionMove.from] = -1;
-        char i = 47;
-        while(allPieces[i-1] < 0)
-            --i;
-        allPieces[i] = promotionMove.to;
-        switch (promotionMove.takenPiece){
-        case -2:
-            board[promotionMove.to] = 2;
-            break;
-        case -3:
-            board[promotionMove.to] = 3;
-            break;
-        case -4:
-            board[promotionMove.to] = 4;
-            break;
-        case -5:
-            board[promotionMove.to] = 5;
-            break;
-        default:
-            break;
-        }
-    }
-}   
-
 void ChessBoard::whitePawnMoveGeneration(char pieceIndex){
     char currentPawn = allPieces[pieceIndex]; /// 0-7
     if (currentPawn != -1){
@@ -453,59 +400,6 @@ void ChessBoard::blackPawnsCapture(char index, char piece){
     }
 }
 
-void ChessBoard::blackPawnPromotion(){
-    if(allPieces[promotionMove.from] - 10 != promotionMove.to){
-        /// gyalog promóció ütéssel együtt
-        board[allPieces[promotionMove.from]] = 0;
-        allPieces[promotionMove.from] = -1;
-        allPieces[findPiece(promotionMove.to)] = -1
-        char i = 47;
-        while(allPieces[i-1] < 0)
-            --i;
-        allPieces[i] = promotionMove.to;
-        switch (promotionMove.takenPiece){
-        case -2:
-            board[promotionMove.to] = -2;
-            break;
-        case -3:
-            board[promotionMove.to] = -3;
-            break;
-        case -4:
-            board[promotionMove.to] = -4;
-            break;
-        case -5:
-            board[promotionMove.to] = -5;
-            break;
-        default:
-            break;
-        }
-    }else{
-        /// gyalog promóció egyszerű előrelépéssel
-        board[allPieces[promotionMove.from]] = 0;
-        allPieces[promotionMove.from] = -1;
-        char i = 47;
-        while(allPieces[i-1] < 0)
-            --i;
-        allPieces[i] = promotionMove.to;
-        switch (promotionMove.takenPiece){
-        case -2:
-            board[promotionMove.to] = -2;
-            break;
-        case -3:
-            board[promotionMove.to] = -3;
-            break;
-        case -4:
-            board[promotionMove.to] = -4;
-            break;
-        case -5:
-            board[promotionMove.to] = -5;
-            break;
-        default:
-            break;
-        }
-    }
-}
-
 void ChessBoard::blackPawnMoveGeneration(char pieceIndex){
     char currentPawn = allPieces[pieceIndex];
     if (currentPawn != -1){
@@ -639,6 +533,112 @@ void ChessBoard::promotedPiecesMoveGeneration(bool player){
 ; 
 **************************************************************************************************/
 
+void ChessBoard::doPawnPromotion(legalMove promotionMove){
+    if(board[allPieces[promotionMove.from]] > 0){
+        if(allPieces[promotionMove.from] + 10 != promotionMove.to){
+            /// gyalog promóció ütéssel együtt
+            board[allPieces[promotionMove.from]] = 0;
+            allPieces[promotionMove.from] = -1;
+            allPieces[findPiece(promotionMove.to)] = -1;
+            char i = 47;
+            while(allPieces[i-1] < 0)
+                --i;
+            allPieces[i] = promotionMove.to;
+            switch (promotionMove.takenPiece){
+            case -2:
+                board[promotionMove.to] = 2;
+                break;
+            case -3:
+                board[promotionMove.to] = 3;
+                break;
+            case -4:
+                board[promotionMove.to] = 4;
+                break;
+            case -5:
+                board[promotionMove.to] = 5;
+                break;
+            default:
+                break;
+            }
+        }else{
+            /// gyalog promóció egyszerű előrelépéssel
+            board[allPieces[promotionMove.from]] = 0;
+            allPieces[promotionMove.from] = -1;
+            char i = 47;
+            while(allPieces[i-1] < 0)
+                --i;
+            allPieces[i] = promotionMove.to;
+            switch (promotionMove.takenPiece){
+            case -2:
+                board[promotionMove.to] = 2;
+                break;
+            case -3:
+                board[promotionMove.to] = 3;
+                break;
+            case -4:
+                board[promotionMove.to] = 4;
+                break;
+            case -5:
+                board[promotionMove.to] = 5;
+                break;
+            default:
+                break;
+            }
+        }
+    }else{
+        if(allPieces[promotionMove.from] - 10 != promotionMove.to){
+            /// gyalog promóció ütéssel együtt
+            board[allPieces[promotionMove.from]] = 0;
+            allPieces[promotionMove.from] = -1;
+            allPieces[findPiece(promotionMove.to)] = -1;
+            char i = 47;
+            while(allPieces[i-1] < 0)
+                --i;
+            allPieces[i] = promotionMove.to;
+            switch (promotionMove.takenPiece){
+            case -2:
+                board[promotionMove.to] = -2;
+                break;
+            case -3:
+                board[promotionMove.to] = -3;
+                break;
+            case -4:
+                board[promotionMove.to] = -4;
+                break;
+            case -5:
+                board[promotionMove.to] = -5;
+                break;
+            default:
+                break;
+            }
+        }else{
+            /// gyalog promóció egyszerű előrelépéssel
+            board[allPieces[promotionMove.from]] = 0;
+            allPieces[promotionMove.from] = -1;
+            char i = 47;
+            while(allPieces[i-1] < 0)
+                --i;
+            allPieces[i] = promotionMove.to;
+            switch (promotionMove.takenPiece){
+            case -2:
+                board[promotionMove.to] = -2;
+                break;
+            case -3:
+                board[promotionMove.to] = -3;
+                break;
+            case -4:
+                board[promotionMove.to] = -4;
+                break;
+            case -5:
+                board[promotionMove.to] = -5;
+                break;
+            default:
+                break;
+            }
+        }
+    }
+}
+
 void ChessBoard::generatePseudoLegalMoves(){
     if(currentPlayer){ /// current player is true when it's white's turn
         //std::cout << "white's turn" << std::endl;
@@ -660,7 +660,7 @@ void ChessBoard::makeMove(char indexOfMove){
             board[legalMoves[indexOfMove].to] = getPieceNumber(legalMoves[indexOfMove].from);
             allPieces[legalMoves[indexOfMove].from] = legalMoves[indexOfMove].to;
         }else if(legalMoves[indexOfMove].takenPiece < -1){ /// bábu promóció
-            whitePawnPromotion(legalMoves[indexOfMove]);
+            doPawnPromotion(legalMoves[indexOfMove]);
         }else{ /// ütések
             std::cout << "Piece: " << int(getPieceNumber(legalMoves[indexOfMove].from)) << " on: "<< indexToPos[allPieces[legalMoves[indexOfMove].from]] << " captures: " << int(getPieceNumber(legalMoves[indexOfMove].takenPiece)) << indexToPos[legalMoves[indexOfMove].to] << std::endl;
             board[allPieces[legalMoves[indexOfMove].from]] = 0;

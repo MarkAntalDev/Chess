@@ -181,7 +181,6 @@ private:
     void whitePawnsEnPassant(char index, char piece);
     void whitePawnMoveGeneration(char pieceIndex);  // all the white pawn functions together
 
-    void whitePawnPromotion(legalMove promotionMove); /// promotedTo: q-queen , k-knight, b-bishop, r-rook 
 
     //A függvényeket megfelelő számokkal meghívó függvénye
     void whiteRookMoveCall();
@@ -209,9 +208,7 @@ private:
 
     void blackPawnsCapture(char index, char piece);
     void blackPawnsEnPassant(char index, char piece);
-    void blackPawnMoveGeneration(char pieceIndex);
-
-    void blackPawnPromotion(legalMove promotionMove); /// promotedTo: q-queen , k-knight, b-bishop, r-rook 
+    void blackPawnMoveGeneration(char pieceIndex); 
 
 
     // a függvényeet megfelelő számokkal meghívó függvénye
@@ -239,7 +236,7 @@ private:
     void putInLegalMoves(char _from, char _to, char _takenPiece, char _value); /// puches back the vector with a new legalMove item 
     char findPiece(char index); /// finds which piece is on the board with the given index
     char getPieceNumber(char index);
-    
+    void doPawnPromotion(legalMove promotionMove);
 
     /*************************************************************************************************
     ; 
