@@ -10,14 +10,9 @@
 #include <ratio>
 #include <chrono>
 #include <cstdlib>
+#include "eval_tables.h"
+#include "defs.h"
 
-
-struct legalMove{
-  char from;
-  char to;
-  char takenPiece;
-  char value;
-};
 
 /* side note for takenPiece 
 ; 0 - 7 white pawns ( -1 equals the index in the array)
@@ -44,11 +39,20 @@ public:
     void writeVector();
     void makeMove(char indexOfMove);
     void generateRandomMove();
+    int evaluation();
 protected:
     bool currentPlayer; // true-white || false-black
-    bool enPassant; //is en passant an option
+    bool enPassant; // is en passant an option
 private:
     std::vector<legalMove> legalMoves;//vector for current possible moves
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+    genMove moves[SIZE_OF_MOVES_ARRAY];
+    history movesHistory[SIZE_OF_HISTORY];
+    int firstMoveOfDepth[MAXIMUM_DEPTH];
+    int currentDepth;
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+
     
     /***********************************************************************************************
     ; egy 120 elemes 1 dimenziós tömb a gyorsabb elérés és könnyebb lépésgenerálás érdekében
@@ -64,15 +68,15 @@ private:
     ; 5 - fehér királyanő | white queen
     ; 6 - fehér király    | white king
     ;
-    ; 1 - fekete gyalog    | black pawn
-    ; 2 - fekete ló        | black knight
-    ; 3 - fekete futó      | black bishop
-    ; 4 - fekete bástya    | black rook
-    ; 5 - fekete királyanő | black queen
-    ; 6 - fekete király    | black king
+    ; -1 - fekete gyalog    | black pawn
+    ; -2 - fekete ló        | black knight
+    ; -3 - fekete futó      | black bishop
+    ; -4 - fekete bástya    | black rook
+    ; -5 - fekete királyanő | black queen
+    ; -6 - fekete király    | black king
     ;
     ************************************************************************************************/
-    char board[120] = {
+    char board[120] /*= {
       7,  7,  7,  7,  7,  7,  7,  7,  7,  7,
       7,  7,  7,  7,  7,  7,  7,  7,  7,  7,
       7,  4,  2,  3,  5,  6,  3,  2,  4,  7,
@@ -85,7 +89,7 @@ private:
       7, -4, -2, -3, -5, -6, -3, -2, -4,  7,
       7,  7,  7,  7,  7,  7,  7,  7,  7,  7,
       7,  7,  7,  7,  7,  7,  7,  7,  7,  7
-    };
+    }*/;
 
 
     //current positions(indices) of the pieces
@@ -147,9 +151,9 @@ private:
     ;
     ; 32 - 47 promoted pieces
     */
-    char allPieces[48] = { 31, 32, 33, 34, 35, 36, 37, 38, 21, 28, 22, 27, 23, 26, 24, 25, 
+    char allPieces[48]/* = { 31, 32, 33, 34, 35, 36, 37, 38, 21, 28, 22, 27, 23, 26, 24, 25, 
                            81, 82, 83, 84, 85, 86, 87, 88, 91, 98, 92, 97, 93, 96, 94, 95,
-                           -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1};
+                           -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1}*/;
 
     /*************************************************************************************************
     ; 
@@ -222,8 +226,59 @@ private:
     void callAllBlackMoveGeneration();
 
 
-    ///Promótált bábuk mozgatása.
-    ///Nincs szükség külön függvényre a két félnek
+    ///////////////////////////////////////////////////////////////////////////////////////////////////
+    /// Támadást eldöntő funkciók bábunként
+    /// első paraméterként (sq) megkapja a támadott mező indexét
+    /// másodikban (attacker) a támadó indexét bábukat tároló többern (allPieces)
+    ///////////////////////////////////////////////////////////////////////////////////////////////////
+
+    bool   attackRook(char sq, char attacker);
+    bool attackBishop(char sq, char attacker);
+    bool attackKnight(char sq, char attacker);
+    bool  attackQueen(char sq, char attacker);
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////
+    /// Kiértékelő függvény
+    /// Megadja a győzelmi esélyeket egy adott állásra a megfelelő félnek
+    ///////////////////////////////////////////////////////////////////////////////////////////////////
+
+    // **************************************************************************************************************int evaluation();
+    
+    ///////////////////////////////////////////////////////////////////////////////////////////////////
+    /// Kiértékelő függvény segédfüggvényeinek közösen használt változói
+    /// minden értéket tároló tömb 2 elemű, melynek első eleme a fehér félre vonatkozik, a másodika fekete félre
+    ///////////////////////////////////////////////////////////////////////////////////////////////////
+
+    /// ebben a tömbben minden egyes oszlopokban vizsgáljuk a legkevésbé előrehaladottabb gyalogot
+    /// alaphelyzet a fehérnek 7 a feketének 0 ugyanis feltételezzük hogy "végtelenségig" előrenyomult 
+    /// az adott oszlopban a gyalog 
+    /// (ha nincs az adott oszlopban gyalog ez az érték marad)
+    /// azért 10 hosszú hogy a széső gyalogoknak később érzékelhessük, hogy nincs mellettük másik
+    int pawnRank[2][10];
+
+    /// a nem-gyalog bábuk értékének összessége
+    /// futó || ló == 300   bástya == 500   királynő == 900 
+    int pieceSum[2];
+
+    /// a gyalogok értékeinek összege
+    /// gyalog == 100
+    int pawnSum[2];
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////
+    /// Kiértékelő függvényt segítő függvények
+    ///////////////////////////////////////////////////////////////////////////////////////////////////
+
+    int whitePawnScore(int index);
+    int blackPawnScore(int index);
+
+    int whiteKingScore();
+    int blackKingScore();
+
+    int whiteKingPawnScore(int f);
+    int blackKingPawnScore(int f);
+
+    /// Promótált bábuk mozgatása.
+    /// Nincs szükség külön függvényre a két félnek
     /// Paraméterként adjuk át hogy ki van soron
     void promotedPiecesMoveGeneration(bool player);
     /*************************************************************************************************
@@ -237,7 +292,9 @@ private:
     char findPiece(char index); /// finds which piece is on the board with the given index
     char getPieceNumber(char index);
     void doPawnPromotion(legalMove promotionMove);
-
+    void initBoard(); /// a pályát kezdeti állapotba állítja minden szükséges változójával együtt
+    bool attack(char sq, bool side); /// igazat ad vissza ha egy mező támadás alatt áll, hamisat ha nem áll támadás alatt, vagy nincs a pályán
+    bool inCheck(bool side); /// A fehér mindig az igaz fekete mindig a hamis. Visszaadja hogy az adott oldal királya sakkban áll-e?
     /*************************************************************************************************
     ; 
     ; Maps to exchange the indexes with positions
@@ -395,6 +452,65 @@ private:
       { "f8", 96 },
       { "g8", 97 },
       { "h8", 98 }
+    };
+
+
+    /* side note for the pieces (indices in allPieces array)
+    ; 0 - 7 white pawns
+    ; 8  white left rook
+    ; 9  white right rook
+    ; 10 white left knight
+    ; 11 white right knight
+    ; 12 white left bishop
+    ; 13 white right bishop
+    ; 14 white queen
+    ; 15 white king
+    ; 
+    ; 16 - 23 black pawns
+    ; 24 black left rook
+    ; 25 black right rook
+    ; 26 black left knight
+    ; 27 black right knight
+    ; 28 black left bishop
+    ; 29 black right bishop
+    ; 30 black queen
+    ; 31 black king
+    ;
+    ;
+    ; 32 - 47 promoted pieces
+    */
+
+    std::map<int, int> indexToValue = {
+      {8,  500},
+      {9,  500},
+      {10, 300},
+      {11, 300},
+      {12, 300},
+      {13, 300},
+      {14, 900},
+      {24, 500},
+      {25, 500},
+      {26, 300},
+      {27, 300},
+      {28, 300},
+      {29, 300},
+      {30, 900}
+    };
+
+    std::map<int, int> numberToValueWhite = {
+      {1, 100},
+      {2, 300},
+      {3, 300},
+      {4, 500},
+      {5, 900}
+    };
+
+    std::map<int, int> numberToValueBlack = {
+      {-1, 100},
+      {-2, 300},
+      {-3, 300},
+      {-4, 500},
+      {-5, 900}
     };
 
 };
