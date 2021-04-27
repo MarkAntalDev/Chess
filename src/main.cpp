@@ -3,14 +3,12 @@
 
 int main(){
     ChessBoard* chessboard = new ChessBoard();
-    //std::cout << convert_table_black[5] << std::endl;
     chessboard->drawIntBoard();
-    chessboard->evaluation();
+    //chessboard->evaluation();
     //chessboard->generatePseudoLegalMoves();
     //chessboard->writeVector();
     //chessboard->testingFunction();
     //chessboard->generateRandomMove();
-    move m;
     char c;
     do{
         std::cout << "input:";
@@ -21,6 +19,19 @@ int main(){
             chessboard->drawIntBoard();
             chessboard->evaluation();
         }
+        if(c == 't'){
+            chessboard->TakeBack();
+            chessboard->drawIntBoard();
+            chessboard->evaluation();
+        }
+        if(c == 's'){
+            chessboard->search();
+            chessboard->drawIntBoard();
+            chessboard->evaluation();
+        }
     }while(c != 'x');
+
+    delete chessboard;
+    
     return 0;
 }

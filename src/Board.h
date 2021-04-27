@@ -10,6 +10,7 @@
 #include <ratio>
 #include <chrono>
 #include <cstdlib>
+#include <math.h>
 #include "eval_tables.h"
 #include "defs.h"
 
@@ -37,20 +38,42 @@ public:
     void generatePseudoLegalMoves();
     void testingFunction();
     void writeVector();
-    void makeMove(char indexOfMove);
+    //void makeMove(char indexOfMove);
     void generateRandomMove();
     int evaluation();
+    bool isNthBitSet(int x, int n);
+    void addToMoves(int from, int to, int moveT);
+    void addPromToMoves(int from, int to, int moveT);
+    bool isMoveType(int bits, int type);
+
+    bool MakeMove(moveBytes moveByte);
+    void TakeBack();
+
+    int max(moveBytes* bestMove);
+    int min(moveBytes* bestMove);
+    void search();
 protected:
     bool currentPlayer; // true-white || false-black
-    bool enPassant; // is en passant an option
+    //bool enPassant; // is en passant an option
 private:
     std::vector<legalMove> legalMoves;//vector for current possible moves
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
     genMove moves[SIZE_OF_MOVES_ARRAY];
     history movesHistory[SIZE_OF_HISTORY];
-    int firstMoveOfDepth[MAXIMUM_DEPTH];
-    int currentDepth;
+    int firstMoveOfDepth[MAXIMUM_DEPTH]; /// első lépés indexe minden 
+    int currentDepth; /// jelenlegi mélység a keresőfában
+    ////////
+    // bits for catling
+    // 1111
+    // 1 for white right caste
+    // 2 for white left
+    // 4 for black right
+    // 8 for black left
+    int castleFlag;
+    int fifthyMove;
+    int historyDepth;
+    int ep; /// en passant mező indexe, ha lehetséges (dupla gyalog lépés után a mögötte lévő mező indexe) egyébként -1
     ////////////////////////////////////////////////////////////////////////////////////////////////
 
     
@@ -181,10 +204,11 @@ private:
     void whiteKnightMoveGeneration(char pieceIndex); // white knight move generation function
 
     //pawn moves: separate functions because of the complications (double push, en passant,different capture)
-    void whitePawnsCapture(char index, char piece);
-    void whitePawnsEnPassant(char index, char piece);
-    void whitePawnMoveGeneration(char pieceIndex);  // all the white pawn functions together
+    void whiteEnPassantGeneration();
+    void whitePawnMove();
 
+    // sáncolási lehetőségek generálása
+    void whiteCastleMoveGeneration();
 
     //A függvényeket megfelelő számokkal meghívó függvénye
     void whiteRookMoveCall();
@@ -192,7 +216,6 @@ private:
     void whiteQueenMoveCall();
     void whiteKingMoveCall();
     void whiteKnightMoveCall();
-    void whitePawnMoveCall();
 
     void callAllWhiteMoveGeneration();
 
@@ -210,9 +233,11 @@ private:
     void blackKingMoveGeneration();
     void blackQueenMoveGeneration(char pieceIndex);
 
-    void blackPawnsCapture(char index, char piece);
-    void blackPawnsEnPassant(char index, char piece);
-    void blackPawnMoveGeneration(char pieceIndex); 
+    void blackEnPassantGeneration();
+    void blackPawnMove();
+
+    // sáncolási lehetőségek generálása
+    void blackCastleMoveGeneration();    
 
 
     // a függvényeet megfelelő számokkal meghívó függvénye
@@ -221,9 +246,13 @@ private:
     void blackQueenMoveCall();
     void blackKingMoveCall();
     void blackKnightMoveCall();
-    void blackPawnMoveCall();
 
     void callAllBlackMoveGeneration();
+
+    /// Promótált bábuk mozgatása.
+    /// Nincs szükség külön függvényre a két félnek
+    /// Paraméterként adjuk át hogy ki van soron
+    void promotedPiecesMoveGeneration(bool player);
 
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -277,10 +306,26 @@ private:
     int whiteKingPawnScore(int f);
     int blackKingPawnScore(int f);
 
-    /// Promótált bábuk mozgatása.
-    /// Nincs szükség külön függvényre a két félnek
-    /// Paraméterként adjuk át hogy ki van soron
-    void promotedPiecesMoveGeneration(bool player);
+    ///////////////////////////////////////////////////////////////////////////////////////////////////
+    /// A KERESŐFÜGGVÉNY
+    ///
+    ///
+    ///
+    ///////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+    /// A Principle Variation tárolására használt változók
+    move pv[MAXIMUM_DEPTH][MAXIMUM_DEPTH];
+    int pvLength[MAXIMUM_DEPTH];
+    
+    //int max(moveBytes* bestMove);
+    //int min(moveBytes* bestMove);
+    //void search();
+
+    int max(int depth);
+    int min(int depth);
+    void search2();
+
     /*************************************************************************************************
     ; 
     ; Additional functions
@@ -288,13 +333,15 @@ private:
     **************************************************************************************************/
 
     //bool whiteKingInCheck(); /// checking if the white king is in check
-    void putInLegalMoves(char _from, char _to, char _takenPiece, char _value); /// puches back the vector with a new legalMove item 
+    //void putInLegalMoves(char _from, char _to, char _takenPiece, char _value); /// puches back the vector with a new legalMove item 
     char findPiece(char index); /// finds which piece is on the board with the given index
     char getPieceNumber(char index);
-    void doPawnPromotion(legalMove promotionMove);
+    //void doPawnPromotion(legalMove promotionMove);
     void initBoard(); /// a pályát kezdeti állapotba állítja minden szükséges változójával együtt
     bool attack(char sq, bool side); /// igazat ad vissza ha egy mező támadás alatt áll, hamisat ha nem áll támadás alatt, vagy nincs a pályán
     bool inCheck(bool side); /// A fehér mindig az igaz fekete mindig a hamis. Visszaadja hogy az adott oldal királya sakkban áll-e?
+    std::string moveToString(moveBytes move);
+    //bool isNthBitSet(int x, int n); /// visszaadja hogy x nek az n-edik bitje 1-e.
     /*************************************************************************************************
     ; 
     ; Maps to exchange the indexes with positions
@@ -506,6 +553,19 @@ private:
     };
 
     std::map<int, int> numberToValueBlack = {
+      {-1, 100},
+      {-2, 300},
+      {-3, 300},
+      {-4, 500},
+      {-5, 900}
+    };
+
+    std::map<int, int> pieceToMoveValue = {
+      {1, 100},
+      {2, 300},
+      {3, 300},
+      {4, 500},
+      {5, 900},
       {-1, 100},
       {-2, 300},
       {-3, 300},

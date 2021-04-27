@@ -19,7 +19,12 @@ struct legalMove{
   char value;
 };
 
-/// megujitott moving
+#define CAPTURE     1
+#define CASTLE      2
+#define ENPASSANT   4
+#define DOUBLEPUSH  8
+#define PAWNMOVE    16
+#define PROMOTION   32
 
 /////////////////////////////////////
 /// Egy lépés bájtjai
@@ -31,6 +36,13 @@ struct legalMove{
 /// 8 dupla gyalog tolás
 /// 16 gyalog mozgás
 /// 32 promóció (gyalog átalakítás)
+///
+/// promote hasonló módszerrel
+///
+/// 1 ló
+/// 2 futó
+/// 4 bástya
+/// 8 királynő
 ///
 /////////////////////////////////////
 struct moveBytes{
@@ -63,10 +75,12 @@ struct genMove{
 struct history{
     move m;
     int capture;
-    int castle;
+    int castleFlag;
     int ep;
     int fifthy;
     int hash;
+    int boardFrom;
+    int toAllPieces;
 };
 
 ///typusdefiníciók a könnyebb létrehozás és kezelés érdekében
