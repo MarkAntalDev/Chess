@@ -29,8 +29,7 @@ void ChessBoard::initBoard(){
         ++counter;
     }
 
-    currentPlayer = true; 
-    //enPassant = false;
+    currentPlayer = true;
     currentDepth = 0;
     historyDepth = 0;
     firstMoveOfDepth[currentDepth] = 0;
@@ -43,19 +42,6 @@ ChessBoard::ChessBoard(){
     std::srand(std::time(nullptr));
 }
 
-//drawing the chessboard with ints
-void ChessBoard::drawIntBoard(){
-    for (int i=11; i>-1 ; --i){
-        for (int j=0; j<10 ; ++j){
-            if (int(board[i * 10 + j])<0)
-                std::cout << " " << int(board[i * 10 + j]);
-            else
-                std::cout << "  " << int(board[i * 10 + j]);
-        }
-        std::cout << std::endl << std::endl;
-    }
-}
-
 
 /////////////////////////////////////////////////////////////////////////////////////////////////
 ///
@@ -63,7 +49,7 @@ void ChessBoard::drawIntBoard(){
 ///
 /////////////////////////////////////////////////////////////////////////////////////////////////
 
-int ChessBoard::max(moveBytes* bestMove){
+/*int ChessBoard::max(moveBytes* bestMove){
     int score = -100000;
     int value;
     generatePseudoLegalMoves();
@@ -98,9 +84,9 @@ int ChessBoard::min(moveBytes* bestMove){
         }
     }
     return score;
-}
+}*/
 
-void ChessBoard::search(){
+/*void ChessBoard::search(){
     moveBytes bestMove ;
     int score;
     if (currentPlayer)
@@ -110,66 +96,7 @@ void ChessBoard::search(){
     std::cout << "Score is : " << score << std::endl;
     std::cout << "The best move is : " << moveToString(bestMove) << std::endl;
     MakeMove(bestMove);
-}
-
-//////////// second try with pv
-int ChessBoard::max(int depth){
-    pvLength[currentDepth] = currentDepth;
-    if(depth == 0)
-        return evaluation();
-    int score = -100000;
-    int value;
-    generatePseudoLegalMoves();
-    for (int i = firstMoveOfDepth[currentDepth] ; i < firstMoveOfDepth[currentDepth + 1] ; ++i){
-        if(!MakeMove(moves[i].m.b))
-            continue;
-        value = min (depth - 1);
-        TakeBack();
-        if(value > score){
-            score = value;
-            pv[currentDepth][currentDepth] = moves[i].m;
-            for ( int j = currentDepth+1 ; pvLength[currentDepth + 1]; ++i)
-                pv[currentDepth][j] = pv[currentDepth + 1][j];
-            pvLength[currentDepth] = pvLength[currentDepth + 1];
-        }
-    }
-    return score;
-}
-
-int ChessBoard::min(int depth){
-    pvLength[currentDepth] = currentDepth;
-    if(depth == 0)
-        return -evaluation();
-    int score = 100000;
-    int value;
-    generatePseudoLegalMoves();
-    for (int i = firstMoveOfDepth[currentDepth] ; i < firstMoveOfDepth[currentDepth + 1] ; ++i){
-        if(!MakeMove(moves[i].m.b))
-            continue;
-        value = max (depth - 1);
-        TakeBack();
-        if(value < score){
-            score = value;
-            pv[currentDepth][currentDepth] = moves[i].m;
-            for ( int j = currentDepth+1 ; pvLength[currentDepth + 1]; ++i)
-                pv[currentDepth][j] = pv[currentDepth + 1][j];
-            pvLength[currentDepth] = pvLength[currentDepth + 1];
-        }
-    }
-    return score;
-}
-
-void ChessBoard::search2(){
-    /*moveBytes bestMove ;
-    int score;
-    if (currentPlayer)
-        score = max(&bestMove);
-    else
-        score = min(&bestMove);
-    std::cout << "Score is : " << score << std::endl;
-    std::cout << "The best move is : " << moveToString(bestMove) << std::endl;
-    MakeMove(bestMove);*/
-} 
+}*/
 
 /////////////////////////////////////////////////////////////////////////////////////////////////
 ///
@@ -557,7 +484,7 @@ int ChessBoard::evaluation(){
     else
         score[BLACK] += blackKingScore();
 
-    std::cout << "Feher pontjai " << score[WHITE] << std::endl << "Fekete pontjai " << score[BLACK] << std::endl;
+    //std::cout << "Feher pontjai " << score[WHITE] << std::endl << "Fekete pontjai " << score[BLACK] << std::endl;
 
     /// a jelenlegi játékostól függően adunk visssza
     if(currentPlayer)
@@ -1433,12 +1360,6 @@ void ChessBoard::testingFunction(){
     }    
 }
 
-void ChessBoard::writeVector(){
-    for (auto & element : legalMoves) {
-        std::cout << int(element.from) << " " << int(element.to) << " " << int(element.takenPiece) << std::endl;
-    }
-}
-
 /// finds the index of the piece in allPieces[] based on the given index in board[]
 char ChessBoard::findPiece(char index){
     for (char i=0 ; i<48 ; ++i){
@@ -1528,6 +1449,8 @@ void ChessBoard::generateRandomMove(){
 
 std::string ChessBoard::moveToString(moveBytes move){
     std::string moveString;
+    if(move.to > 98 || move.to < 21)
+        return "0000";
     moveString = indexToPos[allPieces[move.from]] + indexToPos[move.to];
     return moveString;
 }

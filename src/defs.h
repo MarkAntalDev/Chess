@@ -12,13 +12,6 @@
 #define MAXIMUM_DEPTH           32
 #define SIZE_OF_HISTORY         400
 
-struct legalMove{
-  char from;
-  char to;
-  char takenPiece;
-  char value;
-};
-
 #define CAPTURE     1
 #define CASTLE      2
 #define ENPASSANT   4

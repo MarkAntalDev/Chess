@@ -13,6 +13,7 @@
 #include <math.h>
 #include "eval_tables.h"
 #include "defs.h"
+#include <windows.h>
 
 
 /* side note for takenPiece 
@@ -34,11 +35,10 @@ class ChessBoard{
 public:
     ChessBoard();
 
-    void drawIntBoard();//drawing the table to the console with numbers
+    void drawIntBoard(); // kirajzolja a teljes pályát int -ekkel
+    void drawBoard(); // kirajzolja a pályát "szépen"
     void generatePseudoLegalMoves();
     void testingFunction();
-    void writeVector();
-    //void makeMove(char indexOfMove);
     void generateRandomMove();
     int evaluation();
     bool isNthBitSet(int x, int n);
@@ -48,21 +48,23 @@ public:
 
     bool MakeMove(moveBytes moveByte);
     void TakeBack();
-
-    int max(moveBytes* bestMove);
-    int min(moveBytes* bestMove);
     void search();
+    bool getCp(){return currentPlayer;}
+    void printPv();
+    void negasearch();
+
+    /// protocols to run in main
+    void ConsoleMain();
 protected:
     bool currentPlayer; // true-white || false-black
     //bool enPassant; // is en passant an option
 private:
-    std::vector<legalMove> legalMoves;//vector for current possible moves
-
     ////////////////////////////////////////////////////////////////////////////////////////////////
     genMove moves[SIZE_OF_MOVES_ARRAY];
     history movesHistory[SIZE_OF_HISTORY];
     int firstMoveOfDepth[MAXIMUM_DEPTH]; /// első lépés indexe minden 
     int currentDepth; /// jelenlegi mélység a keresőfában
+    bool playerSide; /// a játékos által választott oldal
     ////////
     // bits for catling
     // 1111
@@ -76,7 +78,6 @@ private:
     int ep; /// en passant mező indexe, ha lehetséges (dupla gyalog lépés után a mögötte lévő mező indexe) egyébként -1
     ////////////////////////////////////////////////////////////////////////////////////////////////
 
-    
     /***********************************************************************************************
     ; egy 120 elemes 1 dimenziós tömb a gyorsabb elérés és könnyebb lépésgenerálás érdekében
     ; 10*12 es táblát reprezentál amivel a pályáról való kilépés alacsony költséggel ellenőrizhető
@@ -324,7 +325,11 @@ private:
 
     int max(int depth);
     int min(int depth);
-    void search2();
+    int negamax(int depth);
+    int AlphaBetaMax(int alpha, int beta, int depth);
+    int AlphaBetaMin(int alpha, int beta, int depth);
+    void sortMoves(int i); /// sorbarakja a lépéseket az alapján, hogy mennyi pontjuk van tárolva
+    //void search2();
 
     /*************************************************************************************************
     ; 
@@ -573,6 +578,21 @@ private:
       {-5, 900}
     };
 
+    std::map<int, char> ConsolePieces = {
+      {0, '_'},
+      {1,  'P'},
+      {-1,  'p'},
+      {2, 'N'},
+      {-2, 'n'},
+      {3, 'B'},
+      {-3, 'b'},
+      {4, 'R'},
+      {-4, 'r'},
+      {5, 'Q'},
+      {-5, 'q'},
+      {6, 'K'},
+      {-6, 'k'}
+    };
 };
 
 #endif // _BOARD_H_

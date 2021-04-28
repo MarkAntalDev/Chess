@@ -1,37 +1,22 @@
 #include <iostream>
 #include "Board.h"
 
+
 int main(){
     ChessBoard* chessboard = new ChessBoard();
-    chessboard->drawIntBoard();
-    //chessboard->evaluation();
-    //chessboard->generatePseudoLegalMoves();
-    //chessboard->writeVector();
-    //chessboard->testingFunction();
-    //chessboard->generateRandomMove();
     char c;
-    do{
-        std::cout << "input:";
-        std::cin >> c;
-        std::cout << std::endl << std::endl;
-        if(c == 'r'){
-            chessboard->generateRandomMove();
-            chessboard->drawIntBoard();
-            chessboard->evaluation();
-        }
-        if(c == 't'){
-            chessboard->TakeBack();
-            chessboard->drawIntBoard();
-            chessboard->evaluation();
-        }
-        if(c == 's'){
-            chessboard->search();
-            chessboard->drawIntBoard();
-            chessboard->evaluation();
-        }
-    }while(c != 'x');
+    std::cout << "chose az "
+    
+    /*const wchar_t *white = L"♔♕♖♗♘♙\r\n";
+    const wchar_t *black = L"♚♛♜♝♞♟\r\n";
 
+    WriteConsoleW(GetStdHandle(STD_OUTPUT_HANDLE), white, wcslen(white), 0, 0);
+    WriteConsoleW(GetStdHandle(STD_OUTPUT_HANDLE), black, wcslen(black), 0, 0);
+    */
+    
     delete chessboard;
     
+
+
     return 0;
 }
