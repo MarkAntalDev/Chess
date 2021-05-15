@@ -1,0 +1,710 @@
+2021-05-08 20:13:57,906 Arena 3.5.1
+2021-05-08 20:13:57,918
+2021-05-08 20:13:58,373**----------New game---2021-05-08 20:13:58,373 Szo -------------
+2021-05-08 20:13:58,505**screen: 1920x1080
+2021-05-08 20:13:58,505**Monitors: 1
+2021-05-08 20:13:58,505**Monitor0: 1920x1080
+2021-05-08 20:13:58,505**FormMonitor: 0
+2021-05-08 20:13:58,505**DesktopRect: 0/0 .. 1920/1080
+2021-05-08 20:13:58,553**Loading  1
+2021-05-08 20:14:21,126*1*------------------------Starting engine 1 Ranger2.0-------------------------
+2021-05-08 20:14:21,128*1*Configured Engine 1 Type:   UCI
+2021-05-08 20:14:21,128*1*Engine 1 dir: C:\Users\Userű\Desktop\Ranger2.0\Chess
+2021-05-08 20:14:21,128*1*Engine 1 commandline: C:\Users\Userű\Desktop\Ranger2.0\Chess\Ranger2.0.exe 
+2021-05-08 20:14:21,269*1*Child Process Prio Adj:  PID 23248 conhost.exe
+2021-05-08 20:14:21,270*1*Engine 1 ProcessID: 19460
+2021-05-08 20:14:21,270*1*Engine 1 Prio:32 ThreadPrio:0
+2021-05-08 20:14:21,295<--1:Opening book opened
+2021-05-08 20:14:21,295-->1:uci
+2021-05-08 20:14:21,295<--1:Valassz egy interface-t (console, uci): id name Ranger Sakk
+2021-05-08 20:14:21,295<--1:id author Antal Mark Medard
+2021-05-08 20:14:21,295<--1:uciok
+2021-05-08 20:14:21,301*1*Child Process Prio Adj:  PID 23248 conhost.exe
+2021-05-08 20:14:21,302-->1:isready
+2021-05-08 20:14:21,357<--1:readyok
+2021-05-08 20:14:24,500**----------New game---2021-05-08 20:14:24,500 Szo -------------
+2021-05-08 20:14:37,187*1*Start calc, move no: 1
+2021-05-08 20:14:37,187-->1:ucinewgame
+2021-05-08 20:14:37,187-->1:isready
+2021-05-08 20:14:37,187<--1:readyok
+2021-05-08 20:14:37,201-->1:position startpos moves e2e4
+2021-05-08 20:14:37,201-->1:go infinite
+2021-05-08 20:14:37,201<--1:AZ ENGINE KULDTE
+2021-05-08 20:14:37,201<--1:curre not: 
+2021-05-08 20:14:37,201<--1:cmove e2e4
+2021-05-08 20:14:37,201<--1: promocio beolvasva
+2021-05-08 20:14:37,201<--1:notation after reading everythinge2e4
+2021-05-08 20:14:37,221<--1:info book move
+2021-05-08 20:14:37,221<--1:bestmove e7e5 
+2021-05-08 20:14:37,221*1*Found move:e7-e5
+2021-05-08 20:14:43,064*1*Start calc, move no: 3
+2021-05-08 20:14:43,064-->1:position startpos moves e2e4 e7e5 g1f3
+2021-05-08 20:14:43,064-->1:go infinite
+2021-05-08 20:14:43,064<--1:AZ ENGINE KULDTE
+2021-05-08 20:14:43,064<--1:curre not: e2e4 e7e5
+2021-05-08 20:14:43,064<--1:cmove e2e4 e7e5 g1f3
+2021-05-08 20:14:43,065<--1: promocio beolvasva
+2021-05-08 20:14:43,065<--1:notation after reading everythinge2e4 e7e5 g1f3
+2021-05-08 20:14:43,080<--1:info book move
+2021-05-08 20:14:43,080<--1:bestmove d7d6 
+2021-05-08 20:14:43,080*1*Found move:d7-d6
+2021-05-08 20:15:28,481*1*Start calc, move no: 5
+2021-05-08 20:15:28,481-->1:position startpos moves e2e4 e7e5 g1f3 d7d6 b1c3
+2021-05-08 20:15:28,481-->1:go infinite
+2021-05-08 20:15:28,481<--1:AZ ENGINE KULDTE
+2021-05-08 20:15:28,481<--1:curre not: e2e4 e7e5 g1f3 d7d6
+2021-05-08 20:15:28,481<--1:cmove e2e4 e7e5 g1f3 d7d6 b1c3
+2021-05-08 20:15:28,481<--1: promocio beolvasva
+2021-05-08 20:15:28,481<--1:notation after reading everythinge2e4 e7e5 g1f3 d7d6 b1c3
+2021-05-08 20:15:28,493<--1:info depth 1
+2021-05-08 20:15:28,494<--1:info depth 2
+2021-05-08 20:15:28,494<--1:info depth 3
+2021-05-08 20:15:28,494<--1:info depth 4
+2021-05-08 20:15:28,494<--1:info depth 5
+2021-05-08 20:15:28,494<--1:info depth 6
+2021-05-08 20:15:28,494<--1:info depth 7
+2021-05-08 20:15:28,494<--1:info depth 8
+2021-05-08 20:15:28,494<--1:info depth 9
+2021-05-08 20:15:28,587<--1:info nodes 10000
+2021-05-08 20:15:28,679<--1:info nodes 20000
+2021-05-08 20:15:28,826<--1:info nodes 30000
+2021-05-08 20:15:28,966<--1:info nodes 40000
+2021-05-08 20:15:29,052<--1:info nodes 50000
+2021-05-08 20:15:29,153<--1:info nodes 60000
+2021-05-08 20:15:29,234<--1:info nodes 70000
+2021-05-08 20:15:29,330<--1:info nodes 80000
+2021-05-08 20:15:29,427<--1:info nodes 90000
+2021-05-08 20:15:29,506<--1:info nodes 100000
+2021-05-08 20:15:29,589<--1:info nodes 110000
+2021-05-08 20:15:29,661<--1:info nodes 120000
+2021-05-08 20:15:29,742<--1:info nodes 130000
+2021-05-08 20:15:29,819<--1:info nodes 140000
+2021-05-08 20:15:29,897<--1:info nodes 150000
+2021-05-08 20:15:29,969<--1:info nodes 160000
+2021-05-08 20:15:30,044<--1:info nodes 170000
+2021-05-08 20:15:30,126<--1:info nodes 180000
+2021-05-08 20:15:30,214<--1:info nodes 190000
+2021-05-08 20:15:30,289<--1:info nodes 200000
+2021-05-08 20:15:30,368<--1:info nodes 210000
+2021-05-08 20:15:30,452<--1:info nodes 220000
+2021-05-08 20:15:30,537<--1:info nodes 230000
+2021-05-08 20:15:30,616<--1:info nodes 240000
+2021-05-08 20:15:30,694<--1:info nodes 250000
+2021-05-08 20:15:30,791<--1:info nodes 260000
+2021-05-08 20:15:30,877<--1:info nodes 270000
+2021-05-08 20:15:30,954<--1:info nodes 280000
+2021-05-08 20:15:31,027<--1:info nodes 290000
+2021-05-08 20:15:31,110<--1:info nodes 300000
+2021-05-08 20:15:31,191<--1:info nodes 310000
+2021-05-08 20:15:31,269<--1:info nodes 320000
+2021-05-08 20:15:31,342<--1:info nodes 330000
+2021-05-08 20:15:31,428<--1:info nodes 340000
+2021-05-08 20:15:31,506<--1:info nodes 350000
+2021-05-08 20:15:31,577<--1:info nodes 360000
+2021-05-08 20:15:31,652<--1:info nodes 370000
+2021-05-08 20:15:31,763<--1:info nodes 380000
+2021-05-08 20:15:31,806<--1:info nodes 390000
+2021-05-08 20:15:31,882<--1:info nodes 400000
+2021-05-08 20:15:31,921<--1:info pv c8g4  f1e2  g8e7  f3e5  g4e2  e1e2  d6e5  
+2021-05-08 20:15:31,923<--1:the allPieces array: 31 32 33 34 55 36 37 38 21 28 43 46 23 26 24 25 81 82 83 74 65 86 87 88 91 98 92 97 93 96 94 95 the allPieces array after making the move: 31 32 33 34 55 36 37 38 21 28 43 46 23 26 24 25 81 82 83 74 65 86 87 88 91 98 92 97 57 96 94 95 bestmove c8g4 
+2021-05-08 20:16:13,650-->1:quit
+2021-05-08 20:16:46,921*1*------------------------Starting engine 1 Ranger2.0-------------------------
+2021-05-08 20:16:46,923*1*Configured Engine 1 Type:   UCI
+2021-05-08 20:16:46,923*1*Engine 1 dir: C:\Users\Userű\Desktop\Ranger2.0\Chess
+2021-05-08 20:16:46,923*1*Engine 1 commandline: C:\Users\Userű\Desktop\Ranger2.0\Chess\Ranger2.0.exe 
+2021-05-08 20:16:47,069*1*Child Process Prio Adj:  PID 17596 conhost.exe
+2021-05-08 20:16:47,070*1*Engine 1 ProcessID: 1632
+2021-05-08 20:16:47,070*1*Engine 1 Prio:32 ThreadPrio:0
+2021-05-08 20:16:47,070<--1:Opening book opened
+2021-05-08 20:16:47,093-->1:uci
+2021-05-08 20:16:47,093<--1:Valassz egy interface-t (console, uci): id name Ranger Sakk
+2021-05-08 20:16:47,093<--1:id author Antal Mark Medard
+2021-05-08 20:16:47,093<--1:uciok
+2021-05-08 20:16:47,100*1*Child Process Prio Adj:  PID 17596 conhost.exe
+2021-05-08 20:16:47,102-->1:isready
+2021-05-08 20:16:47,157<--1:readyok
+2021-05-08 20:16:51,786*1*Start calc, move no: 5
+2021-05-08 20:16:51,786-->1:ucinewgame
+2021-05-08 20:16:51,786-->1:isready
+2021-05-08 20:16:51,787<--1:readyok
+2021-05-08 20:16:51,795-->1:position startpos moves e2e4 e7e5 g1f3 d7d6 b1c3
+2021-05-08 20:16:51,795-->1:go infinite
+2021-05-08 20:16:51,795<--1:AZ ENGINE KULDTE
+2021-05-08 20:16:51,796<--1:curre not: 
+2021-05-08 20:16:51,796<--1:cmove e2e4 e7e5 g1f3 d7d6 b1c3
+2021-05-08 20:16:51,796<--1: promocio beolvasva
+2021-05-08 20:16:51,796<--1:notation after reading everythinge2e4 e7e5 g1f3 d7d6 b1c3
+2021-05-08 20:16:51,809<--1:info depth 1
+2021-05-08 20:16:51,809<--1:info depth 2
+2021-05-08 20:16:51,809<--1:info depth 3
+2021-05-08 20:16:51,809<--1:info depth 4
+2021-05-08 20:16:51,809<--1:info depth 5
+2021-05-08 20:16:51,809<--1:info depth 6
+2021-05-08 20:16:51,809<--1:info depth 7
+2021-05-08 20:16:51,809<--1:info depth 8
+2021-05-08 20:16:51,809<--1:info depth 9
+2021-05-08 20:16:51,902<--1:info nodes 10000
+2021-05-08 20:16:51,996<--1:info nodes 20000
+2021-05-08 20:16:52,144<--1:info nodes 30000
+2021-05-08 20:16:52,285<--1:info nodes 40000
+2021-05-08 20:16:52,372<--1:info nodes 50000
+2021-05-08 20:16:52,474<--1:info nodes 60000
+2021-05-08 20:16:52,555<--1:info nodes 70000
+2021-05-08 20:16:52,652<--1:info nodes 80000
+2021-05-08 20:16:52,749<--1:info nodes 90000
+2021-05-08 20:16:52,829<--1:info nodes 100000
+2021-05-08 20:16:52,912<--1:info nodes 110000
+2021-05-08 20:16:52,984<--1:info nodes 120000
+2021-05-08 20:16:53,065<--1:info nodes 130000
+2021-05-08 20:16:53,143<--1:info nodes 140000
+2021-05-08 20:16:53,221<--1:info nodes 150000
+2021-05-08 20:16:53,293<--1:info nodes 160000
+2021-05-08 20:16:53,367<--1:info nodes 170000
+2021-05-08 20:16:53,451<--1:info nodes 180000
+2021-05-08 20:16:53,539<--1:info nodes 190000
+2021-05-08 20:16:53,614<--1:info nodes 200000
+2021-05-08 20:16:53,694<--1:info nodes 210000
+2021-05-08 20:16:53,778<--1:info nodes 220000
+2021-05-08 20:16:53,863<--1:info nodes 230000
+2021-05-08 20:16:53,942<--1:info nodes 240000
+2021-05-08 20:16:54,027<--1:info nodes 250000
+2021-05-08 20:16:54,129<--1:info nodes 260000
+2021-05-08 20:16:54,221<--1:info nodes 270000
+2021-05-08 20:16:54,299<--1:info nodes 280000
+2021-05-08 20:16:54,376<--1:info nodes 290000
+2021-05-08 20:16:54,457<--1:info nodes 300000
+2021-05-08 20:16:54,538<--1:info nodes 310000
+2021-05-08 20:16:54,616<--1:info nodes 320000
+2021-05-08 20:16:54,688<--1:info nodes 330000
+2021-05-08 20:16:54,775<--1:info nodes 340000
+2021-05-08 20:16:54,854<--1:info nodes 350000
+2021-05-08 20:16:54,926<--1:info nodes 360000
+2021-05-08 20:16:55,001<--1:info nodes 370000
+2021-05-08 20:16:55,080<--1:info nodes 380000
+2021-05-08 20:16:55,155<--1:info nodes 390000
+2021-05-08 20:16:55,232<--1:info nodes 400000
+2021-05-08 20:16:55,273<--1:info pv c8g4  f1e2  g8e7  f3e5  g4e2  e1e2  d6e5  
+2021-05-08 20:16:55,274<--1:the allPieces array: 31 32 33 34 55 36 37 38 21 28 43 46 23 26 24 25 81 82 83 74 65 86 87 88 91 98 92 97 93 96 94 95 the allPieces array after making the move: 31 32 33 34 55 36 37 38 21 28 43 46 23 26 24 25 81 82 83 74 65 86 87 88 91 98 92 97 57 96 94 95 
+2021-05-08 20:16:55,275<--1:bestmove c8g4 
+2021-05-08 20:16:55,275*1*Found move:Bc8-g4
+2021-05-08 20:17:05,408*1*Start calc, move no: 7
+2021-05-08 20:17:05,408-->1:position startpos moves e2e4 e7e5 g1f3 d7d6 b1c3 c8g4 h2h3
+2021-05-08 20:17:05,408-->1:go infinite
+2021-05-08 20:17:05,408<--1:AZ ENGINE KULDTE
+2021-05-08 20:17:05,408<--1:curre not: e2e4 e7e5 g1f3 d7d6 b1c3 c8g4
+2021-05-08 20:17:05,408<--1:cmove e2e4 e7e5 g1f3 d7d6 b1c3 c8g4 h2h3
+2021-05-08 20:17:05,408<--1: promocio beolvasva
+2021-05-08 20:17:05,408<--1:notation after reading everythinge2e4 e7e5 g1f3 d7d6 b1c3 c8g4 h2h3
+2021-05-08 20:17:05,409<--1:info depth 1
+2021-05-08 20:17:05,409<--1:info depth 2
+2021-05-08 20:17:05,409<--1:info depth 3
+2021-05-08 20:17:05,409<--1:info depth 4
+2021-05-08 20:17:05,409<--1:info depth 5
+2021-05-08 20:17:05,409<--1:info depth 6
+2021-05-08 20:17:05,409<--1:info depth 7
+2021-05-08 20:17:05,409<--1:info depth 8
+2021-05-08 20:17:05,409<--1:info depth 9
+2021-05-08 20:17:05,484<--1:info nodes 10000
+2021-05-08 20:17:05,559<--1:info nodes 20000
+2021-05-08 20:17:05,632<--1:info nodes 30000
+2021-05-08 20:17:05,701<--1:info nodes 40000
+2021-05-08 20:17:05,786<--1:info nodes 50000
+2021-05-08 20:17:05,855<--1:info nodes 60000
+2021-05-08 20:17:05,891<--1:info pv g4f3  d1f3  f8e7  f3f7  e8f7  
+2021-05-08 20:17:05,893<--1:the allPieces array: 31 32 33 34 55 36 37 48 21 28 43 46 23 26 24 25 81 82 83 74 65 86 87 88 91 98 92 97 57 96 94 95 the allPieces array after making the move: 31 32 33 34 55 36 37 48 21 28 43 -1 23 26 24 25 81 82 83 74 65 86 87 88 91 98 92 97 46 96 94 95 
+2021-05-08 20:17:05,893<--1:bestmove g4f3 
+2021-05-08 20:17:05,893*1*Found move:Bg4xf3
+2021-05-08 20:17:10,138*1*Start calc, move no: 9
+2021-05-08 20:17:10,138-->1:position startpos moves e2e4 e7e5 g1f3 d7d6 b1c3 c8g4 h2h3 g4f3 d1f3
+2021-05-08 20:17:10,138-->1:go infinite
+2021-05-08 20:17:10,138<--1:AZ ENGINE KULDTE
+2021-05-08 20:17:10,138<--1:curre not: e2e4 e7e5 g1f3 d7d6 b1c3 c8g4 h2h3 g4f3
+2021-05-08 20:17:10,138<--1:cmove e2e4 e7e5 g1f3 d7d6 b1c3 c8g4 h2h3 g4f3 d1f3
+2021-05-08 20:17:10,139<--1: promocio beolvasva
+2021-05-08 20:17:10,139<--1:notation after reading everythinge2e4 e7e5 g1f3 d7d6 b1c3 c8g4 h2h3 g4f3 d1f3
+2021-05-08 20:17:10,139<--1:info depth 1
+2021-05-08 20:17:10,139<--1:info depth 2
+2021-05-08 20:17:10,139<--1:info depth 3
+2021-05-08 20:17:10,139<--1:info depth 4
+2021-05-08 20:17:10,139<--1:info depth 5
+2021-05-08 20:17:10,139<--1:info depth 6
+2021-05-08 20:17:10,139<--1:info depth 7
+2021-05-08 20:17:10,139<--1:info depth 8
+2021-05-08 20:17:10,139<--1:info depth 9
+2021-05-08 20:17:10,211<--1:info nodes 10000
+2021-05-08 20:17:10,296<--1:info nodes 20000
+2021-05-08 20:17:10,384<--1:info nodes 30000
+2021-05-08 20:17:10,458<--1:info nodes 40000
+2021-05-08 20:17:10,533<--1:info nodes 50000
+2021-05-08 20:17:10,605<--1:info nodes 60000
+2021-05-08 20:17:10,683<--1:info nodes 70000
+2021-05-08 20:17:10,768<--1:info nodes 80000
+2021-05-08 20:17:10,846<--1:info nodes 90000
+2021-05-08 20:17:10,926<--1:info nodes 100000
+2021-05-08 20:17:11,007<--1:info nodes 110000
+2021-05-08 20:17:11,087<--1:info nodes 120000
+2021-05-08 20:17:11,165<--1:info nodes 130000
+2021-05-08 20:17:11,237<--1:info nodes 140000
+2021-05-08 20:17:11,310<--1:info nodes 150000
+2021-05-08 20:17:11,380<--1:info pv d8f6  f3f6  g8f6  d2d3  h8g8  
+2021-05-08 20:17:11,381<--1:the allPieces array: 31 32 33 34 55 36 37 48 21 28 43 -1 23 26 46 25 81 82 83 74 65 86 87 88 91 98 92 97 -1 96 94 95 the allPieces array after making the move: 31 32 33 34 55 36 37 48 21 28 43 -1 23 26 46 25 81 82 83 74 65 86 87 88 91 98 92 97 -1 96 76 95 
+2021-05-08 20:17:11,381<--1:bestmove d8f6 
+2021-05-08 20:17:11,381*1*Found move:Qd8-f6
+2021-05-08 20:17:37,972*1*Start calc, move no: 11
+2021-05-08 20:17:37,972-->1:position startpos moves e2e4 e7e5 g1f3 d7d6 b1c3 c8g4 h2h3 g4f3 d1f3 d8f6 f1e2
+2021-05-08 20:17:37,972-->1:go infinite
+2021-05-08 20:17:37,972<--1:AZ ENGINE KULDTE
+2021-05-08 20:17:37,972<--1:curre not: e2e4 e7e5 g1f3 d7d6 b1c3 c8g4 h2h3 g4f3 d1f3 d8f6
+2021-05-08 20:17:37,972<--1:cmove e2e4 e7e5 g1f3 d7d6 b1c3 c8g4 h2h3 g4f3 d1f3 d8f6 f1e2
+2021-05-08 20:17:37,972<--1: promocio beolvasva
+2021-05-08 20:17:37,972<--1:notation after reading everythinge2e4 e7e5 g1f3 d7d6 b1c3 c8g4 h2h3 g4f3 d1f3 d8f6 f1e2
+2021-05-08 20:17:37,972<--1:info depth 1
+2021-05-08 20:17:37,972<--1:info depth 2
+2021-05-08 20:17:37,972<--1:info depth 3
+2021-05-08 20:17:37,973<--1:info depth 4
+2021-05-08 20:17:37,973<--1:info depth 5
+2021-05-08 20:17:37,973<--1:info depth 6
+2021-05-08 20:17:37,973<--1:info depth 7
+2021-05-08 20:17:37,973<--1:info depth 8
+2021-05-08 20:17:37,973<--1:info depth 9
+2021-05-08 20:17:38,045<--1:info nodes 10000
+2021-05-08 20:17:38,118<--1:info nodes 20000
+2021-05-08 20:17:38,187<--1:info nodes 30000
+2021-05-08 20:17:38,205<--1:info pv f6f3  g2f3  b8d7  e2b5  a8b8  b5d7  e8d7  
+2021-05-08 20:17:38,207<--1:the allPieces array: 31 32 33 34 55 36 37 48 21 28 43 -1 23 35 46 25 81 82 83 74 65 86 87 88 91 98 92 97 -1 96 76 95 the allPieces array after making the move: 31 32 33 34 55 36 37 48 21 28 43 -1 23 35 -1 25 81 82 83 74 65 86 87 88 91 98 92 97 -1 96 46 95 
+2021-05-08 20:17:38,207<--1:bestmove f6f3 
+2021-05-08 20:17:38,207*1*Found move:Qf6xf3
+2021-05-08 20:17:41,260*1*Start calc, move no: 13
+2021-05-08 20:17:41,261-->1:position startpos moves e2e4 e7e5 g1f3 d7d6 b1c3 c8g4 h2h3 g4f3 d1f3 d8f6 f1e2 f6f3 e2f3
+2021-05-08 20:17:41,261-->1:go infinite
+2021-05-08 20:17:41,261<--1:AZ ENGINE KULDTE
+2021-05-08 20:17:41,261<--1:curre not: e2e4 e7e5 g1f3 d7d6 b1c3 c8g4 h2h3 g4f3 d1f3 d8f6 f1e2 f6f3
+2021-05-08 20:17:41,261<--1:cmove e2e4 e7e5 g1f3 d7d6 b1c3 c8g4 h2h3 g4f3 d1f3 d8f6 f1e2 f6f3 e2f3
+2021-05-08 20:17:41,261<--1: promocio beolvasva
+2021-05-08 20:17:41,261<--1:notation after reading everythinge2e4 e7e5 g1f3 d7d6 b1c3 c8g4 h2h3 g4f3 d1f3 d8f6 f1e2 f6f3 e2f3
+2021-05-08 20:17:41,261<--1:info depth 1
+2021-05-08 20:17:41,261<--1:info depth 2
+2021-05-08 20:17:41,261<--1:info depth 3
+2021-05-08 20:17:41,261<--1:info depth 4
+2021-05-08 20:17:41,261<--1:info depth 5
+2021-05-08 20:17:41,261<--1:info depth 6
+2021-05-08 20:17:41,261<--1:info depth 7
+2021-05-08 20:17:41,262<--1:info depth 8
+2021-05-08 20:17:41,262<--1:info depth 9
+2021-05-08 20:17:41,324<--1:info nodes 10000
+2021-05-08 20:17:41,396<--1:info nodes 20000
+2021-05-08 20:17:41,461<--1:info nodes 30000
+2021-05-08 20:17:41,526<--1:info nodes 40000
+2021-05-08 20:17:41,589<--1:info nodes 50000
+2021-05-08 20:17:41,650<--1:info nodes 60000
+2021-05-08 20:17:41,712<--1:info nodes 70000
+2021-05-08 20:17:41,778<--1:info nodes 80000
+2021-05-08 20:17:41,816<--1:info pv b8a6  d2d3  a6b4  e1g1  e8c8  
+2021-05-08 20:17:41,818<--1:the allPieces array: 31 32 33 34 55 36 37 48 21 28 43 -1 23 46 -1 25 81 82 83 74 65 86 87 88 91 98 92 97 -1 96 -1 95 the allPieces array after making the move: 31 32 33 34 55 36 37 48 21 28 43 -1 23 46 -1 25 81 82 83 74 65 86 87 88 91 98 71 97 -1 96 -1 95 
+2021-05-08 20:17:41,818<--1:bestmove b8a6 
+2021-05-08 20:17:41,818*1*Found move:Nb8-a6
+2021-05-08 20:17:58,705*1*Start calc, move no: 15
+2021-05-08 20:17:58,706-->1:position startpos moves e2e4 e7e5 g1f3 d7d6 b1c3 c8g4 h2h3 g4f3 d1f3 d8f6 f1e2 f6f3 e2f3 b8a6 a2a3
+2021-05-08 20:17:58,706-->1:go infinite
+2021-05-08 20:17:58,706<--1:AZ ENGINE KULDTE
+2021-05-08 20:17:58,706<--1:curre not: e2e4 e7e5 g1f3 d7d6 b1c3 c8g4 h2h3 g4f3 d1f3 d8f6 f1e2 f6f3 e2f3 b8a6
+2021-05-08 20:17:58,706<--1:cmove e2e4 e7e5 g1f3 d7d6 b1c3 c8g4 h2h3 g4f3 d1f3 d8f6 f1e2 f6f3 e2f3 b8a6 a2a3
+2021-05-08 20:17:58,706<--1: promocio beolvasva
+2021-05-08 20:17:58,706<--1:notation after reading everythinge2e4 e7e5 g1f3 d7d6 b1c3 c8g4 h2h3 g4f3 d1f3 d8f6 f1e2 f6f3 e2f3 b8a6 a2a3
+2021-05-08 20:17:58,706<--1:info depth 1
+2021-05-08 20:17:58,706<--1:info depth 2
+2021-05-08 20:17:58,706<--1:info depth 3
+2021-05-08 20:17:58,706<--1:info depth 4
+2021-05-08 20:17:58,707<--1:info depth 5
+2021-05-08 20:17:58,707<--1:info depth 6
+2021-05-08 20:17:58,707<--1:info depth 7
+2021-05-08 20:17:58,707<--1:info depth 8
+2021-05-08 20:17:58,707<--1:info depth 9
+2021-05-08 20:17:58,775<--1:info nodes 10000
+2021-05-08 20:17:58,846<--1:info nodes 20000
+2021-05-08 20:17:58,918<--1:info nodes 30000
+2021-05-08 20:17:58,991<--1:info nodes 40000
+2021-05-08 20:17:59,065<--1:info nodes 50000
+2021-05-08 20:17:59,130<--1:info nodes 60000
+2021-05-08 20:17:59,192<--1:info nodes 70000
+2021-05-08 20:17:59,251<--1:info nodes 80000
+2021-05-08 20:17:59,310<--1:info nodes 90000
+2021-05-08 20:17:59,370<--1:info nodes 100000
+2021-05-08 20:17:59,393<--1:info pv g8e7  c3b5  e7c6  d2d3  f8e7  
+2021-05-08 20:17:59,394<--1:the allPieces array: 41 32 33 34 55 36 37 48 21 28 43 -1 23 46 -1 25 81 82 83 74 65 86 87 88 91 98 71 97 -1 96 -1 95 the allPieces array after making the move: 41 32 33 34 55 36 37 48 21 28 43 -1 23 46 -1 25 81 82 83 74 65 86 87 88 91 98 71 85 -1 96 -1 95 
+2021-05-08 20:17:59,394<--1:bestmove g8e7 
+2021-05-08 20:17:59,394*1*Found move:Ng8-e7
+2021-05-08 20:18:03,249*1*Start calc, move no: 17
+2021-05-08 20:18:03,249-->1:position startpos moves e2e4 e7e5 g1f3 d7d6 b1c3 c8g4 h2h3 g4f3 d1f3 d8f6 f1e2 f6f3 e2f3 b8a6 a2a3 g8e7 e1g1
+2021-05-08 20:18:03,249-->1:go infinite
+2021-05-08 20:18:03,249<--1:AZ ENGINE KULDTE
+2021-05-08 20:18:03,249<--1:curre not: e2e4 e7e5 g1f3 d7d6 b1c3 c8g4 h2h3 g4f3 d1f3 d8f6 f1e2 f6f3 e2f3 b8a6 a2a3 g8e7
+2021-05-08 20:18:03,249<--1:cmove e2e4 e7e5 g1f3 d7d6 b1c3 c8g4 h2h3 g4f3 d1f3 d8f6 f1e2 f6f3 e2f3 b8a6 a2a3 g8e7 e1g1
+2021-05-08 20:18:03,249<--1: promocio beolvasva
+2021-05-08 20:18:03,249<--1:notation after reading everythinge2e4 e7e5 g1f3 d7d6 b1c3 c8g4 h2h3 g4f3 d1f3 d8f6 f1e2 f6f3 e2f3 b8a6 a2a3 g8e7 e1g1
+2021-05-08 20:18:03,250<--1:info depth 1
+2021-05-08 20:18:03,250<--1:info depth 2
+2021-05-08 20:18:03,250<--1:info depth 3
+2021-05-08 20:18:03,250<--1:info depth 4
+2021-05-08 20:18:03,250<--1:info depth 5
+2021-05-08 20:18:03,250<--1:info depth 6
+2021-05-08 20:18:03,250<--1:info depth 7
+2021-05-08 20:18:03,250<--1:info depth 8
+2021-05-08 20:18:03,250<--1:info depth 9
+2021-05-08 20:18:03,315<--1:info nodes 10000
+2021-05-08 20:18:03,377<--1:info nodes 20000
+2021-05-08 20:18:03,437<--1:info nodes 30000
+2021-05-08 20:18:03,498<--1:info nodes 40000
+2021-05-08 20:18:03,509<--1:info pv e8c8  d2d3  a6c5  c1g5  h7h6  
+2021-05-08 20:18:03,510<--1:the allPieces array: 41 32 33 34 55 36 37 48 21 26 43 -1 23 46 -1 27 81 82 83 74 65 86 87 88 91 98 71 85 -1 96 -1 95 the allPieces array after making the move: 41 32 33 34 55 36 37 48 21 26 43 -1 23 46 -1 27 81 82 83 74 65 86 87 88 94 98 71 85 -1 96 -1 93 
+2021-05-08 20:18:03,511<--1:bestmove e8c8 
+2021-05-08 20:18:03,511*1*Found move:O-O-O
+2021-05-08 20:18:27,715*1*Start calc, move no: 19
+2021-05-08 20:18:27,716-->1:position startpos moves e2e4 e7e5 g1f3 d7d6 b1c3 c8g4 h2h3 g4f3 d1f3 d8f6 f1e2 f6f3 e2f3 b8a6 a2a3 g8e7 e1g1 e8c8 c3e2
+2021-05-08 20:18:27,716-->1:go infinite
+2021-05-08 20:18:27,717<--1:AZ ENGINE KULDTE
+2021-05-08 20:18:27,717<--1:curre not: e2e4 e7e5 g1f3 d7d6 b1c3 c8g4 h2h3 g4f3 d1f3 d8f6 f1e2 f6f3 e2f3 b8a6 a2a3 g8e7 e1g1 e8c8
+2021-05-08 20:18:27,718<--1:cmove e2e4 e7e5 g1f3 d7d6 b1c3 c8g4 h2h3 g4f3 d1f3 d8f6 f1e2 f6f3 e2f3 b8a6 a2a3 g8e7 e1g1 e8c8 c3e2
+2021-05-08 20:18:27,718<--1: promocio beolvasva
+2021-05-08 20:18:27,718<--1:notation after reading everythinge2e4 e7e5 g1f3 d7d6 b1c3 c8g4 h2h3 g4f3 d1f3 d8f6 f1e2 f6f3 e2f3 b8a6 a2a3 g8e7 e1g1 e8c8 c3e2
+2021-05-08 20:18:27,719<--1:info depth 1
+2021-05-08 20:18:27,719<--1:info depth 2
+2021-05-08 20:18:27,719<--1:info depth 3
+2021-05-08 20:18:27,720<--1:info depth 4
+2021-05-08 20:18:27,720<--1:info depth 5
+2021-05-08 20:18:27,721<--1:info depth 6
+2021-05-08 20:18:27,722<--1:info depth 7
+2021-05-08 20:18:27,722<--1:info depth 8
+2021-05-08 20:18:27,722<--1:info depth 9
+2021-05-08 20:18:27,779<--1:info nodes 10000
+2021-05-08 20:18:27,831<--1:info pv a6c5  f3g4  c8b8  d2d4  e5d4  e2d4  c5e4  
+2021-05-08 20:18:27,833<--1:the allPieces array: 41 32 33 34 55 36 37 48 21 26 35 -1 23 46 -1 27 81 82 83 74 65 86 87 88 94 98 71 85 -1 96 -1 93 the allPieces array after making the move: 41 32 33 34 55 36 37 48 21 26 35 -1 23 46 -1 27 81 82 83 74 65 86 87 88 94 98 63 85 -1 96 -1 93 
+2021-05-08 20:18:27,833<--1:bestmove a6c5 
+2021-05-08 20:18:27,834*1*Found move:Na6-c5
+2021-05-08 20:18:40,407*1*Start calc, move no: 21
+2021-05-08 20:18:40,407-->1:position startpos moves e2e4 e7e5 g1f3 d7d6 b1c3 c8g4 h2h3 g4f3 d1f3 d8f6 f1e2 f6f3 e2f3 b8a6 a2a3 g8e7 e1g1 e8c8 c3e2 a6c5 b2b4
+2021-05-08 20:18:40,408-->1:go infinite
+2021-05-08 20:18:40,408<--1:AZ ENGINE KULDTE
+2021-05-08 20:18:40,408<--1:curre not: e2e4 e7e5 g1f3 d7d6 b1c3 c8g4 h2h3 g4f3 d1f3 d8f6 f1e2 f6f3 e2f3 b8a6 a2a3 g8e7 e1g1 e8c8 c3e2 a6c5
+2021-05-08 20:18:40,409<--1:cmove e2e4 e7e5 g1f3 d7d6 b1c3 c8g4 h2h3 g4f3 d1f3 d8f6 f1e2 f6f3 e2f3 b8a6 a2a3 g8e7 e1g1 e8c8 c3e2 a6c5 b2b4
+2021-05-08 20:18:40,409<--1: promocio beolvasva
+2021-05-08 20:18:40,410<--1:notation after reading everythinge2e4 e7e5 g1f3 d7d6 b1c3 c8g4 h2h3 g4f3 d1f3 d8f6 f1e2 f6f3 e2f3 b8a6 a2a3 g8e7 e1g1 e8c8 c3e2 a6c5 b2b4
+2021-05-08 20:18:40,410<--1:info depth 1
+2021-05-08 20:18:40,410<--1:info depth 2
+2021-05-08 20:18:40,411<--1:info depth 3
+2021-05-08 20:18:40,411<--1:info depth 4
+2021-05-08 20:18:40,412<--1:info depth 5
+2021-05-08 20:18:40,412<--1:info depth 6
+2021-05-08 20:18:40,412<--1:info depth 7
+2021-05-08 20:18:40,413<--1:info depth 8
+2021-05-08 20:18:40,413<--1:info depth 9
+2021-05-08 20:18:40,480<--1:info nodes 10000
+2021-05-08 20:18:40,553<--1:info nodes 20000
+2021-05-08 20:18:40,620<--1:info nodes 30000
+2021-05-08 20:18:40,679<--1:info nodes 40000
+2021-05-08 20:18:40,742<--1:info nodes 50000
+2021-05-08 20:18:40,806<--1:info nodes 60000
+2021-05-08 20:18:40,875<--1:info nodes 70000
+2021-05-08 20:18:40,935<--1:info nodes 80000
+2021-05-08 20:18:40,957<--1:info pv c5e6  f3h5  e6d4  e2d4  e5d4  h5f7  
+2021-05-08 20:18:40,959<--1:the allPieces array: 41 52 33 34 55 36 37 48 21 26 35 -1 23 46 -1 27 81 82 83 74 65 86 87 88 94 98 63 85 -1 96 -1 93 the allPieces array after making the move: 41 52 33 34 55 36 37 48 21 26 35 -1 23 46 -1 27 81 82 83 74 65 86 87 88 94 98 75 85 -1 96 -1 93 
+2021-05-08 20:18:40,959<--1:bestmove c5e6 
+2021-05-08 20:18:40,960*1*Found move:Nc5-e6
+2021-05-08 20:19:30,762*1*Start calc, move no: 23
+2021-05-08 20:19:30,763-->1:position startpos moves e2e4 e7e5 g1f3 d7d6 b1c3 c8g4 h2h3 g4f3 d1f3 d8f6 f1e2 f6f3 e2f3 b8a6 a2a3 g8e7 e1g1 e8c8 c3e2 a6c5 b2b4 c5e6 c2c4
+2021-05-08 20:19:30,763-->1:go infinite
+2021-05-08 20:19:30,764<--1:AZ ENGINE KULDTE
+2021-05-08 20:19:30,764<--1:curre not: e2e4 e7e5 g1f3 d7d6 b1c3 c8g4 h2h3 g4f3 d1f3 d8f6 f1e2 f6f3 e2f3 b8a6 a2a3 g8e7 e1g1 e8c8 c3e2 a6c5 b2b4 c5e6
+2021-05-08 20:19:30,765<--1:cmove e2e4 e7e5 g1f3 d7d6 b1c3 c8g4 h2h3 g4f3 d1f3 d8f6 f1e2 f6f3 e2f3 b8a6 a2a3 g8e7 e1g1 e8c8 c3e2 a6c5 b2b4 c5e6 c2c4
+2021-05-08 20:19:30,765<--1: promocio beolvasva
+2021-05-08 20:19:30,765<--1:notation after reading everythinge2e4 e7e5 g1f3 d7d6 b1c3 c8g4 h2h3 g4f3 d1f3 d8f6 f1e2 f6f3 e2f3 b8a6 a2a3 g8e7 e1g1 e8c8 c3e2 a6c5 b2b4 c5e6 c2c4
+2021-05-08 20:19:30,766<--1:info depth 1
+2021-05-08 20:19:30,766<--1:info depth 2
+2021-05-08 20:19:30,767<--1:info depth 3
+2021-05-08 20:19:30,767<--1:info depth 4
+2021-05-08 20:19:30,768<--1:info depth 5
+2021-05-08 20:19:30,768<--1:info depth 6
+2021-05-08 20:19:30,768<--1:info depth 7
+2021-05-08 20:19:30,769<--1:info depth 8
+2021-05-08 20:19:30,769<--1:info depth 9
+2021-05-08 20:19:30,828<--1:info nodes 10000
+2021-05-08 20:19:30,891<--1:info nodes 20000
+2021-05-08 20:19:30,922<--1:info pv c8d7  a1b1  h8g8  b1a1  d8c8  
+2021-05-08 20:19:30,924<--1:the allPieces array: 41 52 53 34 55 36 37 48 21 26 35 -1 23 46 -1 27 81 82 83 74 65 86 87 88 94 98 75 85 -1 96 -1 93 the allPieces array after making the move: 41 52 53 34 55 36 37 48 21 26 35 -1 23 46 -1 27 81 82 83 74 65 86 87 88 94 98 75 85 -1 96 -1 84 
+2021-05-08 20:19:30,924<--1:bestmove c8d7 
+2021-05-08 20:19:30,924*1*Found move:Kc8-d7
+2021-05-08 20:19:40,824*1*Start calc, move no: 25
+2021-05-08 20:19:40,825-->1:position startpos moves e2e4 e7e5 g1f3 d7d6 b1c3 c8g4 h2h3 g4f3 d1f3 d8f6 f1e2 f6f3 e2f3 b8a6 a2a3 g8e7 e1g1 e8c8 c3e2 a6c5 b2b4 c5e6 c2c4 c8d7 c1b2
+2021-05-08 20:19:40,825-->1:go infinite
+2021-05-08 20:19:40,825<--1:AZ ENGINE KULDTE
+2021-05-08 20:19:40,826<--1:curre not: e2e4 e7e5 g1f3 d7d6 b1c3 c8g4 h2h3 g4f3 d1f3 d8f6 f1e2 f6f3 e2f3 b8a6 a2a3 g8e7 e1g1 e8c8 c3e2 a6c5 b2b4 c5e6 c2c4 c8d7
+2021-05-08 20:19:40,826<--1:cmove e2e4 e7e5 g1f3 d7d6 b1c3 c8g4 h2h3 g4f3 d1f3 d8f6 f1e2 f6f3 e2f3 b8a6 a2a3 g8e7 e1g1 e8c8 c3e2 a6c5 b2b4 c5e6 c2c4 c8d7 c1b2
+2021-05-08 20:19:40,826<--1: promocio beolvasva
+2021-05-08 20:19:40,827<--1:notation after reading everythinge2e4 e7e5 g1f3 d7d6 b1c3 c8g4 h2h3 g4f3 d1f3 d8f6 f1e2 f6f3 e2f3 b8a6 a2a3 g8e7 e1g1 e8c8 c3e2 a6c5 b2b4 c5e6 c2c4 c8d7 c1b2
+2021-05-08 20:19:40,827<--1:info depth 1
+2021-05-08 20:19:40,828<--1:info depth 2
+2021-05-08 20:19:40,828<--1:info depth 3
+2021-05-08 20:19:40,828<--1:info depth 4
+2021-05-08 20:19:40,829<--1:info depth 5
+2021-05-08 20:19:40,829<--1:info depth 6
+2021-05-08 20:19:40,829<--1:info depth 7
+2021-05-08 20:19:40,830<--1:info depth 8
+2021-05-08 20:19:40,830<--1:info depth 9
+2021-05-08 20:19:40,895<--1:info nodes 10000
+2021-05-08 20:19:40,971<--1:info nodes 20000
+2021-05-08 20:19:41,048<--1:info nodes 30000
+2021-05-08 20:19:41,129<--1:info nodes 40000
+2021-05-08 20:19:41,192<--1:info nodes 50000
+2021-05-08 20:19:41,254<--1:info nodes 60000
+2021-05-08 20:19:41,319<--1:info nodes 70000
+2021-05-08 20:19:41,386<--1:info nodes 80000
+2021-05-08 20:19:41,451<--1:info nodes 90000
+2021-05-08 20:19:41,516<--1:info nodes 100000
+2021-05-08 20:19:41,576<--1:info nodes 110000
+2021-05-08 20:19:41,636<--1:info nodes 120000
+2021-05-08 20:19:41,696<--1:info nodes 130000
+2021-05-08 20:19:41,757<--1:info nodes 140000
+2021-05-08 20:19:41,823<--1:info nodes 150000
+2021-05-08 20:19:41,883<--1:info nodes 160000
+2021-05-08 20:19:41,945<--1:info nodes 170000
+2021-05-08 20:19:41,967<--1:info pv h7h5  d2d4  d6d5  c4d5  e6d4  b2d4  e5d4  e2d4  e7d5  
+2021-05-08 20:19:41,969<--1:the allPieces array: 41 52 53 34 55 36 37 48 21 26 35 -1 32 46 -1 27 81 82 83 74 65 86 87 88 94 98 75 85 -1 96 -1 84 the allPieces array after making the move: 41 52 53 34 55 36 37 48 21 26 35 -1 32 46 -1 27 81 82 83 74 65 86 87 68 94 98 75 85 -1 96 -1 84 
+2021-05-08 20:19:41,971<--1:bestmove h7h5 
+2021-05-08 20:19:41,971*1*Found move:h7-h5
+2021-05-08 20:19:59,536*1*Start calc, move no: 27
+2021-05-08 20:19:59,536-->1:position startpos moves e2e4 e7e5 g1f3 d7d6 b1c3 c8g4 h2h3 g4f3 d1f3 d8f6 f1e2 f6f3 e2f3 b8a6 a2a3 g8e7 e1g1 e8c8 c3e2 a6c5 b2b4 c5e6 c2c4 c8d7 c1b2 h7h5 d2d4
+2021-05-08 20:19:59,536-->1:go infinite
+2021-05-08 20:19:59,537<--1:AZ ENGINE KULDTE
+2021-05-08 20:19:59,537<--1:curre not: e2e4 e7e5 g1f3 d7d6 b1c3 c8g4 h2h3 g4f3 d1f3 d8f6 f1e2 f6f3 e2f3 b8a6 a2a3 g8e7 e1g1 e8c8 c3e2 a6c5 b2b4 c5e6 c2c4 c8d7 c1b2 h7h5
+2021-05-08 20:19:59,538<--1:cmove e2e4 e7e5 g1f3 d7d6 b1c3 c8g4 h2h3 g4f3 d1f3 d8f6 f1e2 f6f3 e2f3 b8a6 a2a3 g8e7 e1g1 e8c8 c3e2 a6c5 b2b4 c5e6 c2c4 c8d7 c1b2 h7h5 d2d4
+2021-05-08 20:19:59,538<--1: promocio beolvasva
+2021-05-08 20:19:59,538<--1:notation after reading everythinge2e4 e7e5 g1f3 d7d6 b1c3 c8g4 h2h3 g4f3 d1f3 d8f6 f1e2 f6f3 e2f3 b8a6 a2a3 g8e7 e1g1 e8c8 c3e2 a6c5 b2b4 c5e6 c2c4 c8d7 c1b2 h7h5 d2d4
+2021-05-08 20:19:59,539<--1:info depth 1
+2021-05-08 20:19:59,539<--1:info depth 2
+2021-05-08 20:19:59,539<--1:info depth 3
+2021-05-08 20:19:59,540<--1:info depth 4
+2021-05-08 20:19:59,540<--1:info depth 5
+2021-05-08 20:19:59,541<--1:info depth 6
+2021-05-08 20:19:59,541<--1:info depth 7
+2021-05-08 20:19:59,541<--1:info depth 8
+2021-05-08 20:19:59,542<--1:info depth 9
+2021-05-08 20:19:59,601<--1:info nodes 10000
+2021-05-08 20:19:59,662<--1:info nodes 20000
+2021-05-08 20:19:59,718<--1:info nodes 30000
+2021-05-08 20:19:59,776<--1:info nodes 40000
+2021-05-08 20:19:59,838<--1:info nodes 50000
+2021-05-08 20:19:59,897<--1:info nodes 60000
+2021-05-08 20:19:59,955<--1:info pv e5d4  b2d4  e6g5  d4a7  g5f3  g2f3  
+2021-05-08 20:19:59,957<--1:the allPieces array: 41 52 53 54 55 36 37 48 21 26 35 -1 32 46 -1 27 81 82 83 74 65 86 87 68 94 98 75 85 -1 96 -1 84 the allPieces array after making the move: 41 52 53 -1 55 36 37 48 21 26 35 -1 32 46 -1 27 81 82 83 74 54 86 87 68 94 98 75 85 -1 96 -1 84 
+2021-05-08 20:19:59,958<--1:bestmove e5d4 
+2021-05-08 20:19:59,958*1*Found move:e5xd4
+2021-05-08 20:20:03,737*1*Start calc, move no: 29
+2021-05-08 20:20:03,739-->1:position startpos moves e2e4 e7e5 g1f3 d7d6 b1c3 c8g4 h2h3 g4f3 d1f3 d8f6 f1e2 f6f3 e2f3 b8a6 a2a3 g8e7 e1g1 e8c8 c3e2 a6c5 b2b4 c5e6 c2c4 c8d7 c1b2 h7h5 d2d4 e5d4 e2d4
+2021-05-08 20:20:03,739-->1:go infinite
+2021-05-08 20:20:03,740<--1:AZ ENGINE KULDTE
+2021-05-08 20:20:03,740<--1:curre not: e2e4 e7e5 g1f3 d7d6 b1c3 c8g4 h2h3 g4f3 d1f3 d8f6 f1e2 f6f3 e2f3 b8a6 a2a3 g8e7 e1g1 e8c8 c3e2 a6c5 b2b4 c5e6 c2c4 c8d7 c1b2 h7h5 d2d4 e5d4
+2021-05-08 20:20:03,741<--1:cmove e2e4 e7e5 g1f3 d7d6 b1c3 c8g4 h2h3 g4f3 d1f3 d8f6 f1e2 f6f3 e2f3 b8a6 a2a3 g8e7 e1g1 e8c8 c3e2 a6c5 b2b4 c5e6 c2c4 c8d7 c1b2 h7h5 d2d4 e5d4 e2d4
+2021-05-08 20:20:03,741<--1: promocio beolvasva
+2021-05-08 20:20:03,741<--1:notation after reading everythinge2e4 e7e5 g1f3 d7d6 b1c3 c8g4 h2h3 g4f3 d1f3 d8f6 f1e2 f6f3 e2f3 b8a6 a2a3 g8e7 e1g1 e8c8 c3e2 a6c5 b2b4 c5e6 c2c4 c8d7 c1b2 h7h5 d2d4 e5d4 e2d4
+2021-05-08 20:20:03,742<--1:info depth 1
+2021-05-08 20:20:03,742<--1:info depth 2
+2021-05-08 20:20:03,742<--1:info depth 3
+2021-05-08 20:20:03,743<--1:info depth 4
+2021-05-08 20:20:03,743<--1:info depth 5
+2021-05-08 20:20:03,744<--1:info depth 6
+2021-05-08 20:20:03,744<--1:info depth 7
+2021-05-08 20:20:03,744<--1:info depth 8
+2021-05-08 20:20:03,745<--1:info depth 9
+2021-05-08 20:20:03,796<--1:info nodes 10000
+2021-05-08 20:20:03,853<--1:info nodes 20000
+2021-05-08 20:20:03,909<--1:info nodes 30000
+2021-05-08 20:20:03,965<--1:info nodes 40000
+2021-05-08 20:20:04,018<--1:info nodes 50000
+2021-05-08 20:20:04,020<--1:info pv e6d4  b2d4  c7c5  b4c5  d6c5  d4c5  
+2021-05-08 20:20:04,022<--1:the allPieces array: 41 52 53 -1 55 36 37 48 21 26 54 -1 32 46 -1 27 81 82 83 74 -1 86 87 68 94 98 75 85 -1 96 -1 84 the allPieces array after making the move: 41 52 53 -1 55 36 37 48 21 26 -1 -1 32 46 -1 27 81 82 83 74 -1 86 87 68 94 98 54 85 -1 96 -1 84 
+2021-05-08 20:20:04,024<--1:bestmove e6d4 
+2021-05-08 20:20:04,024*1*Found move:Ne6xd4
+2021-05-08 20:20:05,592*1*Start calc, move no: 31
+2021-05-08 20:20:05,593-->1:position startpos moves e2e4 e7e5 g1f3 d7d6 b1c3 c8g4 h2h3 g4f3 d1f3 d8f6 f1e2 f6f3 e2f3 b8a6 a2a3 g8e7 e1g1 e8c8 c3e2 a6c5 b2b4 c5e6 c2c4 c8d7 c1b2 h7h5 d2d4 e5d4 e2d4 e6d4 b2d4
+2021-05-08 20:20:05,593-->1:go infinite
+2021-05-08 20:20:05,594<--1:AZ ENGINE KULDTE
+2021-05-08 20:20:05,594<--1:curre not: e2e4 e7e5 g1f3 d7d6 b1c3 c8g4 h2h3 g4f3 d1f3 d8f6 f1e2 f6f3 e2f3 b8a6 a2a3 g8e7 e1g1 e8c8 c3e2 a6c5 b2b4 c5e6 c2c4 c8d7 c1b2 h7h5 d2d4 e5d4 e2d4 e6d4
+2021-05-08 20:20:05,594<--1:cmove e2e4 e7e5 g1f3 d7d6 b1c3 c8g4 h2h3 g4f3 d1f3 d8f6 f1e2 f6f3 e2f3 b8a6 a2a3 g8e7 e1g1 e8c8 c3e2 a6c5 b2b4 c5e6 c2c4 c8d7 c1b2 h7h5 d2d4 e5d4 e2d4 e6d4 b2d4
+2021-05-08 20:20:05,595<--1: promocio beolvasva
+2021-05-08 20:20:05,595<--1:notation after reading everythinge2e4 e7e5 g1f3 d7d6 b1c3 c8g4 h2h3 g4f3 d1f3 d8f6 f1e2 f6f3 e2f3 b8a6 a2a3 g8e7 e1g1 e8c8 c3e2 a6c5 b2b4 c5e6 c2c4 c8d7 c1b2 h7h5 d2d4 e5d4 e2d4 e6d4 b2d4
+2021-05-08 20:20:05,595<--1:info depth 1
+2021-05-08 20:20:05,596<--1:info depth 2
+2021-05-08 20:20:05,596<--1:info depth 3
+2021-05-08 20:20:05,597<--1:info depth 4
+2021-05-08 20:20:05,597<--1:info depth 5
+2021-05-08 20:20:05,597<--1:info depth 6
+2021-05-08 20:20:05,598<--1:info depth 7
+2021-05-08 20:20:05,598<--1:info depth 8
+2021-05-08 20:20:05,599<--1:info depth 9
+2021-05-08 20:20:05,652<--1:info nodes 10000
+2021-05-08 20:20:05,713<--1:info nodes 20000
+2021-05-08 20:20:05,774<--1:info nodes 30000
+2021-05-08 20:20:05,838<--1:info nodes 40000
+2021-05-08 20:20:05,903<--1:info nodes 50000
+2021-05-08 20:20:05,969<--1:info nodes 60000
+2021-05-08 20:20:06,027<--1:info nodes 70000
+2021-05-08 20:20:06,080<--1:info nodes 80000
+2021-05-08 20:20:06,132<--1:info nodes 90000
+2021-05-08 20:20:06,186<--1:info nodes 100000
+2021-05-08 20:20:06,239<--1:info nodes 110000
+2021-05-08 20:20:06,280<--1:info pv e7c6  a1d1  d8e8  d4c3  a7a6  
+2021-05-08 20:20:06,282<--1:the allPieces array: 41 52 53 -1 55 36 37 48 21 26 -1 -1 54 46 -1 27 81 82 83 74 -1 86 87 68 94 98 -1 85 -1 96 -1 84 the allPieces array after making the move: 41 52 53 -1 55 36 37 48 21 26 -1 -1 54 46 -1 27 81 82 83 74 -1 86 87 68 94 98 -1 73 -1 96 -1 84 
+2021-05-08 20:20:06,283<--1:bestmove e7c6 
+2021-05-08 20:20:06,283*1*Found move:Ne7-c6
+2021-05-08 20:20:18,495*1*Start calc, move no: 33
+2021-05-08 20:20:18,496-->1:position startpos moves e2e4 e7e5 g1f3 d7d6 b1c3 c8g4 h2h3 g4f3 d1f3 d8f6 f1e2 f6f3 e2f3 b8a6 a2a3 g8e7 e1g1 e8c8 c3e2 a6c5 b2b4 c5e6 c2c4 c8d7 c1b2 h7h5 d2d4 e5d4 e2d4 e6d4 b2d4 e7c6 d4e3
+2021-05-08 20:20:18,496-->1:go infinite
+2021-05-08 20:20:18,497<--1:AZ ENGINE KULDTE
+2021-05-08 20:20:18,497<--1:curre not: e2e4 e7e5 g1f3 d7d6 b1c3 c8g4 h2h3 g4f3 d1f3 d8f6 f1e2 f6f3 e2f3 b8a6 a2a3 g8e7 e1g1 e8c8 c3e2 a6c5 b2b4 c5e6 c2c4 c8d7 c1b2 h7h5 d2d4 e5d4 e2d4 e6d4 b2d4 e7c6
+2021-05-08 20:20:18,498<--1:cmove e2e4 e7e5 g1f3 d7d6 b1c3 c8g4 h2h3 g4f3 d1f3 d8f6 f1e2 f6f3 e2f3 b8a6 a2a3 g8e7 e1g1 e8c8 c3e2 a6c5 b2b4 c5e6 c2c4 c8d7 c1b2 h7h5 d2d4 e5d4 e2d4 e6d4 b2d4 e7c6 d4e3
+2021-05-08 20:20:18,499<--1: promocio beolvasva
+2021-05-08 20:20:18,503<--1:notation after reading everythinge2e4 e7e5 g1f3 d7d6 b1c3 c8g4 h2h3 g4f3 d1f3 d8f6 f1e2 f6f3 e2f3 b8a6 a2a3 g8e7 e1g1 e8c8 c3e2 a6c5 b2b4 c5e6 c2c4 c8d7 c1b2 h7h5 d2d4 e5d4 e2d4 e6d4 b2d4 e7c6 d4e3
+2021-05-08 20:20:18,503<--1:info depth 1
+2021-05-08 20:20:18,503<--1:info depth 2
+2021-05-08 20:20:18,504<--1:info depth 3
+2021-05-08 20:20:18,504<--1:info depth 4
+2021-05-08 20:20:18,505<--1:info depth 5
+2021-05-08 20:20:18,505<--1:info depth 6
+2021-05-08 20:20:18,505<--1:info depth 7
+2021-05-08 20:20:18,506<--1:info depth 8
+2021-05-08 20:20:18,506<--1:info depth 9
+2021-05-08 20:20:18,557<--1:info nodes 10000
+2021-05-08 20:20:18,619<--1:info nodes 20000
+2021-05-08 20:20:18,681<--1:info nodes 30000
+2021-05-08 20:20:18,747<--1:info nodes 40000
+2021-05-08 20:20:18,810<--1:info nodes 50000
+2021-05-08 20:20:18,874<--1:info nodes 60000
+2021-05-08 20:20:18,948<--1:info nodes 70000
+2021-05-08 20:20:19,011<--1:info nodes 80000
+2021-05-08 20:20:19,069<--1:info nodes 90000
+2021-05-08 20:20:19,129<--1:info nodes 100000
+2021-05-08 20:20:19,194<--1:info nodes 110000
+2021-05-08 20:20:19,261<--1:info nodes 120000
+2021-05-08 20:20:19,328<--1:info nodes 130000
+2021-05-08 20:20:19,385<--1:info nodes 140000
+2021-05-08 20:20:19,438<--1:info nodes 150000
+2021-05-08 20:20:19,502<--1:info nodes 160000
+2021-05-08 20:20:19,555<--1:info nodes 170000
+2021-05-08 20:20:19,611<--1:info nodes 180000
+2021-05-08 20:20:19,664<--1:info nodes 190000
+2021-05-08 20:20:19,719<--1:info nodes 200000
+2021-05-08 20:20:19,774<--1:info nodes 210000
+2021-05-08 20:20:19,830<--1:info nodes 220000
+2021-05-08 20:20:19,884<--1:info nodes 230000
+2021-05-08 20:20:19,937<--1:info nodes 240000
+2021-05-08 20:20:19,978<--1:info pv a7a5  a1b1  d8e8  f1d1  f8e7  
+2021-05-08 20:20:19,980<--1:the allPieces array: 41 52 53 -1 55 36 37 48 21 26 -1 -1 45 46 -1 27 81 82 83 74 -1 86 87 68 94 98 -1 73 -1 96 -1 84 the allPieces array after making the move: 41 52 53 -1 55 36 37 48 21 26 -1 -1 45 46 -1 27 61 82 83 74 -1 86 87 68 94 98 -1 73 -1 96 -1 84 
+2021-05-08 20:20:19,981<--1:bestmove a7a5 
+2021-05-08 20:20:19,981*1*Found move:a7-a5
+2021-05-08 20:20:25,962*1*Start calc, move no: 35
+2021-05-08 20:20:25,963-->1:position startpos moves e2e4 e7e5 g1f3 d7d6 b1c3 c8g4 h2h3 g4f3 d1f3 d8f6 f1e2 f6f3 e2f3 b8a6 a2a3 g8e7 e1g1 e8c8 c3e2 a6c5 b2b4 c5e6 c2c4 c8d7 c1b2 h7h5 d2d4 e5d4 e2d4 e6d4 b2d4 e7c6 d4e3 a7a5 b4b5
+2021-05-08 20:20:25,964-->1:go infinite
+2021-05-08 20:20:25,964<--1:AZ ENGINE KULDTE
+2021-05-08 20:20:25,964<--1:curre not: e2e4 e7e5 g1f3 d7d6 b1c3 c8g4 h2h3 g4f3 d1f3 d8f6 f1e2 f6f3 e2f3 b8a6 a2a3 g8e7 e1g1 e8c8 c3e2 a6c5 b2b4 c5e6 c2c4 c8d7 c1b2 h7h5 d2d4 e5d4 e2d4 e6d4 b2d4 e7c6 d4e3 a7a5
+2021-05-08 20:20:25,965<--1:cmove e2e4 e7e5 g1f3 d7d6 b1c3 c8g4 h2h3 g4f3 d1f3 d8f6 f1e2 f6f3 e2f3 b8a6 a2a3 g8e7 e1g1 e8c8 c3e2 a6c5 b2b4 c5e6 c2c4 c8d7 c1b2 h7h5 d2d4 e5d4 e2d4 e6d4 b2d4 e7c6 d4e3 a7a5 b4b5
+2021-05-08 20:20:25,965<--1: promocio beolvasva
+2021-05-08 20:20:25,965<--1:notation after reading everythinge2e4 e7e5 g1f3 d7d6 b1c3 c8g4 h2h3 g4f3 d1f3 d8f6 f1e2 f6f3 e2f3 b8a6 a2a3 g8e7 e1g1 e8c8 c3e2 a6c5 b2b4 c5e6 c2c4 c8d7 c1b2 h7h5 d2d4 e5d4 e2d4 e6d4 b2d4 e7c6 d4e3 a7a5 b4b5
+2021-05-08 20:20:25,966<--1:info depth 1
+2021-05-08 20:20:25,966<--1:info depth 2
+2021-05-08 20:20:25,967<--1:info depth 3
+2021-05-08 20:20:25,967<--1:info depth 4
+2021-05-08 20:20:25,967<--1:info depth 5
+2021-05-08 20:20:25,968<--1:info depth 6
+2021-05-08 20:20:25,968<--1:info depth 7
+2021-05-08 20:20:25,968<--1:info depth 8
+2021-05-08 20:20:25,969<--1:info depth 9
+2021-05-08 20:20:26,032<--1:info nodes 10000
+2021-05-08 20:20:26,113<--1:info nodes 20000
+2021-05-08 20:20:26,180<--1:info nodes 30000
+2021-05-08 20:20:26,247<--1:info nodes 40000
+2021-05-08 20:20:26,313<--1:info nodes 50000
+2021-05-08 20:20:26,379<--1:info nodes 60000
+2021-05-08 20:20:26,439<--1:info nodes 70000
+2021-05-08 20:20:26,499<--1:info nodes 80000
+2021-05-08 20:20:26,558<--1:info nodes 90000
+2021-05-08 20:20:26,618<--1:info nodes 100000
+2021-05-08 20:20:26,676<--1:info nodes 110000
+2021-05-08 20:20:26,736<--1:info nodes 120000
+2021-05-08 20:20:26,795<--1:info nodes 130000
+2021-05-08 20:20:26,850<--1:info nodes 140000
+2021-05-08 20:20:26,897<--1:info pv c6e5  f3e2  d8e8  f2f4  e5g6  
+2021-05-08 20:20:26,899<--1:the allPieces array: 41 62 53 -1 55 36 37 48 21 26 -1 -1 45 46 -1 27 61 82 83 74 -1 86 87 68 94 98 -1 73 -1 96 -1 84 the allPieces array after making the move: 41 62 53 -1 55 36 37 48 21 26 -1 -1 45 46 -1 27 61 82 83 74 -1 86 87 68 94 98 -1 65 -1 96 -1 84 
+2021-05-08 20:20:26,899<--1:bestmove c6e5 
+2021-05-08 20:20:26,900*1*Found move:Nc6-e5
+2021-05-08 20:20:36,713*1*Start calc, move no: 37
+2021-05-08 20:20:36,714-->1:position startpos moves e2e4 e7e5 g1f3 d7d6 b1c3 c8g4 h2h3 g4f3 d1f3 d8f6 f1e2 f6f3 e2f3 b8a6 a2a3 g8e7 e1g1 e8c8 c3e2 a6c5 b2b4 c5e6 c2c4 c8d7 c1b2 h7h5 d2d4 e5d4 e2d4 e6d4 b2d4 e7c6 d4e3 a7a5 b4b5 c6e5 e3d2
+2021-05-08 20:20:36,714-->1:go infinite
+2021-05-08 20:20:36,714<--1:AZ ENGINE KULDTE
+2021-05-08 20:20:36,715<--1:curre not: e2e4 e7e5 g1f3 d7d6 b1c3 c8g4 h2h3 g4f3 d1f3 d8f6 f1e2 f6f3 e2f3 b8a6 a2a3 g8e7 e1g1 e8c8 c3e2 a6c5 b2b4 c5e6 c2c4 c8d7 c1b2 h7h5 d2d4 e5d4 e2d4 e6d4 b2d4 e7c6 d4e3 a7a5 b4b5 c6e5
+2021-05-08 20:20:36,715<--1:cmove e2e4 e7e5 g1f3 d7d6 b1c3 c8g4 h2h3 g4f3 d1f3 d8f6 f1e2 f6f3 e2f3 b8a6 a2a3 g8e7 e1g1 e8c8 c3e2 a6c5 b2b4 c5e6 c2c4 c8d7 c1b2 h7h5 d2d4 e5d4 e2d4 e6d4 b2d4 e7c6 d4e3 a7a5 b4b5 c6e5 e3d2
+2021-05-08 20:20:36,716<--1: promocio beolvasva
+2021-05-08 20:20:36,716<--1:notation after reading everythinge2e4 e7e5 g1f3 d7d6 b1c3 c8g4 h2h3 g4f3 d1f3 d8f6 f1e2 f6f3 e2f3 b8a6 a2a3 g8e7 e1g1 e8c8 c3e2 a6c5 b2b4 c5e6 c2c4 c8d7 c1b2 h7h5 d2d4 e5d4 e2d4 e6d4 b2d4 e7c6 d4e3 a7a5 b4b5 c6e5 e3d2
+2021-05-08 20:20:36,716<--1:info depth 1
+2021-05-08 20:20:36,717<--1:info depth 2
+2021-05-08 20:20:36,717<--1:info depth 3
+2021-05-08 20:20:36,717<--1:info depth 4
+2021-05-08 20:20:36,718<--1:info depth 5
+2021-05-08 20:20:36,718<--1:info depth 6
+2021-05-08 20:20:36,719<--1:info depth 7
+2021-05-08 20:20:36,719<--1:info depth 8
+2021-05-08 20:20:36,719<--1:info depth 9
+2021-05-08 20:20:36,773<--1:info nodes 10000
+2021-05-08 20:20:36,836<--1:info nodes 20000
+2021-05-08 20:20:36,899<--1:info nodes 30000
+2021-05-08 20:20:36,968<--1:info nodes 40000
+2021-05-08 20:20:37,031<--1:info nodes 50000
+2021-05-08 20:20:37,083<--1:info nodes 60000
+2021-05-08 20:20:37,133<--1:info nodes 70000
+2021-05-08 20:20:37,153<--1:info pv e5c4  d2g5  f7f6  f1c1  d6d5  
+2021-05-08 20:20:37,155<--1:the allPieces array: 41 62 53 -1 55 36 37 48 21 26 -1 -1 34 46 -1 27 61 82 83 74 -1 86 87 68 94 98 -1 65 -1 96 -1 84 the allPieces array after making the move: 41 62 -1 -1 55 36 37 48 21 26 -1 -1 34 46 -1 27 61 82 83 74 -1 86 87 68 94 98 -1 53 -1 96 -1 84 
+2021-05-08 20:20:37,155<--1:bestmove e5c4 
+2021-05-08 20:20:37,156*1*Found move:Ne5xc4
+2021-05-08 20:20:48,023*1*Start calc, move no: 37
+2021-05-08 20:20:48,024-->1:position startpos moves e2e4 e7e5 g1f3 d7d6 b1c3 c8g4 h2h3 g4f3 d1f3 d8f6 f1e2 f6f3 e2f3 b8a6 a2a3 g8e7 e1g1 e8c8 c3e2 a6c5 b2b4 c5e6 c2c4 c8d7 c1b2 h7h5 d2d4 e5d4 e2d4 e6d4 b2d4 e7c6 d4e3 a7a5 b4b5 c6e5 f3e2
+2021-05-08 20:20:48,024-->1:go infinite
+2021-05-08 20:20:48,025<--1:AZ ENGINE KULDTE
+2021-05-08 20:20:48,025<--1:curre not: e2e4 e7e5 g1f3 d7d6 b1c3 c8g4 h2h3 g4f3 d1f3 d8f6 f1e2 f6f3 e2f3 b8a6 a2a3 g8e7 e1g1 e8c8 c3e2 a6c5 b2b4 c5e6 c2c4 c8d7 c1b2 h7h5 d2d4 e5d4 e2d4 e6d4 b2d4 e7c6 d4e3 a7a5 b4b5 c6e5 e3d2 e5c4
+2021-05-08 20:20:48,026<--1:cmove e2e4 e7e5 g1f3 d7d6 b1c3 c8g4 h2h3 g4f3 d1f3 d8f6 f1e2 f6f3 e2f3 b8a6 a2a3 g8e7 e1g1 e8c8 c3e2 a6c5 b2b4 c5e6 c2c4 c8d7 c1b2 h7h5 d2d4 e5d4 e2d4 e6d4 b2d4 e7c6 d4e3 a7a5 b4b5 c6e5 f3e2
+2021-05-08 20:20:48,026<--1: promocio beolvasva
+2021-05-08 20:20:48,026<--1:notation after reading everythinge2e4 e7e5 g1f3 d7d6 b1c3 c8g4 h2h3 g4f3 d1f3 d8f6 f1e2 f6f3 e2f3 b8a6 a2a3 g8e7 e1g1 e8c8 c3e2 a6c5 b2b4 c5e6 c2c4 c8d7 c1b2 h7h5 d2d4 e5d4 e2d4 e6d4 b2d4 e7c6 d4e3 a7a5 b4b5 c6e5 f3e2
+2021-05-08 20:20:48,037<--1:info depth 1
+2021-05-08 20:20:48,037<--1:info depth 2
+2021-05-08 20:20:48,038<--1:info depth 3
+2021-05-08 20:20:48,038<--1:info depth 4
+2021-05-08 20:20:48,038<--1:info depth 5
+2021-05-08 20:20:48,039<--1:info depth 6
+2021-05-08 20:20:48,039<--1:info depth 7
+2021-05-08 20:20:48,039<--1:info depth 8
+2021-05-08 20:20:48,040<--1:info depth 9
+2021-05-08 20:20:48,107<--1:info nodes 10000
+2021-05-08 20:20:48,187<--1:info nodes 20000
+2021-05-08 20:20:48,248<--1:info nodes 30000
+2021-05-08 20:20:48,312<--1:info nodes 40000
+2021-05-08 20:20:48,377<--1:info nodes 50000
+2021-05-08 20:20:48,436<--1:info nodes 60000
+2021-05-08 20:20:48,495<--1:info nodes 70000
+2021-05-08 20:20:48,557<--1:info nodes 80000
+2021-05-08 20:20:48,617<--1:info nodes 90000
+2021-05-08 20:20:48,677<--1:info nodes 100000
+2021-05-08 20:20:48,732<--1:info nodes 110000
+2021-05-08 20:20:48,786<--1:info nodes 120000
+2021-05-08 20:20:48,843<--1:info nodes 130000
+2021-05-08 20:20:48,903<--1:info nodes 140000
+2021-05-08 20:20:48,965<--1:info nodes 150000
+2021-05-08 20:20:49,024<--1:info nodes 160000
+2021-05-08 20:20:49,081<--1:info nodes 170000
+2021-05-08 20:20:49,135<--1:info nodes 180000
+2021-05-08 20:20:49,188<--1:info nodes 190000
+2021-05-08 20:20:49,243<--1:info nodes 200000
+2021-05-08 20:20:49,273<--1:info pv d7c6  f1b1  d8e8  f2f4  e5g6  
+2021-05-08 20:20:49,275<--1:the allPieces array: 41 62 53 -1 55 36 37 48 21 26 -1 -1 45 35 -1 27 61 82 83 74 -1 86 87 68 94 98 -1 65 -1 96 -1 84 the allPieces array after making the move: 41 62 53 -1 55 36 37 48 21 26 -1 -1 45 35 -1 27 61 82 83 74 -1 86 87 68 94 98 -1 65 -1 96 -1 73 
+2021-05-08 20:20:49,275<--1:bestmove d7c6 
+2021-05-08 20:20:49,276*moveerror* own king in check !Kd7-c6!
+2021-05-08 20:20:49,276*moveerror* move not in legal moves list2 !Kd7-c6!
+2021-05-08 20:20:49,276*moveerror* R illegal move detected by movegen, sorry, no more details !...!
+2021-05-08 20:20:49,277*1*---------> Arena:Illegal move!: "bestmove d7c6 " ()

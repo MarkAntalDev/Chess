@@ -1,19 +1,21 @@
 #include <iostream>
 #include "Board.h"
 
-
 int main(){
+    std::ios::sync_with_stdio(false);
     ChessBoard* chessboard = new ChessBoard();
-    char c;
-    std::cout << "chose az "
-    
-    /*const wchar_t *white = L"♔♕♖♗♘♙\r\n";
-    const wchar_t *black = L"♚♛♜♝♞♟\r\n";
-
-    WriteConsoleW(GetStdHandle(STD_OUTPUT_HANDLE), white, wcslen(white), 0, 0);
-    WriteConsoleW(GetStdHandle(STD_OUTPUT_HANDLE), black, wcslen(black), 0, 0);
-    */
-    
+    chessboard->InitZobrist();
+    chessboard->OpenBook();
+    std::string s;
+    std::cout << "Valassz egy interface-t (console, uci): ";
+    std::cin >> s;
+    if (s.substr(0,7) == "console"){
+        chessboard->ConsoleMain();
+    }
+    if (s.substr(0,3) == "uci"){
+        chessboard->UciMain();
+    }
+    chessboard->CloseBook();
     delete chessboard;
     
 

@@ -14,6 +14,13 @@
 #include "eval_tables.h"
 #include "defs.h"
 #include <windows.h>
+#include <unistd.h>
+#include <fstream>
+// for <streamsize>
+#include<ios>     
+  
+// for numeric_limits
+#include<limits> 
 
 
 /* side note for takenPiece 
@@ -35,11 +42,14 @@ class ChessBoard{
 public:
     ChessBoard();
 
+    void OpenBook();
+    void CloseBook();
+
     void drawIntBoard(); // kirajzolja a teljes pályát int -ekkel
     void drawBoard(); // kirajzolja a pályát "szépen"
     void generatePseudoLegalMoves();
+    void generatePseudoLegalCaptures();
     void testingFunction();
-    void generateRandomMove();
     int evaluation();
     bool isNthBitSet(int x, int n);
     void addToMoves(int from, int to, int moveT);
@@ -52,9 +62,15 @@ public:
     bool getCp(){return currentPlayer;}
     void printPv();
     void negasearch();
-
+    void AlphaBetaSearch(); /// the final one
+    void InitZobrist();
     /// protocols to run in main
     void ConsoleMain();
+    void UciMain();
+
+    bool inParseMove;
+
+
 protected:
     bool currentPlayer; // true-white || false-black
     //bool enPassant; // is en passant an option
@@ -73,9 +89,35 @@ private:
     // 4 for black right
     // 8 for black left
     int castleFlag;
+    int castled;
     int fifthyMove;
     int historyDepth;
     int ep; /// en passant mező indexe, ha lehetséges (dupla gyalog lépés után a mögötte lévő mező indexe) egyébként -1
+
+    /// Változók a Zobrist Hash-hez
+    int ZobristHash[120][12];
+    int ZobristEnPassant[120];
+    int hash;
+
+    // függvények
+    int RandBits();
+    void GenerateHash();
+
+    std::map<char, int> BoardToZobrist = {
+      { 1, 0 },
+      { 2, 1 },
+      { 3, 2 },
+      { 4, 3 },
+      { 5, 4 },
+      { 6, 5 },
+      { -1, 6 },
+      { -2, 7 },
+      { -3, 8 },
+      { -4, 9 },
+      { -5, 10 },
+      { -6, 11 }
+    };
+
     ////////////////////////////////////////////////////////////////////////////////////////////////
 
     /***********************************************************************************************
@@ -100,49 +142,7 @@ private:
     ; -6 - fekete király    | black king
     ;
     ************************************************************************************************/
-    char board[120] /*= {
-      7,  7,  7,  7,  7,  7,  7,  7,  7,  7,
-      7,  7,  7,  7,  7,  7,  7,  7,  7,  7,
-      7,  4,  2,  3,  5,  6,  3,  2,  4,  7,
-      7,  1,  1,  1,  1,  1,  1,  1,  1,  7,
-      7,  0,  0,  0,  0,  0,  0,  0,  0,  7,
-      7,  0,  0,  0,  0,  0,  0,  0,  0,  7,
-      7,  0,  0,  0,  0,  0,  0,  0,  0,  7,
-      7,  0,  0,  0,  0,  0,  0,  0,  0,  7,
-      7, -1, -1, -1, -1, -1, -1, -1, -1,  7,
-      7, -4, -2, -3, -5, -6, -3, -2, -4,  7,
-      7,  7,  7,  7,  7,  7,  7,  7,  7,  7,
-      7,  7,  7,  7,  7,  7,  7,  7,  7,  7
-    }*/;
-
-
-    //current positions(indices) of the pieces
-
-    //**************white pieces**************************
-
-    //char whiteLeftRook =    21;
-    //char whiteLeftKnight =  22;
-    //char whiteLeftBishop =  23;
-    //char whiteQueen =       24;
-    //char whiteKing =        25; 
-    //char whiteRightBishop = 26;
-    //char whiteRightKnight = 27;
-    //char whiteRightRook =   28;
-
-    //char whitePawns[8] = {31, 32, 33, 34, 35, 36, 37, 38};
-    
-    //**************black pieces**************************
-
-    //char blackLeftRook =    91;
-    //char blackLeftKnight =  92;
-    //char blackLeftBishop =  93;
-    //char blackQueen =       94;
-    //char blackKing =        95; 
-    //char blackRightBishop = 96;
-    //char blackRightKnight = 97;
-    //char blackRightRook =   98;
-
-    //char blackPawns[8] = {81, 82, 83, 84, 85, 86, 87, 88};
+    int board[120];
 
     /*************************************************************************************************
     ; 
@@ -171,23 +171,22 @@ private:
     ; 29 black right bishop
     ; 30 black queen
     ; 31 black king
-    ;
-    ;
-    ; 32 - 47 promoted pieces
     */
-    char allPieces[48]/* = { 31, 32, 33, 34, 35, 36, 37, 38, 21, 28, 22, 27, 23, 26, 24, 25, 
-                           81, 82, 83, 84, 85, 86, 87, 88, 91, 98, 92, 97, 93, 96, 94, 95,
-                           -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1}*/;
+    int allPieces[32];/* = { 31, 32, 33, 34, 35, 36, 37, 38, 21, 28, 22, 27, 23, 26, 24, 25, 
+                           81, 82, 83, 84, 85, 86, 87, 88, 91, 98, 92, 97, 93, 96, 94, 95 }*/
+                           
+    int whitePromoted[8]; // ha 0 akkor nem átalakított, egyébként azt a számot ami a promótált bábut reprezentál
+    int blackPromoted[8]; // ha 0 akkor nem átalakított, egyébként azt a számot ami a promótált bábut reprezentál
 
     /*************************************************************************************************
     ; 
-    ; Moving constants (Offsets)
+    ; Mozgási konstans offsetek
     ; 
     **************************************************************************************************/
 
-    const char knightOffsets[8] = {-21, -19, -12, -8,  8,  12,  19,  21};
-    const char rookOffsets[4] = {-1, 1, -10, 10};
-    const char bishopOffsets[4] = {9, 11, -9, -11};
+    const int knightOffsets[8] = {-21, -19, -12, -8,  8,  12,  19,  21};
+    const int rookOffsets[4] = {-1, 1, -10, 10};
+    const int bishopOffsets[4] = {9, 11, -9, -11};
 
 
     /*************************************************************************************************
@@ -198,11 +197,11 @@ private:
     **************************************************************************************************/
 
     
-    void whiteRookMoveGeneration(char pieceIndex);   // white rook move generation function
-    void whiteBishopMoveGeneration(char pieceIndex); // white bishop move generation function
-    void whiteQueenMoveGeneration(char pieceIndex);  // white queen move generation function (rook + bishop move geenration)
+    void whiteRookMoveGeneration(int pieceIndex);   // white rook move generation function
+    void whiteBishopMoveGeneration(int pieceIndex); // white bishop move generation function
+    void whiteQueenMoveGeneration(int pieceIndex);  // white queen move generation function (rook + bishop move geenration)
     void whiteKingMoveGeneration();   // white king move generation function (queen without while loop)
-    void whiteKnightMoveGeneration(char pieceIndex); // white knight move generation function
+    void whiteKnightMoveGeneration(int pieceIndex); // white knight move generation function
 
     //pawn moves: separate functions because of the complications (double push, en passant,different capture)
     void whiteEnPassantGeneration();
@@ -220,6 +219,20 @@ private:
 
     void callAllWhiteMoveGeneration();
 
+    ////////////////////////////////////
+    /// Pseudo legális ütések generálása
+    ////////////////////////////////////
+
+    void whiteRookTakeGeneration(int pieceIndex);  
+    void whiteBishopTakeGeneration(int pieceIndex); 
+    void whiteQueenTakeGeneration(int pieceIndex); 
+    void whiteKingTakeGeneration();  
+    void whiteKnightTakeGeneration(int pieceIndex);
+
+    void whitePawnTake();
+
+    void callAllWhiteTake();
+
     /*************************************************************************************************
     ; 
     ; BLACK move generation functions for each piece
@@ -228,11 +241,11 @@ private:
     ; 
     **************************************************************************************************/
 
-    void blackRookMoveGeneration(char pieceIndex);
-    void blackBishopMoveGeneration(char pieceIndex);
-    void blackKnightMoveGeneration(char pieceIndex); 
+    void blackRookMoveGeneration(int pieceIndex);
+    void blackBishopMoveGeneration(int pieceIndex);
+    void blackKnightMoveGeneration(int pieceIndex); 
     void blackKingMoveGeneration();
-    void blackQueenMoveGeneration(char pieceIndex);
+    void blackQueenMoveGeneration(int pieceIndex);
 
     void blackEnPassantGeneration();
     void blackPawnMove();
@@ -250,10 +263,25 @@ private:
 
     void callAllBlackMoveGeneration();
 
+    ////////////////////////////////////
+    /// Pseudo legális ütések generálása
+    ////////////////////////////////////
+
+    void blackRookTakeGeneration(int pieceIndex);   
+    void blackBishopTakeGeneration(int pieceIndex); 
+    void blackQueenTakeGeneration(int pieceIndex); 
+    void blackKingTakeGeneration();  
+    void blackKnightTakeGeneration(int pieceIndex); 
+
+    void blackPawnTake();
+
+    void callAllBlackTake();
+
     /// Promótált bábuk mozgatása.
     /// Nincs szükség külön függvényre a két félnek
     /// Paraméterként adjuk át hogy ki van soron
     void promotedPiecesMoveGeneration(bool player);
+    void promotedPiecesTakeGeneration(bool player);
 
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -262,10 +290,11 @@ private:
     /// másodikban (attacker) a támadó indexét bábukat tároló többern (allPieces)
     ///////////////////////////////////////////////////////////////////////////////////////////////////
 
-    bool   attackRook(char sq, char attacker);
-    bool attackBishop(char sq, char attacker);
-    bool attackKnight(char sq, char attacker);
-    bool  attackQueen(char sq, char attacker);
+    bool   attackRook(int sq, int attacker);
+    bool attackBishop(int sq, int attacker);
+    bool attackKnight(int sq, int attacker);
+    bool  attackQueen(int sq, int attacker);
+    bool   attackKing(int sq, int attacker);
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////
     /// Kiértékelő függvény
@@ -308,8 +337,9 @@ private:
     int blackKingPawnScore(int f);
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////
-    /// A KERESŐFÜGGVÉNY
+    /// 
     ///
+    /// A KERESŐFÜGGVÉNY
     ///
     ///
     ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -317,19 +347,28 @@ private:
 
     /// A Principle Variation tárolására használt változók
     move pv[MAXIMUM_DEPTH][MAXIMUM_DEPTH];
+    std::string pvStr[MAXIMUM_DEPTH][MAXIMUM_DEPTH];
     int pvLength[MAXIMUM_DEPTH];
+    int histoH[2][120][120];
     
-    //int max(moveBytes* bestMove);
-    //int min(moveBytes* bestMove);
-    //void search();
-
-    int max(int depth);
-    int min(int depth);
-    int negamax(int depth);
-    int AlphaBetaMax(int alpha, int beta, int depth);
-    int AlphaBetaMin(int alpha, int beta, int depth);
+    int HashReps(); // visszaadja hányszor értük el az adott pozíciót eddig a játékban
     void sortMoves(int i); /// sorbarakja a lépéseket az alapján, hogy mennyi pontjuk van tárolva
-    //void search2();
+    int MinMaxAlphaBeta(int depth, int alpha, int beta);
+    int AlphaBetaCaps(int alpha, int beta);
+    int nodes; //  akiszámolt node ok mennyisége egy pozícióban
+    int maxDepthReached;
+    int engineDepth;
+
+    /*************************************************************************************************
+    ; 
+    ; Nyitási könyv
+    ; 
+    **************************************************************************************************/
+
+    std::ifstream book; // a book.txt re mutató változó
+    int FindBookMove();
+    bool hasBook;
+    bool followBook;
 
     /*************************************************************************************************
     ; 
@@ -337,22 +376,23 @@ private:
     ; 
     **************************************************************************************************/
 
-    //bool whiteKingInCheck(); /// checking if the white king is in check
+    void NewGame();
+    int parseMove(std::string moveStr);
     //void putInLegalMoves(char _from, char _to, char _takenPiece, char _value); /// puches back the vector with a new legalMove item 
-    char findPiece(char index); /// finds which piece is on the board with the given index
-    char getPieceNumber(char index);
+    int findPiece(int index); /// finds which piece is on the board with the given index
     //void doPawnPromotion(legalMove promotionMove);
     void initBoard(); /// a pályát kezdeti állapotba állítja minden szükséges változójával együtt
-    bool attack(char sq, bool side); /// igazat ad vissza ha egy mező támadás alatt áll, hamisat ha nem áll támadás alatt, vagy nincs a pályán
+    bool attack(int sq, bool side); /// igazat ad vissza ha egy mező támadás alatt áll, hamisat ha nem áll támadás alatt, vagy nincs a pályán
     bool inCheck(bool side); /// A fehér mindig az igaz fekete mindig a hamis. Visszaadja hogy az adott oldal királya sakkban áll-e?
     std::string moveToString(moveBytes move);
-    //bool isNthBitSet(int x, int n); /// visszaadja hogy x nek az n-edik bitje 1-e.
+    void UciMakeMove(std::string str);
+    void SetFromStart(std::string str);
     /*************************************************************************************************
     ; 
     ; Maps to exchange the indexes with positions
     ; 
     **************************************************************************************************/
-    std::map<char, std::string> indexToPos = {
+    std::map<int, std::string> indexToPos = {
       { 21, "a1" },
       { 22, "b1" },
       { 23, "c1" },
@@ -432,7 +472,7 @@ private:
     ; Map a táblapozíciók indexre való átváltására
     ; 
     **************************************************************************************************/
-    std::map<std::string, char> posToIndex = {
+    std::map<std::string, int> posToIndex = {
       { "a1", 21 },
       { "b1", 22 },
       { "c1", 23 },
@@ -506,32 +546,6 @@ private:
       { "h8", 98 }
     };
 
-
-    /* side note for the pieces (indices in allPieces array)
-    ; 0 - 7 white pawns
-    ; 8  white left rook
-    ; 9  white right rook
-    ; 10 white left knight
-    ; 11 white right knight
-    ; 12 white left bishop
-    ; 13 white right bishop
-    ; 14 white queen
-    ; 15 white king
-    ; 
-    ; 16 - 23 black pawns
-    ; 24 black left rook
-    ; 25 black right rook
-    ; 26 black left knight
-    ; 27 black right knight
-    ; 28 black left bishop
-    ; 29 black right bishop
-    ; 30 black queen
-    ; 31 black king
-    ;
-    ;
-    ; 32 - 47 promoted pieces
-    */
-
     std::map<int, int> indexToValue = {
       {8,  500},
       {9,  500},
@@ -579,19 +593,44 @@ private:
     };
 
     std::map<int, char> ConsolePieces = {
-      {0, '_'},
+      {0,  '_'},
       {1,  'P'},
-      {-1,  'p'},
-      {2, 'N'},
+      {-1, 'p'},
+      {2,  'N'},
       {-2, 'n'},
-      {3, 'B'},
+      {3,  'B'},
       {-3, 'b'},
-      {4, 'R'},
+      {4,  'R'},
       {-4, 'r'},
-      {5, 'Q'},
+      {5,  'Q'},
       {-5, 'q'},
-      {6, 'K'},
+      {6,  'K'},
       {-6, 'k'}
+    };
+
+    std::map<std::string, int> whitePlayerPromote = {
+      {"n",  2},
+      {"b",  3},
+      {"r",  4},
+      {"q",  5}
+    };
+
+    std::map<std::string, int> blackPlayerPromote = {
+      {"n",  -2},
+      {"b",  -3},
+      {"r",  -4},
+      {"q",  -5}
+    };
+
+    std::map<int, std::string> promoteNumberToStr = {
+      {2,  "n"},
+      {3,  "b"},
+      {4,  "r"},
+      {5,  "q"},
+      {-2,  "n"},
+      {-3,  "b"},
+      {-4,  "r"},
+      {-5,  "q"}
     };
 };
 

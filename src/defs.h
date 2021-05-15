@@ -9,7 +9,7 @@
 #define BLACK			0
 
 #define SIZE_OF_MOVES_ARRAY     1120
-#define MAXIMUM_DEPTH           32
+#define MAXIMUM_DEPTH           10
 #define SIZE_OF_HISTORY         400
 
 #define CAPTURE     1
@@ -24,18 +24,11 @@
 /// a moveType egy bájt amely meghatározza milyen mozgás fajta az alapján hogy melyik bitje aktív
 ///
 /// 1 ütés
-/// 2 sánc
+/// 2 sánc | castle
 /// 4 en passant 
 /// 8 dupla gyalog tolás
 /// 16 gyalog mozgás
 /// 32 promóció (gyalog átalakítás)
-///
-/// promote hasonló módszerrel
-///
-/// 1 ló
-/// 2 futó
-/// 4 bástya
-/// 8 királynő
 ///
 /////////////////////////////////////
 struct moveBytes{
@@ -74,6 +67,9 @@ struct history{
     int hash;
     int boardFrom;
     int toAllPieces;
+    int castled;
+    int promotedToIndex;
+    char moveString[5];
 };
 
 ///typusdefiníciók a könnyebb létrehozás és kezelés érdekében
